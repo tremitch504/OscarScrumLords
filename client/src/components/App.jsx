@@ -1,20 +1,20 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 import styled from 'styled-components';
-import Map from './Map.jsx'
-import Calendar from './Calendar.jsx'
-import UserProfile from './UserProfile.jsx'
+import Map from './Map.jsx';
+import Calendar from './Calendar.jsx';
+import UserProfile from './UserProfile.jsx';
 
 const AppStyles = styled.div`
 `;
 class App extends Component {
-  constructor(){
-    super()
+  constructor() {
+    super();
     this.state = {
 
-    }
+    };
   }
 
-  render(){
+  render() {
     return (
       <AppStyles>
         <div>
@@ -24,13 +24,13 @@ class App extends Component {
           </header>
           <nav>
           </nav>
-            <Map />
-            <Calendar />
-            <UserProfile />
+          <Map />
+          <Calendar />
+          <UserProfile />
         </div>
       </AppStyles>
-    )
+    );
   }
 }
 
-export default App
+export default App;
