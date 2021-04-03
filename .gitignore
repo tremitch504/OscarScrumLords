@@ -10,3 +10,5 @@ client/dist/bundle.js
 myfirstkeypair.pem
 
 package-lock.json
+
+key.js
