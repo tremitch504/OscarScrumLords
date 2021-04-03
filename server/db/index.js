@@ -12,7 +12,7 @@ db.connect((err, res) => {
   }
   return console.log('Connected to bikeAround', res.connectionId);
 });
-
+//testing
 module.exports = {
   db
 };
