@@ -5,7 +5,7 @@
 node_modules
 
 # Project
-client/dist/bundle.js
+client/dist/app.bundle.js
 .env
 myfirstkeypair.pem
 
