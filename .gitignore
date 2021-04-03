@@ -8,3 +8,5 @@ node_modules
 client/dist/bundle.js
 .env
 myfirstkeypair.pem
+
+package-lock.json
