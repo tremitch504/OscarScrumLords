@@ -6,7 +6,6 @@ import Calendar from './Calendar.jsx';
 import UserProfile from './UserProfile.jsx';
 import { withScriptjs, withGoogleMap } from 'react-google-maps';
 import { apiKey } from '../../../key.js';
-
 const AppStyles = styled.div`
 `;
 class App extends Component {
@@ -17,14 +16,12 @@ class App extends Component {
     };
     this.initializeGoogleSignin = this.initializeGoogleSignin.bind(this)
   }
-
   initializeGoogleSignin() {
     gapi.load('auth2', () => {
       gapi.auth2.init({
         client_id: '636707500167-jl0be6d4pi4e96ttgqkvt1v0758a3r9p.apps.googleusercontent.com'
       })
       console.log('api init successful')
-
       gapi.load('signin2', () => {
         const params = {
           onSuccess: () => {
@@ -35,17 +32,12 @@ class App extends Component {
       })
     })
   }
-
   componentDidMount() {
     console.log('Loading')
-
     this.initializeGoogleSignin();
   }
-
   render() {
-
     const WrappedMap = withScriptjs(withGoogleMap(Map));
-
     return (
       <AppStyles>
         <div>
@@ -66,11 +58,7 @@ class App extends Component {
         <UserProfile />
       </div>
       </AppStyles>
-
     );
   }
 }
-
-
 export default App;
-
