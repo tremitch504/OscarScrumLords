@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const UserProfile = () => {
   return (
@@ -6,7 +6,7 @@ const UserProfile = () => {
       <h4>User Profile</h4>
 
     </div>
-  )
-}
+  );
+};
 
-export default UserProfile
+export default UserProfile;
