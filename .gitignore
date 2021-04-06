@@ -6,9 +6,7 @@ node_modules
 
 # Project
 client/dist/app.bundle.js
-.env
-myfirstkeypair.pem
-
+client/dist
+.env.local
+apikey.js
 package-lock.json
-
-key.js

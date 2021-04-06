@@ -34,5 +34,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({ template: path.resolve(srcDir, 'index.ejs')})
+    
   ]
+ 
 };

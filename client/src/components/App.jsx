@@ -6,6 +6,7 @@ import {
   Route,
   Link
 } from 'react-router-dom';
+
 import Map from './Map.jsx';
 import Search from './Search.jsx';
 import Calendar from './Calendar.jsx';
