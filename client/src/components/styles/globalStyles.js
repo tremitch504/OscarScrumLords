@@ -27,16 +27,11 @@ header{
   margin: 0;
 }
 
-
 li {
   // float: left;
   display: block;
   padding: 8px;
   background-color: #dddddd;
 }
-
-
-
-
 
 `;
