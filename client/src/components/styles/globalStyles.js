@@ -18,6 +18,7 @@ div{
 }
 
 header{
+  color: white;
   border-radius: 25px;
   background-color: #7400b8;
   width: 90%;
@@ -25,6 +26,17 @@ header{
   padding: 10px;
   margin: 0;
 }
+
+
+li {
+  // float: left;
+  display: block;
+  padding: 8px;
+  background-color: #dddddd;
+}
+
+
+
 
 
 `;
