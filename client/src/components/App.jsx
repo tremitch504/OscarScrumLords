@@ -28,13 +28,8 @@ class App extends Component {
     gapi.load('auth2', () => {
       gapi.auth2.init({
         client_id: '636707500167-jl0be6d4pi4e96ttgqkvt1v0758a3r9p.apps.googleusercontent.com'
-<<<<<<< HEAD
       }); 
       console.log('api init successful');
-=======
-      }); 
-      console.log('api init successful')
->>>>>>> 5e16bd25c7082193b15900ece27458a6cfd6e418
       gapi.load('signin2', () => {
         const params = {
           onSuccess: () => {
@@ -75,7 +70,6 @@ class App extends Component {
   // }
 
   render() {
-<<<<<<< HEAD
     return (
       <div>
         <header>
@@ -127,23 +121,6 @@ class App extends Component {
           </Switch>
         </Router>
       </div>
-=======
-   
-
-    return (
-      <AppStyles>
-        <div>
-          <header>
-            <h1>Bike Around and Find Out</h1>
-            <h3>New Orleans Interactive Community Bike Map</h3>
-          </header>
-          <Map />
-        </div>
-        <Calendar />
-        <UserProfile />
-        
-      </AppStyles>
->>>>>>> 5e16bd25c7082193b15900ece27458a6cfd6e418
     );
 
   }
