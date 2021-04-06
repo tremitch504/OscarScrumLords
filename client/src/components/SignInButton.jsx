@@ -1,7 +1,7 @@
-import react from 'react'
+import React from 'react';
 import { gapi } from 'gapi-script';
 
-const initializeGoogleSignin = () => {
+const SignInButton = () => {
   gapi.load('auth2', () => {
     gapi.auth2.init({
       client_id: '636707500167-jl0be6d4pi4e96ttgqkvt1v0758a3r9p.apps.googleusercontent.com'
@@ -16,8 +16,6 @@ const initializeGoogleSignin = () => {
       gapi.signin2.render('loginButton', params)
     })
   })
-
-
 
 }
 

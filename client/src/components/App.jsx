@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route,
   Link
@@ -12,15 +12,15 @@ import Search from './Search.jsx';
 import Calendar from './Calendar.jsx';
 import UserProfile from './UserProfile.jsx';
 import Home from './Home.jsx';
+import SignInButton from './SignInButton.jsx'
 const AppStyles = styled.div``;
 
 const App = () => {
 
   useEffect(() => {
     console.log('Loading');
-    this.initializeGoogleSignin();
+    SignInButton();
   }, [])
-
 
     return (
       <div>
