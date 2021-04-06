@@ -5,7 +5,8 @@ CREATE DATABASE bike;
 USE bike;
 
 CREATE TABLE locations (
-    coordinates int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    coordinates int,
     time_id TIME,
     date_id DATE,
     media MEDIUMBLOB NOT NULL
