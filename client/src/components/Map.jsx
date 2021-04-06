@@ -3,24 +3,13 @@
 import React from 'react'; 
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api'; 
 import { formatRelative } from 'date-fns'; 
-import { apiKey } from '../../../key.js';
+import REACT_APP_MAPS_API_KEY from '../../../.env.local';
 import Search from './Search.jsx'; 
 import Locate from './Locate.jsx'; 
 
 import mapStyles from './styles/mapStyles.js'; 
 import styled from 'styled-components';
-//import mapStyle2 from './styles/mapStyles2.css';
-// import usePlacesAutocomplete, {
-//   getGeocode,
-//   getLatLng,
-// } from 'use-places-autocomplete'; 
-// import {
-//   Combobox,
-//   ComboboxInput,
-//   ComboboxPopover,
-//   ComboboxList,
-//   ComboboxOption,
-// } from '@reach/combobox'; 
+
 //import '@reach/combobox/styles.css'; 
 
 
@@ -59,24 +48,9 @@ const H1 = styled.h2`
 `
 ;
 
-
-/* 
-const SearchInput = styled.div`
-
-`; 
-
-const locate = styled.div`
-
-`; 
-
-const locateImg = styled.div`
-
-`;  */
-
-
 const Map = () => {
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: `${apiKey}`,
+    googleMapsApiKey: REACT_APP_MAPS_API_KEY,
     libraries,
 
   }); 

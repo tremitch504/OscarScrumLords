@@ -15,9 +15,9 @@ import {
 
 const Searched = styled.div`
   position: absolute;
-  top: 10rem;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 14rem;
+  left: 60%;
+  transform: translateX(-100%);
   color: black; 
   width: 100%;
   max-width: 400px;
@@ -35,7 +35,7 @@ const Search = ({ panTo }) => {
   } = usePlacesAutocomplete({
     requestOptions: {
       location: { lat: () => 29.951065, lng: () => -90.071533 },
-      radius: 100 * 1000,
+      radius: 50 * 1000,
     }
   }); 
 

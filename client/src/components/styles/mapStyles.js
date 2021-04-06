@@ -1,28 +1,10 @@
 export default [
   {
-    'featureType': 'all',
-    'elementType': 'geometry.fill',
+    'featureType': 'administrative',
+    'elementType': 'all',
     'stylers': [
       {
-        'weight': '2.00'
-      }
-    ]
-  },
-  {
-    'featureType': 'all',
-    'elementType': 'geometry.stroke',
-    'stylers': [
-      {
-        'color': '#9c9c9c'
-      }
-    ]
-  },
-  {
-    'featureType': 'all',
-    'elementType': 'labels.text',
-    'stylers': [
-      {
-        'visibility': 'on'
+        'visibility': 'off'
       }
     ]
   },
@@ -31,25 +13,16 @@ export default [
     'elementType': 'all',
     'stylers': [
       {
-        'color': '#f2f2f2'
-      }
-    ]
-  },
-  {
-    'featureType': 'landscape',
-    'elementType': 'geometry.fill',
-    'stylers': [
+        'visibility': 'simplified'
+      },
       {
-        'color': '#ffffff'
-      }
-    ]
-  },
-  {
-    'featureType': 'landscape.man_made',
-    'elementType': 'geometry.fill',
-    'stylers': [
+        'hue': '#0066ff'
+      },
       {
-        'color': '#ffffff'
+        'saturation': 74
+      },
+      {
+        'lightness': 100
       }
     ]
   },
@@ -58,51 +31,12 @@ export default [
     'elementType': 'all',
     'stylers': [
       {
-        'visibility': 'off'
+        'visibility': 'simplified'
       }
     ]
   },
   {
     'featureType': 'road',
-    'elementType': 'all',
-    'stylers': [
-      {
-        'saturation': -100
-      },
-      {
-        'lightness': 45
-      }
-    ]
-  },
-  {
-    'featureType': 'road',
-    'elementType': 'geometry.fill',
-    'stylers': [
-      {
-        'color': '#eeeeee'
-      }
-    ]
-  },
-  {
-    'featureType': 'road',
-    'elementType': 'labels.text.fill',
-    'stylers': [
-      {
-        'color': '#7b7b7b'
-      }
-    ]
-  },
-  {
-    'featureType': 'road',
-    'elementType': 'labels.text.stroke',
-    'stylers': [
-      {
-        'color': '#ffffff'
-      }
-    ]
-  },
-  {
-    'featureType': 'road.highway',
     'elementType': 'all',
     'stylers': [
       {
@@ -111,11 +45,47 @@ export default [
     ]
   },
   {
-    'featureType': 'road.arterial',
-    'elementType': 'labels.icon',
+    'featureType': 'road.highway',
+    'elementType': 'all',
     'stylers': [
       {
         'visibility': 'off'
+      },
+      {
+        'weight': 0.6
+      },
+      {
+        'saturation': -85
+      },
+      {
+        'lightness': 61
+      }
+    ]
+  },
+  {
+    'featureType': 'road.highway',
+    'elementType': 'geometry',
+    'stylers': [
+      {
+        'visibility': 'on'
+      }
+    ]
+  },
+  {
+    'featureType': 'road.arterial',
+    'elementType': 'all',
+    'stylers': [
+      {
+        'visibility': 'off'
+      }
+    ]
+  },
+  {
+    'featureType': 'road.local',
+    'elementType': 'all',
+    'stylers': [
+      {
+        'visibility': 'on'
       }
     ]
   },
@@ -124,7 +94,7 @@ export default [
     'elementType': 'all',
     'stylers': [
       {
-        'visibility': 'off'
+        'visibility': 'simplified'
       }
     ]
   },
@@ -133,38 +103,19 @@ export default [
     'elementType': 'all',
     'stylers': [
       {
-        'color': '#46bcec'
+        'visibility': 'simplified'
       },
       {
-        'visibility': 'on'
-      }
-    ]
-  },
-  {
-    'featureType': 'water',
-    'elementType': 'geometry.fill',
-    'stylers': [
+        'color': '#5f94ff'
+      },
       {
-        'color': '#c8d7d4'
-      }
-    ]
-  },
-  {
-    'featureType': 'water',
-    'elementType': 'labels.text.fill',
-    'stylers': [
+        'lightness': 26
+      },
       {
-        'color': '#070707'
-      }
-    ]
-  },
-  {
-    'featureType': 'water',
-    'elementType': 'labels.text.stroke',
-    'stylers': [
-      {
-        'color': '#ffffff'
+        'gamma': 5.86
       }
     ]
   }
-];
+]; 
+
+
