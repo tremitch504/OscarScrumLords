@@ -51,9 +51,9 @@ const photoBank = ({ coordinates, time, date, img }) => {
   
 //CREATE, FIND, AND CATEGORIZE BIKING EVENTS
 //will need API to pin location of event, EVENTS DB: id, date_id, time_id, location_id
-const bikeEvents = ({ id, date, time, location }) => {
+const bikeEvents = ({ eventsName, date, time, location }) => {
   return new Promise((resolve, reject) => {
-    db.query('INSERT INTO events (id, date, time, location) VALUES (?)', [id, date, time, location], (err, results) => {
+    db.query('INSERT INTO events (eventsName, date_id, time_id, location_id) VALUES (?, ?, ?, ?)', [eventsName, date, time, location], (err, results) => {
       if (err) {
         return reject(err);
       }
@@ -65,9 +65,10 @@ const bikeEvents = ({ id, date, time, location }) => {
   
 //ATTENDANCE TO BIKE EVENTS
 //call to store in USER TABLE
-const rsvp = ({ upcomingEvents }) => {
+//INSERT user_Id from USERS and events_id from the EVENTS table
+const rsvp = ({ userId, eventId }) => {
   return new Promise((resolve, reject) => {
-    db.query('INSERT INTO user (upcomingEvents) VALUES (?)', [upcomingEvents], (err, results) => {
+    db.query('INSERT INTO rsvps (userId, eventId) VALUES (?, ?)', [userId, eventId], (err, results) => {
       if (err) {
         return reject(err);
       }

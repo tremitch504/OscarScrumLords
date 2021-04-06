@@ -62,9 +62,35 @@ app.post('/locations', (req, res) => {
       res.sendStatus(500);
     });
 });
-  
+
+//CREATE, FIND, AND CATEGORIZE BIKING EVENTS
+//will need API to pin location of event, EVENTS DB: id, date_id, time_id, location_id
+app.post('/events', (req, res) => {
+
+  const { eventsName, date, time, location } = req.body;
+
+  return bikeEvents({ eventsName, date, time, location })
+    .then(() => res.sendStatus(201))
+    .catch(err => {
+      console.log('ERROR', err);
+      res.sendStatus(500);
+    });
+});
 
 
+//ATTENDANCE TO BIKE EVENTS
+//call to store in USER TABLE
+app.post('/rsvps', (req, res) => {
+
+  const { userId, eventId } = req.body;
+
+  return rsvp({ userId, eventId })
+    .then(() => res.sendStatus(201))
+    .catch(err => {
+      console.log('ERROR', err);
+      res.sendStatus(500);
+    });
+});
 
 
 module.exports = {
