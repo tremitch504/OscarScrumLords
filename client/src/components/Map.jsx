@@ -10,7 +10,6 @@ import Locate from './Locate.jsx';
 import mapStyles from './styles/mapStyles.js'; 
 import styled from 'styled-components';
 
-//import '@reach/combobox/styles.css'; 
 
 
 

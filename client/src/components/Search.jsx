@@ -1,6 +1,5 @@
 import React from 'react'; 
 import Map from './Map.jsx'; 
-import styled from 'styled-components';
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
@@ -12,6 +11,8 @@ import {
   ComboboxList,
   ComboboxOption,
 } from '@reach/combobox'; 
+
+import styled from 'styled-components';
 
 const Searched = styled.div`
   position: absolute;

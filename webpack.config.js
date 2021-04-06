@@ -3,6 +3,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // installed via
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const srcDir = path.resolve(__dirname, 'client/src');
 const distDir = path.resolve(__dirname, 'client/dist');
+
 module.exports = {
   mode: 'development',
   watch: true,
@@ -29,6 +30,10 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      }, 
     ],
   },
   plugins: [
