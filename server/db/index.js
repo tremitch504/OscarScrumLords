@@ -6,12 +6,13 @@ const db = mysql.createConnection({
   database: 'bike'
 });
 
-db.connect((err, res) => {
-  if (err) {
-    return console.error('FAILURE');
-  }
-  return console.log('Connected to bikeAround', res.connectionId);
-});
+// db.connect((err, res) => {
+//   if (err) {
+//     return console.error('FAILURE');
+//   }
+//   return console.log('Connected to bikeAround', res.connectionId);
+// });
+
 //testing
 module.exports = {
   db
