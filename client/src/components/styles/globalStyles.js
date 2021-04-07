@@ -54,4 +54,9 @@ li {
   float: left;
   display: block;
 }
+
+label {
+  float: left;
+  display: block;
+}
 `;

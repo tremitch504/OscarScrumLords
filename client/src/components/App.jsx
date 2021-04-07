@@ -6,12 +6,12 @@ import {
   Link
 } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Map from './Map.jsx';
-import Calendar from './Calendar.jsx';
-import UserProfile from './UserProfile.jsx';
-import Home from './Home.jsx';
-import SignInButton from './SignInButton.jsx';
-import SignOutButton from './SignOutButton.jsx';
+import Map from './Map/Map.jsx';
+import Calendar from './NavBar/Calendar.jsx';
+import UserProfile from './NavBar/UserProfile.jsx';
+import Home from './NavBar/Home.jsx';
+import SignInButton from './NavBar/SignInButton.jsx';
+import SignOutButton from './NavBar/SignOutButton.jsx';
 // import styled from 'styled-components';
 // const AppStyles = styled.div``;
 
