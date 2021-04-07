@@ -57,7 +57,7 @@ const App = () => {
           </ul>
           <br/>
         </nav>
-        <views>
+        <div>
           <Switch>
             <Route exact path='/'>
               <Home />
@@ -75,7 +75,7 @@ const App = () => {
               <Map />
             </Route>
           </Switch>
-        </views>
+        </div>
       </Router>
     </div>
   );
