@@ -10,7 +10,6 @@ const MapToolbar = ({activeLayers, setActiveLayers}) => {
     setActiveLayers(returnObj);
   };
 
-
   return (
     <nav>
       <label>

@@ -4,7 +4,7 @@ import { formatRelative } from 'date-fns'; // marking time and date on potholes
 
 
 
-const Hazard = ({selected: {name, time}}) => {
+const Hazard = ({selected: {time}}) => {
   return (
     <div>
       <h2>uh oh!</h2>
