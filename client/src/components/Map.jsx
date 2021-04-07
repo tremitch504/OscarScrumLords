@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import { GoogleMap, useLoadScript, Marker, InfoWindow, BicyclingLayer } from '@react-google-maps/api'; 
 import { formatRelative } from 'date-fns'; // marking time and date on potholes
 import 'bootstrap/dist/css/bootstrap.min.css';
-import REACT_APP_MAPS_API_KEY from '../../../.env.local';
 import Search from './Search.jsx'; 
 import mapStyles from './styles/mapStyles.js'; 
 import styled from 'styled-components';
@@ -55,7 +54,7 @@ const H1 = styled.h2`
 
 const Map = () => {
   const { isLoaded, loadError } = useLoadScript({ 
-    googleMapsApiKey: REACT_APP_MAPS_API_KEY, 
+    googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY, 
     libraries, //                                   enable additional libraries for 'places' api
 
   }); 

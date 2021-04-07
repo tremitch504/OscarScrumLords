@@ -1,6 +1,7 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // installed via npm
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 const srcDir = path.resolve(__dirname, 'client/src');
 const distDir = path.resolve(__dirname, 'client/dist');
 
@@ -38,8 +39,8 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({ template: path.resolve(srcDir, 'index.ejs')})
-    
+    new HtmlWebpackPlugin({ template: path.resolve(srcDir, 'index.ejs')}),
+    new Dotenv()
   ]
  
 };
