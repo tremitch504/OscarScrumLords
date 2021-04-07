@@ -1,6 +1,6 @@
 /* eslint-disable multiline-ternary */
 import React from 'react'; 
-import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api'; 
+import { GoogleMap, useLoadScript, Marker, InfoWindow, BicyclingLayer } from '@react-google-maps/api'; 
 import { formatRelative } from 'date-fns'; // marking time and date on potholes
 import REACT_APP_MAPS_API_KEY from '../../../.env.local';
 import Search from './Search.jsx'; 
@@ -117,7 +117,8 @@ const Map = () => {
         onClick={onMapClick} 
         onLoad={onMapLoad}
       >
-        {markers.map(marker => <Marker key={marker.time.toISOString()}
+        <BicyclingLayer autoUpdate />
+        {markers.map(marker => <Marker key={Math.random()}
           position={{ lat: marker.lat, lng: marker.lng }} 
           icon={{ //                                        options for centering and resizing pin 
             url: 'https://media.istockphoto.com/vectors/traffic-cone-cartoon-vector-id922344356',
@@ -128,6 +129,7 @@ const Map = () => {
           onClick={() => { 
             setSelected(marker); //                       onlick passes in the marker being clicked, rendered (stores marker in selected state)
           }}
+          
         />
         )}
         
