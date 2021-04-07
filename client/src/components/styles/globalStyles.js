@@ -7,7 +7,7 @@ export default createGlobalStyle`
 }
 body{
     margin: 0;
-    background-color: aliceblue; 
+    background-color: #caffbf;
   }
 div{
     color: black;
@@ -31,8 +31,8 @@ header{
 nav{
   color: black;
   width: 90%;
-  border-radius: 15px; 
-  border: 2px; 
+  border-radius: 15px;
+  border: 2px;
   background-color: #ffffff;
   border-color: black;
   border-style: solid;
