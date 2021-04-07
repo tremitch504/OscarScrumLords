@@ -31,7 +31,7 @@ export default [
     'elementType': 'all',
     'stylers': [
       {
-        'visibility': 'simplified'
+        'visibility': 'off'
       }
     ]
   },
