@@ -106,7 +106,7 @@ const Map = () => {
       <H1> nola ❤️´s 🚲 </H1>
 
       <Search panTo={panTo} />   
-      <Locate panTo={panTo} />
+    
     
   
       <GoogleMap 

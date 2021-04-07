@@ -17,8 +17,8 @@ import {
 // styles for combobox 
 const Searched = styled.div`
   position: absolute;
-  top: 17rem;
-  left: 60%;
+  top: 15rem;
+  left: 36rem;
   transform: translateX(-100%);
   color: black; 
   width: 100%;
@@ -67,7 +67,7 @@ const Search = ({ panTo }) => {
             setValue(e.target.value);
           }}
           disabled={!ready} //                                        disable if useplaces hook isnt ready 
-          placeholder='Enter an address' 
+          placeholder='❤️❤❤️❤️🚲🚲🚲❤️❤️❤️❤️' 
         />
         <ComboboxPopover> 
           <ComboboxList>
