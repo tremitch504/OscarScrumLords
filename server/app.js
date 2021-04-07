@@ -9,6 +9,11 @@ const {
 
 } = require('./db/helpers.js');
 
+const dotenv = require('dotenv');
+dotenv.config({
+  path: path.resolve(__dirname, '../.env'),
+});
+
 const CLIENT_PATH = path.resolve(__dirname, '../client/dist');
 const app = express();
 app.use(express.json());
