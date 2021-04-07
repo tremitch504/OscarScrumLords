@@ -17,8 +17,8 @@ import {
 // styles for combobox 
 const Searched = styled.div`
   position: absolute;
-  top: 15rem;
-  left: 36rem;
+  top: 14rem;
+  left: 43rem;
   transform: translateX(-100%);
   color: black; 
   width: 100%;
@@ -67,13 +67,13 @@ const Search = ({ panTo }) => {
             setValue(e.target.value);
           }}
           disabled={!ready} //                                        disable if useplaces hook isnt ready 
-          placeholder='❤️❤❤️❤️🚲🚲🚲❤️❤️❤️❤️' 
+          placeholder='❤️❤❤❤️❤️🚲🚲🚲❤️❤️❤❤️❤️' 
         />
         <ComboboxPopover> 
           <ComboboxList>
             {status === 'OK' && 
           data.map(({id, description}) =>( 
-            <ComboboxOption key={id} value={description} 
+            <ComboboxOption key={Math.random()} value={description} 
             />
           ))}
           </ComboboxList>
@@ -86,4 +86,5 @@ const Search = ({ panTo }) => {
 
 // popover gives us the suggestions if status is ok map over suggestions 
 // deconstruct an id and descripton. render an option and give it a key and value 
+// adding this so i can push 
 export default Search; 
