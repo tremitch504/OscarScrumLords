@@ -34,9 +34,9 @@ module.exports = {
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
-      }, 
+      },
       {
-        test: /\.(jpg|png)$/,
+        test: /\.(jpg|png|jpeg)$/,
         use: {
           loader: 'url-loader',
         },
@@ -48,5 +48,5 @@ module.exports = {
     new HtmlWebpackPlugin({ template: path.resolve(srcDir, 'index.ejs')}),
     new Dotenv()
   ]
- 
+
 };

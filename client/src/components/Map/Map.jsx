@@ -18,18 +18,15 @@ import shopImg from '../../assets/shop.jpg';
 
  
 const libraries = ['places']; //    library for places api
-
 const mapContainerStyle = {
   // width: '100vw', 
   height: '100vh',
 };
-
 // position of map when loaded  
 const center = {
   lat: 29.951065,  
   lng: -90.071533
 };
-
 /**
  * options for customizing map
  * styles: imported from mapStyles.js
@@ -40,7 +37,6 @@ const options = {
   disableDefaultUI: false, 
   zoomControl: true,
 };
-
 /**
  * styles for nola ❤️´s 🚲
  */
@@ -61,7 +57,6 @@ const Map = () => {
   const { isLoaded, loadError } = useLoadScript({ 
     googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY, 
     libraries, //                                   enable additional libraries for 'places' api
-
   }); 
   // state for markers 
   // const [markers, setMarkers] = React.useState([]); 
@@ -96,7 +91,6 @@ const Map = () => {
         setShops(shopArray);
       });
   }, []);
-
   /**
    * useCallBack hook allows you to create a function that will always retain the same value
    * setMarkers gets called when the cone gets placed
@@ -134,33 +128,22 @@ const Map = () => {
   const onMapLoad = React.useCallback((map) => {
     mapRef.current = map; 
   }, []); 
-
-
-
   const panTo = React.useCallback(({lat, lng}) => { //                     lat and lng that user whats to pan to
     mapRef.current.panTo({lat, lng}); //                                   call panTo function with same params
     mapRef.current.setZoom(18); //                                         zooms into location that is is searched
   }, []); 
-
-
   if (loadError) { 
     return 'error loading map';
   } else if (!isLoaded) {
     return 'Loading Maps';
   }  
-
-
   return (
     <div> 
       <MapToolbar activeLayers={activeLayers} setActiveLayers={setActiveLayers} />
       <MarkderDropdown dropdown={dropdown} setDropdown={setDropdown}/>
       
       <H1> nola ❤️´s 🚲 </H1>
-
       <Search panTo={panTo} />   
-    
-    
-  
       <GoogleMap 
         mapContainerStyle={mapContainerStyle} 
         zoom={12} 
@@ -181,7 +164,6 @@ const Map = () => {
           onClick={() => { 
             setSelected(shop); //                       onlick passes in the marker being clicked, rendered (stores marker in selected state)
           }}
-          
         />
         )}
         
@@ -224,8 +206,5 @@ const Map = () => {
       </GoogleMap>
     </div>
   );
-
 }; 
-
-
 export default Map;
