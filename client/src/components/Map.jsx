@@ -1,12 +1,14 @@
 /* eslint-disable multiline-ternary */
-import React from 'react'; 
+import React, { useEffect } from 'react'; 
 import { GoogleMap, useLoadScript, Marker, InfoWindow, BicyclingLayer } from '@react-google-maps/api'; 
 import { formatRelative } from 'date-fns'; // marking time and date on potholes
+import 'bootstrap/dist/css/bootstrap.min.css';
 import REACT_APP_MAPS_API_KEY from '../../../.env.local';
 import Search from './Search.jsx'; 
 import Locate from './Locate.jsx'; 
 import mapStyles from './styles/mapStyles.js'; 
 import styled from 'styled-components';
+import axios from 'axios';
 
  
 const libraries = ['places']; //    library for places api
@@ -62,6 +64,15 @@ const Map = () => {
   const [markers, setMarkers] = React.useState([]); 
   const [selected, setSelected] = React.useState(null); 
 
+  useEffect(() => {
+    axios.get('/bike')
+      .then(({ data: { results } }) => {
+        const formatObjs = results.map(({name, geometry: { location: { lat, lng }}}) => { return { name, lat, lng, time: new Date() }; });
+        setMarkers(formatObjs);
+        console.log(formatObjs);
+      });
+  }, []);
+
   /**
    * useCallBack hook allows you to create a function that will always retain the same value
    * setMarkers gets called when the cone gets placed
@@ -103,6 +114,16 @@ const Map = () => {
 
   return (
     <div> 
+      <nav>
+        <ul className ='navbar' >
+          <li>yep</li>
+          <li>yep</li>
+          <li>yep</li>
+          <li>yep</li>
+
+        </ul>
+        <br/>
+      </nav>
       <H1> nola ❤️´s 🚲 </H1>
 
       <Search panTo={panTo} />   
@@ -111,7 +132,7 @@ const Map = () => {
   
       <GoogleMap 
         mapContainerStyle={mapContainerStyle} 
-        zoom={10} 
+        zoom={12} 
         center={center} 
         options={options} 
         onClick={onMapClick} 
@@ -157,4 +178,3 @@ const Map = () => {
 
 
 export default Map;
-

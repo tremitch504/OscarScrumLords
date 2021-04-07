@@ -6,9 +6,6 @@ import {
   Link
 } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Container, Row, Col } from 'react-bootstrap';
-
-
 import Map from './Map.jsx';
 import Calendar from './Calendar.jsx';
 import UserProfile from './UserProfile.jsx';
@@ -33,50 +30,33 @@ const App = () => {
       <Router>
         <nav>
           <ul className ='navbar' >
-            <li>
-              <Link to='/home' >Home</Link>
-            </li>
-            <li>
-              <Link to='/map' >Map</Link>
-            </li>
-            <li>
-              <Link to='/calendar' >Events</Link>
-            </li>
-            <li>
-              <Link to='/userProfile'>My Profile</Link>
-            </li>
-            <li>
-              {loggedIn ? 
-                `Hello ${userObj.givenName}` :
-                'Please Sign in!'
-              }              
-            </li>
+            <li><Link to='/home' >Home</Link></li>
+            <li><Link to='/map' >Map</Link></li>
+            <li><Link to='/calendar' >Events</Link></li>
+            <li><Link to='/userProfile'>My Profile</Link></li>
+            <li>{loggedIn ? 
+              `Hello ${userObj.givenName}` :
+              'Please Sign in!'
+            }</li>
             <li>
               {loggedIn ?
-                <SignOutButton setLoggedIn={setLoggedIn} setUserObj={setUserObj} userObj={userObj}/> :
-                <SignInButton setLoggedIn={setLoggedIn} setUserObj={setUserObj} userObj={userObj}/>
-              }
-            </li>
-
+                <SignOutButton setLoggedIn={setLoggedIn} setUserObj={setUserObj}/> :
+                <SignInButton setLoggedIn={setLoggedIn} setUserObj={setUserObj}/>
+              }</li>
           </ul>
           <br/>
         </nav>
         <main>
           <Switch>
-            <Route exact path='/'>
-              <Home />
+            <Route exact path='/'><Home />
             </Route>
-            <Route path='/home'>
-              <Home />
+            <Route path='/home'><Home />
             </Route>
-            <Route path='/calendar'>
-              <Calendar />
+            <Route path='/calendar'><Calendar />
             </Route>
-            <Route path='/userProfile'>
-              <UserProfile />
+            <Route path='/userProfile'><UserProfile />
             </Route>
-            <Route path='/map'>
-              <Map />
+            <Route path='/map'><Map />
             </Route>
           </Switch>
         </main>

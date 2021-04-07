@@ -1,6 +1,6 @@
 const axios = require('axios');
 const { apiKey } = require('../key.js');
-const { app } = require('../app.js');
+const { app } = require('./app.js');
 
 
 const googlePlaces = 'https://maps.googleapis.com/maps/api/place/textsearch/json';
@@ -16,7 +16,7 @@ const bikeResources = app.get('/bike', async (req, res, next) => {
           ${type}+
           ${city}+
           &type=${type}&key=
-          ${apiKey}`
+          AIzaSyCb4Z934x5lXv3VKao-57wzaSSxqdNglXs`
   
     );
     res.json(data);
@@ -26,6 +26,6 @@ const bikeResources = app.get('/bike', async (req, res, next) => {
 });
 
 module.exports = {
-  bikeResources
+  app
 };
 
