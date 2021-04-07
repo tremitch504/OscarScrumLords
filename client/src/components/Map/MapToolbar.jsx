@@ -42,6 +42,16 @@ const MapToolbar = ({activeLayers, setActiveLayers}) => {
           onChange={onChange}
         />
       </label>
+      <label>
+      Show Events:
+        <input
+          name="Show Events"
+          type="checkbox"
+          value='events'
+          checked={activeLayers.events}
+          onChange={onChange}
+        />
+      </label>
     </nav>
   );
 

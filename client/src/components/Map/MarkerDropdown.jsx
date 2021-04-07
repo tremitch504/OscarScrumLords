@@ -11,7 +11,7 @@ const MarkerDropdown = ({dropdown, setDropdown}) => {
       <nav>
 
         <select value={dropdown} onChange={onChange} >
-          <option value=''>Add to the Map!</option>
+          <option value={null}>Add to the Map!</option>
           <option value='poi'>Cool Thing</option>
           <option value='hazard'>Hazard</option>
           <option value='event'>Event</option>

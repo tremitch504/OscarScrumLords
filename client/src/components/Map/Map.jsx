@@ -10,6 +10,8 @@ import MarkderDropdown from './MarkerDropdown.jsx';
 import Shop from './InfoWindows/Shop.jsx';
 import Hazard from './InfoWindows/Hazard.jsx';
 import Event from './InfoWindows/Event.jsx';
+import NewEvent from './EntryForms/NewEvent.jsx';
+
 
 import cone from '../../assets/stockcone.jpg';
 import shopImg from '../../assets/shop.jpg';
@@ -65,17 +67,32 @@ const Map = () => {
   // const [markers, setMarkers] = React.useState([]); 
   const [selected, setSelected] = React.useState(null); 
   const [shops, setShops] = React.useState([]);
-  const [dropdown, setDropdown] = React.useState('');
+  const [dropdown, setDropdown] = React.useState(null);
+  const [form, setForm] = React.useState(null);
   const [activeLayers, setActiveLayers] = React.useState({
     hazards: true,
     poi: true,
-    shops: true
+    shops: true,
+    events: true
   });
 
   useEffect(() => {
     axios.get('/shops')
       .then(({ data: { results } }) => {
-        const shopArray = results.map(({name, geometry: { location: { lat, lng }}}) => { return { name, lat, lng, time: new Date(), kind: 'shop' }; });
+        console.log(results);
+        const shopArray = results.map(({name, formatted_address, rating, opening_hours, geometry: { location: { lat, lng }}}) => {
+          return {
+            name,
+            lat,
+            lng,
+            formatted_address,
+            rating,
+            time: new Date(),
+            kind: 'shop',
+            opening_hours
+            // open_now
+          };
+        });
         setShops(shopArray);
       });
   }, []);
@@ -88,14 +105,25 @@ const Map = () => {
    * every time you click on map it renders a new version of state
    */  
   const onMapClick = (event) => {
+
+    console.log('heres some coords', event.latLng.lat(), event.latLng.lng());
+
+
     console.log('uclicked me');
 
+    dropdown && setForm({
+      lat: event.latLng.lat(),
+      lng: event.latLng.lng(),
+      time: new Date(),
+      type: dropdown
+    });
 
-  //   setMarkers(current => [...current, {
-  //     lat: event.latLng.lat(),
-  //     lng: event.latLng.lng(),
-  //     time: new Date()
-  //   }]);
+
+    //   setMarkers(current => [...current, {
+    //     lat: event.latLng.lat(),
+    //     lng: event.latLng.lng(),
+    //     time: new Date()
+    //   }]);
   }; 
 
   /**
@@ -158,7 +186,7 @@ const Map = () => {
         )}
         
 
-        {selected ? (
+        {selected && (
           <InfoWindow 
             position={{ lat: selected.lat, lng: selected.lng }} 
             onCloseClick={() => {
@@ -174,7 +202,25 @@ const Map = () => {
 
 
           </InfoWindow>
+        )}
+
+        {form && dropdown ? (
+          <InfoWindow 
+            position={{ lat: form.lat, lng: form.lng }} 
+            onCloseClick={() => {
+              setForm(null); 
+            }}
+          >
+            <div>
+              <h2>add your event!!</h2>
+              <NewEvent />
+
+            </div>
+
+
+          </InfoWindow>
         ) : null}
+
       </GoogleMap>
     </div>
   );
