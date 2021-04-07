@@ -4,7 +4,6 @@ import { GoogleMap, useLoadScript, Marker, InfoWindow, BicyclingLayer } from '@r
 import { formatRelative } from 'date-fns'; // marking time and date on potholes
 import REACT_APP_MAPS_API_KEY from '../../../.env.local';
 import Search from './Search.jsx'; 
-import Locate from './Locate.jsx'; 
 import mapStyles from './styles/mapStyles.js'; 
 import styled from 'styled-components';
 
