@@ -16,6 +16,8 @@ app.use(express.urlencoded({extended: true}));
 
 
 app.use(express.static(CLIENT_PATH));
+app.use('/favicon.ico', express.static(path.resolve(__dirname, 'assets', 'stockcone.jpg')));
+
 
 //middleware
 //set API FOLDER to api/ googleMaps (or change if named something else)

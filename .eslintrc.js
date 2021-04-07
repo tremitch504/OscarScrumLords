@@ -25,7 +25,7 @@ module.exports = {
     'eqeqeq': [2, 'smart'],
     'func-style': [2, 'expression'],
     'object-curly-newline': 'off',
-    'react/prop-types': 2,
+    // 'react/prop-types': 2,
     'no-var': 2,
     'prefer-const': 2,
     // Semicolons
