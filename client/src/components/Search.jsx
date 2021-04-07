@@ -86,4 +86,5 @@ const Search = ({ panTo }) => {
 
 // popover gives us the suggestions if status is ok map over suggestions 
 // deconstruct an id and descripton. render an option and give it a key and value 
+// adding this so i can push 
 export default Search; 
