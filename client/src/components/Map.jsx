@@ -12,7 +12,7 @@ import styled from 'styled-components';
 const libraries = ['places']; //    library for places api
 
 const mapContainerStyle = {
-  width: '100vw', 
+  // width: '100vw', 
   height: '100vh',
 };
 

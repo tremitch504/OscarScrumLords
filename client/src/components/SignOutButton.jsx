@@ -16,9 +16,8 @@ const SignOutButton = ({ setLoggedIn, setUserObj }) => {
     <div>
       <GoogleLogout
         clientId={'636707500167-jl0be6d4pi4e96ttgqkvt1v0758a3r9p.apps.googleusercontent.com'}
+        buttonText= 'Sign out'
         onLogoutSuccess={onSuccess}
-        style={{height: 5}}
-
       />
     </div>
   );

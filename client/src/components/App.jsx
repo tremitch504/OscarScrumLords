@@ -5,6 +5,9 @@ import {
   Route,
   Link
 } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {Container, Row, Col } from 'react-bootstrap';
+
 
 import Map from './Map.jsx';
 import Calendar from './Calendar.jsx';
@@ -30,23 +33,17 @@ const App = () => {
       <Router>
         <nav>
           <ul className ='navbar' >
-            <li style={{float: 'left'}}>
+            <li>
               <Link to='/home' >Home</Link>
             </li>
-            <li style={{float: 'left'}}>
+            <li>
               <Link to='/map' >Map</Link>
             </li>
-            <li style={{float: 'left'}}>
+            <li>
               <Link to='/calendar' >Events</Link>
             </li>
-            <li style={{float: 'left'}}>
+            <li>
               <Link to='/userProfile'>My Profile</Link>
-            </li>
-            <li style={{float: 'left'}}>
-              {loggedIn ?
-                <SignOutButton setLoggedIn={setLoggedIn} setUserObj={setUserObj} userObj={userObj}/> :
-                <SignInButton setLoggedIn={setLoggedIn} setUserObj={setUserObj} userObj={userObj}/>
-              }
             </li>
             <li>
               {loggedIn ? 
@@ -54,10 +51,17 @@ const App = () => {
                 'Please Sign in!'
               }              
             </li>
+            <li>
+              {loggedIn ?
+                <SignOutButton setLoggedIn={setLoggedIn} setUserObj={setUserObj} userObj={userObj}/> :
+                <SignInButton setLoggedIn={setLoggedIn} setUserObj={setUserObj} userObj={userObj}/>
+              }
+            </li>
+
           </ul>
           <br/>
         </nav>
-        <div>
+        <main>
           <Switch>
             <Route exact path='/'>
               <Home />
@@ -75,9 +79,9 @@ const App = () => {
               <Map />
             </Route>
           </Switch>
-        </div>
+        </main>
       </Router>
-    </div>
+    </ div>
   );
 };
 export default App;

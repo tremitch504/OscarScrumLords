@@ -20,10 +20,12 @@ const SignInButton = ({ setLoggedIn, setUserObj }) => {
     <div>
       <GoogleLogin
         clientId={'636707500167-jl0be6d4pi4e96ttgqkvt1v0758a3r9p.apps.googleusercontent.com'}
+        buttonText="Sign in"
         onSuccess={onSuccess}
         onFailure={onFailure}
         cookiePolicy={'single_host_origin'}
         isSignedIn={true}
+        style={{color: 'pink'}}
       />
     </div>
   );
