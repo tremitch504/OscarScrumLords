@@ -6,7 +6,7 @@ const { app } = require('./app.js');
 const googlePlaces = 'https://maps.googleapis.com/maps/api/place/textsearch/json';
 
 
-app.get('/bike', async (req, res, next) => {
+app.get('/shops', async (req, res, next) => {
   try {
     const city = 'new+orleans';
     const type = 'bicycle_store';
