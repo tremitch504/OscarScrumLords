@@ -130,7 +130,7 @@ const Map = () => {
   }, []); 
   const panTo = React.useCallback(({lat, lng}) => { //                     lat and lng that user whats to pan to
     mapRef.current.panTo({lat, lng}); //                                   call panTo function with same params
-    mapRef.current.setZoom(18); //                                         zooms into location that is is searched
+    mapRef.current.setZoom(15); //                                         zooms into location that is is searched
   }, []); 
   if (loadError) { 
     return 'error loading map';
