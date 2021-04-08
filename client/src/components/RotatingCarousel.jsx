@@ -2,15 +2,15 @@ import React from 'react';
 import Carousel from 'react-bootstrap/carousel';
 import styled from 'styled-components';
 import carousel1 from './assets/carousel1.jpeg';
-import carousel2 from './assets/carousel2.jpeg';
-import carousel3 from './assets/carousel3.jpeg';
-import carousel4 from './assets/carousel4.jpeg';
-import carousel5 from './assets/carousel5.jpeg';
+import carousel2 from './assets/carousel2.jpg';
+import carousel3 from './assets/carousel3.jpg';
+import carousel4 from './assets/carousel4.jpg'; 
+import carousel5 from './assets/carousel5.jpg'; 
 
 
 const Img = styled.img`
     display: flex;
-`;
+`; 
 
 const RotatingCarousel = () => {
   return (
@@ -55,4 +55,4 @@ const RotatingCarousel = () => {
   );
 };
 
-export default RotatingCarousel;
+export default RotatingCarousel; 
