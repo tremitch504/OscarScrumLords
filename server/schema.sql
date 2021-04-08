@@ -15,7 +15,7 @@ CREATE TABLE users (
 CREATE TABLE poi (
     id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
     kind varchar (40),
-    deets varchar(200),
+    details varchar(200),
     userId int,
     FOREIGN KEY (userId) REFERENCES users(id),
     lat varchar(40),
@@ -29,7 +29,7 @@ CREATE TABLE events (
   id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
   eventsName varchar(40),
   hostName varchar(40), 
-  deets varchar(200),
+  details varchar(200),
   date_id DATE,
   time_id TIME,
   lat varchar(40),

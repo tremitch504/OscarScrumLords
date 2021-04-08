@@ -6,16 +6,13 @@ import axios from 'axios';
 import Search from './Search.jsx'; 
 import mapStyles from '../styles/mapStyles.js'; 
 import MapToolbar from './MapToolbar.jsx';
-import MarkderDropdown from './MarkerDropdown.jsx';
-import Shop from './InfoWindows/Shop.jsx';
-import Hazard from './InfoWindows/Hazard.jsx';
-import Event from './InfoWindows/Event.jsx';
+import MarkerDropdown from './MarkerDropdown.jsx';
 import NewEvent from './EntryForms/NewEvent.jsx';
-
+import RenderInfo from './RenderInfo.jsx';
 
 import cone from '../../assets/stockcone.jpg';
 import shopImg from '../../assets/shop.jpg';
-
+import eventImg from '../../assets/Event.jpg';
  
 const libraries = ['places']; //    library for places api
 const mapContainerStyle = {
@@ -53,7 +50,7 @@ const H1 = styled.h2`
 
 
 
-const Map = () => {
+const Map = ({events, setEvents, loggedIn, createEvent}) => {
   const { isLoaded, loadError } = useLoadScript({ 
     googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY, 
     libraries, //                                   enable additional libraries for 'places' api
@@ -62,7 +59,7 @@ const Map = () => {
   // const [markers, setMarkers] = React.useState([]); 
   const [selected, setSelected] = React.useState(null); 
   const [shops, setShops] = React.useState([]);
-  const [dropdown, setDropdown] = React.useState(null);
+  const [dropdown, setDropdown] = React.useState(false);
   const [form, setForm] = React.useState(null);
   const [activeLayers, setActiveLayers] = React.useState({
     hazards: true,
@@ -74,17 +71,16 @@ const Map = () => {
   useEffect(() => {
     axios.get('/shops')
       .then(({ data: { results } }) => {
-        console.log(results);
-        const shopArray = results.map(({name, formatted_address, rating, opening_hours, geometry: { location: { lat, lng }}}) => {
+        const shopArray = results.map(({name, formatted_address: formattedAddress, rating, opening_hours: openingHours, geometry: { location: { lat, lng }}}) => {
           return {
             name,
             lat,
             lng,
-            formatted_address,
+            formattedAddress,
             rating,
             time: new Date(),
             kind: 'shop',
-            opening_hours
+            openingHours
             // open_now
           };
         });
@@ -99,26 +95,15 @@ const Map = () => {
    * every time you click on map it renders a new version of state
    */  
   const onMapClick = (event) => {
-
-    console.log('heres some coords', event.latLng.lat(), event.latLng.lng());
-
-
-    console.log('uclicked me');
-
     dropdown && setForm({
       lat: event.latLng.lat(),
       lng: event.latLng.lng(),
       time: new Date(),
       type: dropdown
     });
-
-
-    //   setMarkers(current => [...current, {
-    //     lat: event.latLng.lat(),
-    //     lng: event.latLng.lng(),
-    //     time: new Date()
-    //   }]);
   }; 
+
+
 
   /**
    * mapRef: retain a reference of the actual map instance. used to pan and zoom on map when searching
@@ -140,7 +125,7 @@ const Map = () => {
   return (
     <div> 
       <MapToolbar activeLayers={activeLayers} setActiveLayers={setActiveLayers} />
-      <MarkderDropdown dropdown={dropdown} setDropdown={setDropdown}/>
+      <MarkerDropdown dropdown={dropdown} setDropdown={setDropdown} loggedIn={loggedIn}/>
       
       <H1> nola ❤️´s 🚲 </H1>
       <Search panTo={panTo} />   
@@ -166,6 +151,21 @@ const Map = () => {
           }}
         />
         )}
+
+        {activeLayers.events && events.map(event => <Marker key={Math.random()}
+          position={{ lat: Number(event.lat), lng: Number(event.lng) }} 
+          icon={{ //                                        options for centering and resizing pin 
+            url: eventImg,
+            scaledSize: new window.google.maps.Size(33, 33),
+            origin: new window.google.maps.Point(0, 0),
+            anchor: new window.google.maps.Point(15, 15), 
+          }}
+          onClick={() => { 
+            console.log(event);
+            setSelected(event); //                       onlick passes in the marker being clicked, rendered (stores marker in selected state)
+          }}
+        />
+        )}
         
 
         {selected && (
@@ -175,14 +175,7 @@ const Map = () => {
               setSelected(null); 
             }}
           >
-            <div>
-              {selected.kind === 'shop' ?
-                <Shop selected={selected} /> :
-                <Hazard />
-              }
-            </div>
-
-
+            <RenderInfo selected={selected}/>
           </InfoWindow>
         )}
 
@@ -195,7 +188,7 @@ const Map = () => {
           >
             <div>
               <h2>add your event!!</h2>
-              <NewEvent />
+              <NewEvent form={form} createEvent={createEvent} />
 
             </div>
 

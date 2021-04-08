@@ -51,9 +51,20 @@ const photoBank = ({ coordinates, time, date, img }) => {
   
 //CREATE, FIND, AND CATEGORIZE BIKING EVENTS
 //will need API to pin location of event, EVENTS DB: id, date_id, time_id, location_id
-const bikeEvents = ({ eventsName, date, time, location }) => {
+const bikeEvents = ({ name, hostName, details, date, time, lat, lng}) => {
   return new Promise((resolve, reject) => {
-    db.query('INSERT INTO events (eventsName, date_id, time_id, location_id) VALUES (?, ?, ?, ?)', [eventsName, date, time, location], (err, results) => {
+    db.query('INSERT INTO events (eventsName, hostName, details, date_id, time_id, lat, lng) VALUES (?, ?, ?, ?, ?, ?, ?)', [name, hostName, details, date, time, lat, lng], (err, results) => {
+      if (err) {
+        return reject(err);
+      }
+      resolve(results);
+    });
+  });
+};
+
+const getEvents = () => {
+  return new Promise((resolve, reject) => {
+    db.query('SELECT * FROM events', (err, results) => {
       if (err) {
         return reject(err);
       }
@@ -82,5 +93,6 @@ module.exports = {
   postRoutes,
   photoBank,
   rsvp,
-  bikeEvents
+  bikeEvents,
+  getEvents
 };
