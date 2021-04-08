@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
+import DatePicker from 'react-datepicker';
 
 const NewEvent = ({form: {lat, lng}, createEvent}) => {
 
@@ -11,6 +12,11 @@ const NewEvent = ({form: {lat, lng}, createEvent}) => {
     lat: lat,
     lng: lng
   });
+
+  const [startDate, setStartDate] = useState(new Date());
+
+
+
 
   const onChange = ({target: {name, value}}) => {
     setEvent({
@@ -33,10 +39,13 @@ const NewEvent = ({form: {lat, lng}, createEvent}) => {
     Details:
         <input type="text" name="details" onChange={onChange}/>
       </label>
-      <label>
-    Date:
-        <input type="text" name="date" onChange={onChange}/>
-      </label>
+
+      <DatePicker
+        selected={startDate}
+        onChange={date => setStartDate(date)}
+        // showTimeSelect
+        // dateFormat="Pp"
+      />
       <label>
     Time:
         <input type="text" name="time" onChange={onChange}/>
@@ -51,6 +60,6 @@ NewEvent.propTypes = {
   lat: PropTypes.number,
   lng: PropTypes.number,
   form: PropTypes.object,
-  createEvent: PropTypes.function
+  createEvent: PropTypes.func
 };
 export default NewEvent;
