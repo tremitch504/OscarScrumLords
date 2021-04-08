@@ -6,6 +6,7 @@ const {
   photoBank,
   rsvp,
   bikeEvents,
+  getEvents
 
 } = require('./db/helpers.js');
 
@@ -74,15 +75,40 @@ app.post('/poi', (req, res) => {
 //CREATE, FIND, AND CATEGORIZE BIKING EVENTS
 //will need API to pin location of event, EVENTS DB: id, date_id, time_id, location_id
 app.post('/events', (req, res) => {
+  console.log('hiiiiii');
 
-  const { eventsName, date, time, location } = req.body;
+  // const {name: eventsName, date: date_id, time: time_id, ...rest } = req.body;
 
-  return bikeEvents({ eventsName, date, time, location })
+  // return bikeEvents({ eventsName, date_id, time_id, rest })
+  return bikeEvents(req.body)
     .then(() => res.sendStatus(201))
     .catch(err => {
       console.log('ERROR', err);
       res.sendStatus(500);
     });
+});
+
+app.get('/events', (req, res) => {
+  console.log('hi');
+
+  return getEvents()
+    .then(data => res.status(201).send(data))
+    .catch(err => {
+      console.log('ERROR', err);
+      res.sendStatus(500);
+    });
+});
+
+app.put('/events', (req, res) => {
+
+  // const { eventsName, date, time, location } = req.body;
+
+  // return bikeEvents({ eventsName, date, time, location })
+  //   .then(() => res.sendStatus(201))
+  //   .catch(err => {
+  //     console.log('ERROR', err);
+  //     res.sendStatus(500);
+  //   });
 });
 
 

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   HashRouter as Router,
   Switch,
@@ -19,37 +19,37 @@ import axios from 'axios';
 const App = () => {
 
   const [loggedIn, setLoggedIn] = useState(false);
-  const [userObj, setUserObj] = useState({welp: 'welllllp'});
-  const [events, setEvents] = useState([{
-    name: 'biking in the river',
-    host: 'daniel & zach',
-    details: 'crossing river from algiers to bywater on bike',
-    date: '2021-04-11',
-    time: '20:00:00',
-    lat: '29.956078435884773',
-    lng: '-90.03581080691308'
-  }]);
+  const [userObj, setUserObj] = useState({});
+  const [events, setEvents] = useState([]);
 
 
-  const eventChange = (e) => {
-    const { eventsName, hostName, details, date, time, location, lat, lng } = e.target;
-
-    axios.post('/events', {
-      eventsName,
+  const createEvent = (eventObj) => {
+    const {name: hostName} = userObj;
+    const postObj = {
+      ...eventObj,
       hostName,
-      details,
-      date,
-      time,
-      location,
-      lat,
-      lng
-
-
-    });
-
-    //setEvents
+    };
+    axios.post('/events', postObj)
+      .then(getEvents);
   };
 
+  const getEvents = () => {
+    axios.get('/events')
+      .then(({data}) => {
+        data.forEach(event => {
+          event.lat = Number(event.lat);
+          event.lng = Number(event.lng);
+          event.time = new Date();
+          event.kind = 'event';
+        });
+        setEvents(data);
+      });    
+  };
+
+
+  useEffect(() => {
+    getEvents();
+  }, []);
 
   return (
     <div>
@@ -82,11 +82,16 @@ const App = () => {
             </Route>
             <Route path='/home'><Home />
             </Route>
-            <Route path='/calendar'><Calendar events={events} setEvents={setEvents} eventChange={eventChange}/>
+            <Route path='/calendar'><Calendar events={events} setEvents={setEvents} createEvent={createEvent}/>
             </Route>
             <Route path='/userProfile'><UserProfile />
             </Route>
-            <Route path='/map'><Map events={events} setEvents={setEvents} eventChange={eventChange}/>
+            <Route path='/map'>
+              <Map
+                events={events}
+                setEvents={setEvents}
+                createEvent={createEvent}
+                loggedIn={loggedIn}/>
             </Route>
           </Switch>
         </main>

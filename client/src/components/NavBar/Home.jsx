@@ -1,5 +1,5 @@
 import React from 'react';
-import RotatingCarousel from './../RotatingCarousel.jsx'; 
+import RotatingCarousel from '../RotatingCarousel.jsx';
 
 const Home = () => {
   return (

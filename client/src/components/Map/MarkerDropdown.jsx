@@ -1,9 +1,16 @@
 import React from 'react';
 
-const MarkerDropdown = ({dropdown, setDropdown}) => {
+const MarkerDropdown = ({dropdown, setDropdown, loggedIn}) => {
 
   const onChange = ({target: {value}}) => {
-    setDropdown(value);
+    console.log('value of loggedin', loggedIn);
+    if (loggedIn) {
+      setDropdown(value); 
+    } else {
+      // console.log('else condition hit');
+      setDropdown(false);
+      alert('Please Sign In');
+    }
   };
 
   return (
@@ -16,7 +23,7 @@ const MarkerDropdown = ({dropdown, setDropdown}) => {
           <option value='hazard'>Hazard</option>
           <option value='event'>Event</option>
         </select>
-        {dropdown !== '' && <h3>click the map to add feature</h3>}
+        {dropdown && <h3>click the map to add feature</h3>}
       </nav>
     </div>
   );
