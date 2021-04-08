@@ -7,7 +7,7 @@ export default createGlobalStyle`
 }
 body{
     margin: 0;
-    background-color: #caffbf;
+    background-color: aliceblue;
   }
 div{
     color: black;
