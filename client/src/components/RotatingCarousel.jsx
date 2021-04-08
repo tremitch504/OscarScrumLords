@@ -8,48 +8,35 @@ import carousel4 from './assets/carousel4.jpg';
 import carousel5 from './assets/carousel5.jpg'; 
 
 
-const Img = styled.img`
+const Img = styled.div`
     display: flex;
+    width: 100%; 
+    height: 70vh;
+    min-height: 250px; 
+    padding: 1rem 1.5rem;  
+    img {
+      object-fit: cover; 
+      width: 100%;
+      height: 100%; 
+      display: block; 
+    }
 `; 
 
 const RotatingCarousel = () => {
+  const images = [carousel1, carousel2, carousel3, carousel4, carousel5];
   return (
     <Carousel >
-      <Carousel.Item >
-        <Img
-          className="rounded mx-auto d-block w-100"
-          src={carousel1}
-          alt="Responsive image"
-        />
-      </Carousel.Item>
-      <Carousel.Item >
-        <Img
-          className="rounded mx-auto d-block w-100"
-          src={carousel2}
-          alt="Responsive image"
-        />
-      </Carousel.Item>
-      <Carousel.Item >
-        <Img
-          className="rounded mx-auto d-block w-100"
-          src={carousel3}
-          alt="Responsive image"
-        />
-      </Carousel.Item>
-      <Carousel.Item >
-        <Img
-          className="rounded mx-auto d-block w-100"
-          src={carousel4}
-          alt="Responsive image"
-        />
-      </Carousel.Item>
-      <Carousel.Item >
-        <Img
-          className="rounded mx-auto d-block w-100"
-          src={carousel5}
-          alt="Responsive image"
-        />
-      </Carousel.Item>
+      { images.map((image, i) => (
+        <Carousel.Item key = {i} >
+          <Img>
+            <img
+              className="rounded mx-auto d-block w-100"
+              src={image}
+              alt="Responsive image"
+            />
+          </Img>
+        </Carousel.Item>
+      ))}
     </Carousel>
 
   );

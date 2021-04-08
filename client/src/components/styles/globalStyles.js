@@ -1,23 +1,24 @@
 import { createGlobalStyle } from 'styled-components';
-
 export default createGlobalStyle`
+
 *{
-    // box-sizing: border-box;
-    margin: auto;
+  // box-sizing: border-box;
+  margin: auto;
 }
 body{
-    margin: 0;
-    background-color: aliceblue;
-  }
+  margin: 0;
+  background-color: aliceblue;
+}
 div{
-    color: black;
-    /* background: rgba (255, 255, 255, 0.1);
-    backdrop-filter: blur(6px); */
+  color: black;
+  /* background: rgba (255, 255, 255, 0.1);
+  backdrop-filter: blur(6px); */
 }
 a{
   color:black;
 }
 header{
+  font-family: 'Permanent Marker', cursive;
   color: black;
   border-radius: 25px;
   background-color: #ffd1dc;
@@ -29,6 +30,7 @@ header{
   border-style: solid;
 }
 nav{
+  font-family: 'Ubuntu', sans-serif;
   color: black;
   width: 90%;
   border-radius: 15px;
@@ -53,3 +55,6 @@ label {
   display: block;
 }
 `;
+
+
+
