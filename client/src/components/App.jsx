@@ -24,6 +24,7 @@ const App = () => {
 
 
   const createEvent = (eventObj) => {
+    console.log('here we go');
     const {name: hostName} = userObj;
     const postObj = {
       ...eventObj,

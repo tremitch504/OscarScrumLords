@@ -180,8 +180,9 @@ const Map = ({events, setEvents, loggedIn, createEvent}) => {
         )}
 
         {form && dropdown ? (
-          <InfoWindow 
-            position={{ lat: form.lat, lng: form.lng }} 
+
+          <InfoWindow
+            position={{ lat: form.lat, lng: form.lng }}             
             onCloseClick={() => {
               setForm(null); 
             }}
