@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Map from './Map/Map.jsx';
-import Calendar from './NavBar/Calendar.jsx';
+import Calendar from './NavBar/Events/Calendar.jsx';
 import UserProfile from './NavBar/UserProfile.jsx';
 import Home from './NavBar/Home.jsx';
 import SignInButton from './NavBar/SignInButton.jsx';
@@ -44,7 +44,7 @@ const App = () => {
           event.kind = 'event';
         });
         setEvents(data);
-      });    
+      });
   };
 
 
@@ -65,7 +65,7 @@ const App = () => {
             <li><Link to='/map' >Map</Link></li>
             <li><Link to='/calendar' >Events</Link></li>
             <li><Link to='/userProfile'>My Profile</Link></li>
-            <li>{loggedIn ? 
+            <li>{loggedIn ?
               `Hello ${userObj.givenName}` :
               'Please Sign in!'
             }</li>
