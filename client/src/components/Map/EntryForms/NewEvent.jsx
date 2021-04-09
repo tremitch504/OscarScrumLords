@@ -17,7 +17,6 @@ const NewEvent = ({form: {lat, lng}, createEvent}) => {
   });
 
   const onChange = ({target: {name, value}}) => {
-    console.log(name, value);
     setEvent({
       ...event,
       [name]: value
@@ -29,7 +28,6 @@ const NewEvent = ({form: {lat, lng}, createEvent}) => {
       ...event,
       date: newDate
     });
-    console.log(event.date);
   };
 
   const timeChange = (newTime) => {
@@ -37,7 +35,6 @@ const NewEvent = ({form: {lat, lng}, createEvent}) => {
       ...event,
       time: newTime
     });
-    console.log(typeof event.time);
   };
 
   const onSubmit = () => {

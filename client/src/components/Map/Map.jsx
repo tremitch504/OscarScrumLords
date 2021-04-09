@@ -8,11 +8,16 @@ import mapStyles from '../styles/mapStyles.js';
 import MapToolbar from './MapToolbar.jsx';
 import MarkerDropdown from './MarkerDropdown.jsx';
 import NewEvent from './EntryForms/NewEvent.jsx';
+import NewHazard from './EntryForms/NewHazard.jsx';
+import NewPoi from './EntryForms/NewPoi.jsx';
+
+
 import RenderInfo from './RenderInfo.jsx';
 
-import cone from '../../assets/stockcone.jpg';
-import shopImg from '../../assets/shop.jpg';
-import eventImg from '../../assets/Event.jpg';
+import hazardImg from '../assets/stockcone.jpg';
+import shopImg from '../assets/shop.jpg';
+import eventImg from '../assets/Event.jpg';
+import poiImg from '../assets/babywater.png';
  
 const libraries = ['places']; //    library for places api
 const mapContainerStyle = {
@@ -50,7 +55,7 @@ const H1 = styled.h2`
 
 
 
-const Map = ({events, setEvents, loggedIn, createEvent}) => {
+const Map = ({events, setEvents, createEvent, landmarks, setLandmarks, createLandmark, loggedIn}) => {
   const { isLoaded, loadError } = useLoadScript({ 
     googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY, 
     libraries, //                                   enable additional libraries for 'places' api
@@ -63,7 +68,7 @@ const Map = ({events, setEvents, loggedIn, createEvent}) => {
   const [form, setForm] = React.useState(null);
   const [activeLayers, setActiveLayers] = React.useState({
     hazards: true,
-    poi: true,
+    pois: true,
     shops: true,
     events: true
   });
@@ -166,6 +171,40 @@ const Map = ({events, setEvents, loggedIn, createEvent}) => {
           }}
         />
         )}
+
+        {activeLayers.hazards && landmarks
+          .filter(({kind}) => kind === 'hazard')
+          .map(hazard => <Marker key={Math.random()}
+            position={{ lat: Number(hazard.lat), lng: Number(hazard.lng) }} 
+            icon={{ //                                        options for centering and resizing pin 
+              url: hazardImg,
+              scaledSize: new window.google.maps.Size(33, 33),
+              origin: new window.google.maps.Point(0, 0),
+              anchor: new window.google.maps.Point(15, 15), 
+            }}
+            onClick={() => { 
+              console.log(hazard);
+              setSelected(hazard); //                       onlick passes in the marker being clicked, rendered (stores marker in selected state)
+            }}
+          />
+          )}
+
+        {activeLayers.pois && landmarks
+          .filter(({kind}) => kind === 'poi')
+          .map(hazard => <Marker key={Math.random()}
+            position={{ lat: Number(hazard.lat), lng: Number(hazard.lng) }} 
+            icon={{ //                                        options for centering and resizing pin 
+              url: poiImg,
+              scaledSize: new window.google.maps.Size(33, 33),
+              origin: new window.google.maps.Point(0, 0),
+              anchor: new window.google.maps.Point(15, 15), 
+            }}
+            onClick={() => { 
+              console.log(hazard);
+              setSelected(hazard); //                       onlick passes in the marker being clicked, rendered (stores marker in selected state)
+            }}
+          />
+          )}
         
 
         {selected && (
@@ -188,9 +227,25 @@ const Map = ({events, setEvents, loggedIn, createEvent}) => {
             }}
           >
             <div>
+
+              {dropdown === 'event' &&
+            <div>
               <h2>add your event!!</h2>
               <NewEvent form={form} createEvent={createEvent} />
-
+            </div>
+              }
+              {dropdown === 'hazard' &&
+            <div>
+              <h2>add a traffic cone!!</h2>
+              <NewHazard form={form} createLandmark={createLandmark} />
+            </div>
+              }
+              {dropdown === 'poi' &&
+            <div>
+              <h2>add something cool!!</h2>
+              <NewPoi form={form} createLandmark={createLandmark} />
+            </div>
+              }
             </div>
 
 

@@ -21,10 +21,11 @@ const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userObj, setUserObj] = useState({});
   const [events, setEvents] = useState([]);
+  const [landmarks, setLandmarks] = useState([]);
+
 
 
   const createEvent = (eventObj) => {
-    console.log('here we go');
     const {name: hostName} = userObj;
     const postObj = {
       ...eventObj,
@@ -47,9 +48,32 @@ const App = () => {
       });
   };
 
+  const createLandmark = (eventObj) => {
+    const {name: fullName} = userObj;
+    const postObj = {
+      ...eventObj,
+      fullName,
+    };
+    axios.post('/landmarks', postObj)
+      .then(getLandmarks);
+  };
+
+  const getLandmarks = () => {
+    axios.get('/landmarks')
+      .then(({data}) => {
+        data.forEach(event => {
+          event.lat = Number(event.lat);
+          event.lng = Number(event.lng);
+          event.time = new Date();
+        });
+        setLandmarks(data);
+      });
+  };
+
 
   useEffect(() => {
     getEvents();
+    getLandmarks();
   }, []);
 
   return (
@@ -83,7 +107,11 @@ const App = () => {
             </Route>
             <Route path='/home'><Home />
             </Route>
-            <Route path='/calendar'><Calendar events={events} setEvents={setEvents} createEvent={createEvent}/>
+            <Route path='/calendar'>
+              <Calendar
+                events={events}
+                setEvents={setEvents}
+                createEvent={createEvent}/>
             </Route>
             <Route path='/userProfile'><UserProfile />
             </Route>
@@ -92,6 +120,9 @@ const App = () => {
                 events={events}
                 setEvents={setEvents}
                 createEvent={createEvent}
+                landmarks={landmarks}
+                setLandmarks={setLandmarks}
+                createLandmark={createLandmark}
                 loggedIn={loggedIn}/>
             </Route>
           </Switch>
