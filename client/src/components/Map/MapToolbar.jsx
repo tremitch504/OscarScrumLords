@@ -27,8 +27,8 @@ const MapToolbar = ({activeLayers, setActiveLayers}) => {
         <input
           name="Show Points of Interest"
           type="checkbox"
-          value="poi"
-          checked={activeLayers.poi}
+          value="pois"
+          checked={activeLayers.pois}
           onChange={onChange}
         />
       </label>
@@ -54,7 +54,6 @@ const MapToolbar = ({activeLayers, setActiveLayers}) => {
       </label>
     </nav>
   );
-
 };
 
 MapToolbar.propTypes = {

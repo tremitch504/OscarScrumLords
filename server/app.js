@@ -1,11 +1,12 @@
 const path = require('path');
 const express = require('express');
 const { 
+  getLandmarks,
   postLandmarks,
   postRoutes,
   photoBank,
   rsvp,
-  bikeEvents,
+  postEvents,
   getEvents
 
 } = require('./db/helpers.js');
@@ -31,16 +32,31 @@ app.use('/favicon.ico', express.static(path.resolve(__dirname, 'assets', 'stockc
 // app.use('/api/googleMaps', Maps); 
 
 //call to API search key, store in LANDMARKS DB: address_id, phone, services, bus_hours
-app.post('/poi', (req, res) => {
-  const { kind, deets, userId, lat, lng, media } = req.body;
 
-  return postLandmarks({ kind, deets, userId, lat, lng, media })
+app.get('/landmarks', (req, res) => {
+  return getLandmarks()
+    .then(data => res.status(201).send(data))
+    .catch(err => {
+      console.log('ERROR', err);
+      res.sendStatus(500);
+    });
+});
+
+//PHOTO BANK TO DOCUMENT ROADS
+//store image to LOCATIONS DB and pin location on map: coordinates, time_id, date_id, media
+//DATE FORMAT: yyyy-mm-dd
+app.post('/landmarks', (req, res) => {
+
+  // const { userId, lat, lng, media } = req.body;
+
+  // return photoBank({ userId, lat, lng, media })
+  // return photoBank(req.body)
+  return postLandmarks(req.body)
     .then(() => res.sendStatus(201))
     .catch(err => {
       console.log('ERROR', err);
       res.sendStatus(500);
     });
-
 });
 
 //USER CAN CREATE AND SAVE BIKE ROUTES
@@ -57,25 +73,12 @@ app.post('/routes', (req, res) => {
     });
 });
 
-//PHOTO BANK TO DOCUMENT ROADS
-//store image to LOCATIONS DB and pin location on map: coordinates, time_id, date_id, media
-//DATE FORMAT: yyyy-mm-dd
-app.post('/poi', (req, res) => {
 
-  const { userId, lat, lng, media } = req.body;
-
-  return photoBank({ userId, lat, lng, media })
-    .then(() => res.sendStatus(201))
-    .catch(err => {
-      console.log('ERROR', err);
-      res.sendStatus(500);
-    });
-});
 
 //CREATE, FIND, AND CATEGORIZE BIKING EVENTS
 //will need API to pin location of event, EVENTS DB: id, date_id, time_id, location_id
 app.post('/events', (req, res) => {
-  return bikeEvents(req.body)
+  return postEvents(req.body)
     .then(() => res.sendStatus(201))
     .catch(err => {
       console.log('ERROR', err);
