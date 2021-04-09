@@ -1,5 +1,4 @@
 import React from 'react';
-import Map from './Map.jsx';
 import styled from 'styled-components';
 import usePlacesAutocomplete, {
   getGeocode,
@@ -18,12 +17,24 @@ import {
 const Searched = styled.div`
   position: absolute;
   top: 16rem;
-  left: 43rem;
+  left: 33rem;
   transform: translateX(-100%);
   color: black;
   width: 100%;
-  max-width: 400px;
+  max-width: 215px;
+  background: white;  
   z-index: 10;
+  
+  div {
+  
+  font-size: 1rem;
+  font-weight: bold; 
+  color: #ffd1dc; 
+  font-family: 'Ubuntu', sans-serif;
+  width: 100%; 
+ 
+  }
+
 `;
 
 
@@ -67,17 +78,19 @@ const Search = ({ panTo }) => {
             setValue(e.target.value);
           }}
           disabled={!ready} //                                        disable if useplaces hook isnt ready
-          placeholder='❤️❤❤❤️❤️🚲🚲🚲❤️❤️❤❤️❤️'
+          placeholder='❤️❤❤❤️❤️🚲🚲🚲❤️❤❤️❤️'
         />
-        <ComboboxPopover>
-          <ComboboxList>
-            {status === 'OK' &&
+        <div>
+          <ComboboxPopover portal={false}>
+            <ComboboxList>
+              {status === 'OK' &&
           data.map(({id, description}) =>(
             <ComboboxOption key={Math.random()} value={description}
             />
           ))}
-          </ComboboxList>
-        </ComboboxPopover>
+            </ComboboxList>
+          </ComboboxPopover>
+        </div>
       </Combobox>
     </Searched>
   );
