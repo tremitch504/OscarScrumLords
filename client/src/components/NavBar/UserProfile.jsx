@@ -1,9 +1,11 @@
 import React from 'react';
 
-const UserProfile = () => {
+const UserProfile = ({userObj}) => {
+  console.log('userObj', userObj)
   return (
     <div>
-      <h4>User Profile</h4>
+      <h4>User:{userObj.name}</h4>
+
 
     </div>
   );
