@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import DatePicker from 'react-datepicker';
+import { InfoWindow } from '@react-google-maps/api'; 
+
 
 const NewEvent = ({form: {lat, lng}, createEvent}) => {
 
@@ -39,13 +41,15 @@ const NewEvent = ({form: {lat, lng}, createEvent}) => {
     Details:
         <input type="text" name="details" onChange={onChange}/>
       </label>
+      <div style>
 
-      <DatePicker
-        selected={startDate}
-        onChange={date => setStartDate(date)}
+        <DatePicker
+          selected={startDate}
+          onChange={date => setStartDate(date)}
         // showTimeSelect
         // dateFormat="Pp"
-      />
+        />
+      </div>
       <label>
     Time:
         <input type="text" name="time" onChange={onChange}/>

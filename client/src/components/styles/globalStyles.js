@@ -9,11 +9,11 @@ body{
   margin: 0;
   background-color: aliceblue;
 }
-div{
-  color: black;
-  /* background: rgba (255, 255, 255, 0.1);
-  backdrop-filter: blur(6px); */
-}
+// div{
+//   color: black;
+//   /* background: rgba (255, 255, 255, 0.1);
+//   backdrop-filter: blur(6px); */
+// }
 a{
   color:black;
 }
