@@ -12,17 +12,17 @@ CREATE TABLE users (
   fullName varchar(40) NOT NULL
 );
 
-CREATE TABLE poi (
+CREATE TABLE landmarks (
     id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
     kind varchar (40),
     details varchar(200),
     userId int,
+    fullName varchar(40),
     FOREIGN KEY (userId) REFERENCES users(id),
     lat varchar(40),
     lng varchar(40),
     time_id TIME,
-    date_id DATE,
-    media MEDIUMBLOB NOT NULL
+    date_id DATE
 );
 
 CREATE TABLE events (

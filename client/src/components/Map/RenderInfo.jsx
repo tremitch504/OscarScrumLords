@@ -33,6 +33,26 @@ const RenderInfo = ({selected}) => {
         </div>
       );
     }
+    case ('hazard') : {
+      const {fullName, details, date_id: dateId} = selected;
+      return (
+        <div>
+          <p>created by: {fullName}</p>
+          <p>details: {details}</p>
+          <p>date: {dateId.slice(0, 10)}</p>
+        </div>
+      );
+    }
+    case ('poi') : {
+      const {fullName, details, date_id: dateId} = selected;
+      return (
+        <div>
+          <p>created by: {fullName}</p>
+          <p>details: {details}</p>
+          <p>date: {dateId.slice(0, 10)}</p>
+        </div>
+      );
+    }
     }
   };
   return (

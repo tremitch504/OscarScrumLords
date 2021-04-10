@@ -18,12 +18,12 @@ const postRoutes = ({ routeName, start, end, rating }) => {
 
 
 //call to API search key, store in LANDMARKS DB: address_id, phone, services, bus_hours
-const postLandmarks = ({ kind, deets, userId, lat, lng, media }) => {
+
+
+const getLandmarks = () => {
+  console.log('gonna git landmarks');
   return new Promise((resolve, reject) => {
-    db.query('INSERT INTO poi(kind, deets, userId, lat, lng, media) \
-    VALUES (?, ?, ?, ?)',
-    [kind, deets, userId, lat, lng, media],
-    (err, results) => {
+    db.query('SELECT * FROM landmarks', (err, results) => {
       if (err) {
         return reject(err);
       }
@@ -36,7 +36,7 @@ const postLandmarks = ({ kind, deets, userId, lat, lng, media }) => {
 //store image to LOCATIONS DB and pin location on map: coordinates, time_id, date_id, media
 const photoBank = ({ userId, lat, lng, media }) => {
   return new Promise((resolve, reject) => {
-    db.query('INSERT INTO poi(userId, lat, lng, media) \
+    db.query('INSERT INTO landmarks(userId, lat, lng, media) \
     VALUES (?, ?, ?, ?)',
     [userId, lat, lng, media],
     (err, results) => {
@@ -51,14 +51,28 @@ const photoBank = ({ userId, lat, lng, media }) => {
   
 //CREATE, FIND, AND CATEGORIZE BIKING EVENTS
 //will need API to pin location of event, EVENTS DB: id, date_id, time_id, location_id
-const bikeEvents = ({ name, hostName, details, date, time, lat, lng}) => {
+const postEvents = ({ name, hostName, details, date, time, lat, lng}) => {
   return new Promise((resolve, reject) => {
-    db.query('INSERT INTO events (eventsName, hostName, details, date_id, time_id, lat, lng) VALUES (?, ?, ?, ?, ?, ?, ?)', [name, hostName, details, date, time, lat, lng], (err, results) => {
-      if (err) {
-        return reject(err);
-      }
-      resolve(results);
-    });
+    db.query('INSERT INTO events (eventsName, hostName, details, date_id, time_id, lat, lng) VALUES (?, ?, ?, ?, ?, ?, ?)', 
+      [name, hostName, details, date, time, lat, lng], (err, results) => {
+        if (err) {
+          return reject(err);
+        }
+        resolve(results);
+      });
+  });
+};
+
+const postLandmarks = ({ kind, details, fullName, lat, lng, date, time }) => {
+  return new Promise((resolve, reject) => {
+    db.query('INSERT INTO landmarks (kind, details, fullName, lat, lng, time_id, date_id) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      [kind, details, fullName, lat, lng, time, date],
+      (err, results) => {
+        if (err) {
+          return reject(err);
+        }
+        resolve(results);
+      });
   });
 };
 
@@ -89,10 +103,11 @@ const rsvp = ({ userId, eventId }) => {
 };
   
 module.exports = {
+  getLandmarks,
   postLandmarks,
   postRoutes,
   photoBank,
   rsvp,
-  bikeEvents,
+  postEvents,
   getEvents
 };
