@@ -2,17 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { GoogleLogin } from 'react-google-login';
 
-const SignInButton = ({ setLoggedIn, setUserObj }) => {
+const SignInButton = ({ setLoggedIn, createUser }) => {
 
-  const onSuccess = (response) => {
-    // console.log('log in success', response.profileObj);
+  const onSuccess = ({profileObj}) => {
     setLoggedIn(true);
-    setUserObj(response.profileObj);
+    createUser(profileObj);
+    // setUserObj(response.profileObj);
+    console.info('heres console info', profileObj);
 
   };
 
   const onFailure = (response) => {
-    console.log('log in failure', response);
+    console.warn('log in failure', response);
   };
 
 

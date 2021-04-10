@@ -24,6 +24,16 @@ const App = () => {
   const [landmarks, setLandmarks] = useState([]);
 
 
+  const createUser = (newUser) => {
+    const {name: fullName, ...rest} = newUser;
+    const postObj = {
+      ...rest,
+      fullName,
+    };
+    axios.post('/users', postObj)
+      .then(setUserObj(newUser));
+  };
+
 
   const createEvent = (eventObj) => {
     const {name: hostName} = userObj;
@@ -96,7 +106,7 @@ const App = () => {
             <li>
               {loggedIn ?
                 <SignOutButton setLoggedIn={setLoggedIn} setUserObj={setUserObj}/> :
-                <SignInButton setLoggedIn={setLoggedIn} setUserObj={setUserObj}/>
+                <SignInButton setLoggedIn={setLoggedIn} createUser={createUser}/>
               }</li>
           </ul>
           <br/>

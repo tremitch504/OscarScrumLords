@@ -85,6 +85,46 @@ const getEvents = () => {
     });
   });
 };
+
+
+// const postUser = ({ email, familyName, fullName, givenName, googleId }) => {
+
+//   db.query('SELECT EXISTS(SELECT * FROM users WHERE googleId = ?)', googleId, ;
+//   return new Promise((resolve, reject) => {
+//     db.query('INSERT INTO users (email, familyName, fullName, givenName, googleId) VALUES (?, ?, ?, ?, ?)',
+//       [email, familyName, fullName, givenName, googleId],
+//       (err, results) => {
+//         if (err) {
+//           return reject(err);
+//         }
+//         resolve(results);
+//       });
+//   });
+// };
+
+
+const postUser = ({ email, familyName, fullName, givenName, googleId }) => {
+
+  return new Promise((resolve, reject) => {
+    db.query('SELECT EXISTS(SELECT * FROM users WHERE googleId = ?)', googleId, (err, results) => {
+      if (err) {
+        return reject(err);
+      }
+      if (Object.values(results[0])[0]) {
+        resolve(results);
+      } else {
+        db.query('INSERT INTO users (email, familyName, fullName, givenName, googleId) VALUES (?, ?, ?, ?, ?)',
+          [email, familyName, fullName, givenName, googleId],
+          (err, results) => {
+            if (err) {
+              return reject(err);
+            }
+            resolve(results);
+          });
+      }
+    });
+  });
+};
   
   
 //ATTENDANCE TO BIKE EVENTS
@@ -103,6 +143,7 @@ const rsvp = ({ userId, eventId }) => {
   
 module.exports = {
   getLandmarks,
+  postUser,
   postLandmarks,
   postRoutes,
   photoBank,

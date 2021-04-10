@@ -4,10 +4,10 @@ const {
   getLandmarks,
   postLandmarks,
   postRoutes,
-  photoBank,
   rsvp,
   postEvents,
-  getEvents
+  getEvents,
+  postUser
 
 } = require('./db/helpers.js');
 
@@ -37,7 +37,7 @@ app.get('/landmarks', (req, res) => {
   return getLandmarks()
     .then(data => res.status(201).send(data))
     .catch(err => {
-      console.log('ERROR', err);
+      console.warn('ERROR', err);
       res.sendStatus(500);
     });
 });
@@ -46,15 +46,10 @@ app.get('/landmarks', (req, res) => {
 //store image to LOCATIONS DB and pin location on map: coordinates, time_id, date_id, media
 //DATE FORMAT: yyyy-mm-dd
 app.post('/landmarks', (req, res) => {
-
-  // const { userId, lat, lng, media } = req.body;
-
-  // return photoBank({ userId, lat, lng, media })
-  // return photoBank(req.body)
   return postLandmarks(req.body)
     .then(() => res.sendStatus(201))
     .catch(err => {
-      console.log('ERROR', err);
+      console.warn('ERROR', err);
       res.sendStatus(500);
     });
 });
@@ -62,13 +57,11 @@ app.post('/landmarks', (req, res) => {
 //USER CAN CREATE AND SAVE BIKE ROUTES
 //post to ROUTES DB: route_name, st_location, end_locaiton, rating
 app.post('/routes', (req, res) => {
-
   const { routeName, start, end, rating } = req.body;
-
   return postRoutes({ routeName, start, end, rating })
     .then(() => res.sendStatus(201))
     .catch(err => {
-      console.log('ERROR', err);
+      console.warn('ERROR', err);
       res.sendStatus(500);
     });
 });
@@ -81,7 +74,7 @@ app.post('/events', (req, res) => {
   return postEvents(req.body)
     .then(() => res.sendStatus(201))
     .catch(err => {
-      console.log('ERROR', err);
+      console.warn('ERROR', err);
       res.sendStatus(500);
     });
 });
@@ -90,7 +83,7 @@ app.get('/events', (req, res) => {
   return getEvents()
     .then(data => res.status(201).send(data))
     .catch(err => {
-      console.log('ERROR', err);
+      console.warn('ERROR', err);
       res.sendStatus(500);
     });
 });
@@ -108,19 +101,27 @@ app.put('/events', (req, res) => {
 });
 
 
-//ATTENDANCE TO BIKE EVENTS
-//call to store in USER TABLE
-app.post('/rsvps', (req, res) => {
-
-  const { userId, eventId } = req.body;
-
-  return rsvp({ userId, eventId })
+app.post('/users', (req, res) => {
+  return postUser(req.body)
     .then(() => res.sendStatus(201))
     .catch(err => {
-      console.log('ERROR', err);
+      console.warn('ERROR', err);
       res.sendStatus(500);
     });
 });
+
+
+//ATTENDANCE TO BIKE EVENTS
+//call to store in USER TABLE
+// app.post('/rsvps', (req, res) => {
+//   const { userId, eventId } = req.body;
+//   return rsvp({ userId, eventId })
+//     .then(() => res.sendStatus(201))
+//     .catch(err => {
+//       console.warn('ERROR', err);
+//       res.sendStatus(500);
+//     });
+// });
 
 
 module.exports = {

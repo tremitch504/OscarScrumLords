@@ -9,7 +9,8 @@ CREATE TABLE users (
   email varchar(40) NOT NULL,
   familyName varchar(40) NOT NULL,
   givenName varchar(40) NOT NULL,
-  fullName varchar(40) NOT NULL
+  fullName varchar(40) NOT NULL,
+  googleId varchar(40) NOT NULL
 );
 
 CREATE TABLE landmarks (
