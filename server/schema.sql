@@ -5,11 +5,11 @@ CREATE DATABASE bike;
 USE bike;
 
 CREATE TABLE users (
-  id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
   email varchar(40) NOT NULL,
   familyName varchar(40) NOT NULL,
   givenName varchar(40) NOT NULL,
-  fullName varchar(40) NOT NULL
+  fullName varchar(40) NOT NULL,
+  googleId varchar(40) NOT NULL PRIMARY KEY
 );
 
 CREATE TABLE landmarks (
@@ -18,7 +18,6 @@ CREATE TABLE landmarks (
     details varchar(200),
     userId int,
     fullName varchar(40),
-    FOREIGN KEY (userId) REFERENCES users(id),
     lat varchar(40),
     lng varchar(40),
     time_id TIME,
@@ -45,8 +44,8 @@ CREATE TABLE routes (
 
 CREATE TABLE rsvps (
   id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  userId int,
-  FOREIGN KEY (userId) REFERENCES users(id),
+  googleId varchar(40),
+  FOREIGN KEY (googleId) REFERENCES users(googleId),
   eventId int,
   FOREIGN KEY (eventId) REFERENCES events(id)
 );

@@ -55,7 +55,7 @@ const H1 = styled.h2`
 
 
 
-const Map = ({events, setEvents, createEvent, landmarks, setLandmarks, createLandmark, loggedIn}) => {
+const Map = ({events, setEvents, createEvent, putEvent, landmarks, setLandmarks, createLandmark, loggedIn, attending}) => {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
     libraries, //                                   enable additional libraries for 'places' api
@@ -165,7 +165,6 @@ const Map = ({events, setEvents, createEvent, landmarks, setLandmarks, createLan
             anchor: new window.google.maps.Point(15, 15),
           }}
           onClick={() => {
-            console.log(event);
             setSelected(event); //                       onlick passes in the marker being clicked, rendered (stores marker in selected state)
           }}
         />
@@ -182,7 +181,6 @@ const Map = ({events, setEvents, createEvent, landmarks, setLandmarks, createLan
               anchor: new window.google.maps.Point(15, 15),
             }}
             onClick={() => {
-              console.log(hazard);
               setSelected(hazard); //                       onlick passes in the marker being clicked, rendered (stores marker in selected state)
             }}
           />
@@ -199,7 +197,6 @@ const Map = ({events, setEvents, createEvent, landmarks, setLandmarks, createLan
               anchor: new window.google.maps.Point(15, 15),
             }}
             onClick={() => {
-              console.log(hazard);
               setSelected(hazard); //                       onlick passes in the marker being clicked, rendered (stores marker in selected state)
             }}
           />
@@ -213,7 +210,7 @@ const Map = ({events, setEvents, createEvent, landmarks, setLandmarks, createLan
               setSelected(null);
             }}
           >
-            <RenderInfo selected={selected}/>
+            <RenderInfo selected={selected} putEvent={putEvent} attending={attending} events={events} loggedIn={loggedIn}/>
           </InfoWindow>
         )}
 

@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const RenderInfo = ({selected}) => {
+const RenderInfo = ({selected, putEvent, attending, events, loggedIn}) => {
+  const onClick = () => {
+    loggedIn
+      ? putEvent(selected.id)
+      : alert('please login!');
+  };
 
   const formSwitch = () => {
     switch (selected.kind) {
@@ -21,6 +26,7 @@ const RenderInfo = ({selected}) => {
       );
     }
     case ('event') : {
+
       const {eventsName, hostName, details, date_id: dateId, time_id: timeId} = selected;
       return (
         <div>
@@ -29,7 +35,12 @@ const RenderInfo = ({selected}) => {
           <p>details: {details}</p>
           <p>date: {dateId.slice(0, 10)}</p>
           <p>time: {timeId}</p>
-          <p>attendees: tbd</p>
+          <p>attendees: {events.filter(event => event.id === selected.id)[0].attendees.join(', ')}</p>
+          <button type='button' onClick={onClick}>{
+            attending && attending.includes(selected.id)
+              ? 'unattend event'
+              : 'attend event' 
+          }</button>
         </div>
       );
     }
@@ -65,7 +76,7 @@ const RenderInfo = ({selected}) => {
 
 RenderInfo.propTypes = {
   selected: PropTypes.object,
-  name: PropTypes.string,
+  putEvent: PropTypes.func,
 };
 
 export default RenderInfo;
