@@ -4,10 +4,10 @@ const {
   getLandmarks,
   postLandmarks,
   postRoutes,
-  rsvp,
   postEvents,
   getEvents,
-  postUser
+  postUser,
+  toggleRSVP
 
 } = require('./db/helpers.js');
 
@@ -89,15 +89,12 @@ app.get('/events', (req, res) => {
 });
 
 app.put('/events', (req, res) => {
-
-  // const { eventsName, date, time, location } = req.body;
-
-  // return bikeEvents({ eventsName, date, time, location })
-  //   .then(() => res.sendStatus(201))
-  //   .catch(err => {
-  //     console.log('ERROR', err);
-  //     res.sendStatus(500);
-  //   });
+  return toggleRSVP(req.body)
+    .then(() => res.sendStatus(201))
+    .catch(err => {
+      console.log('ERROR', err);
+      res.sendStatus(500);
+    });
 });
 
 

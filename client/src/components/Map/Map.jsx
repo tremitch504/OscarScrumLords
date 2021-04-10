@@ -55,7 +55,7 @@ const H1 = styled.h2`
 
 
 
-const Map = ({events, setEvents, createEvent, landmarks, setLandmarks, createLandmark, loggedIn}) => {
+const Map = ({events, setEvents, createEvent, putEvent, landmarks, setLandmarks, createLandmark, loggedIn}) => {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
     libraries, //                                   enable additional libraries for 'places' api
@@ -213,7 +213,7 @@ const Map = ({events, setEvents, createEvent, landmarks, setLandmarks, createLan
               setSelected(null);
             }}
           >
-            <RenderInfo selected={selected}/>
+            <RenderInfo selected={selected} putEvent={putEvent} />
           </InfoWindow>
         )}
 

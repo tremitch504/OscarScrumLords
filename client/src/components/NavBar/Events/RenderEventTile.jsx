@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const RenderEventTile = ({events, date}) => {
+const RenderEventTile = ({events}) => {
   // console.log('events RET', events)
 
   return (
@@ -12,6 +12,7 @@ const RenderEventTile = ({events, date}) => {
           <p>created by: {event.hostName}</p>
           <p>details: {event.details}</p>
           <p>when: {event.time_id}</p>
+          <p>attendees: {event.attendees.join(', ')}</p>
         </div>
       ))
       }

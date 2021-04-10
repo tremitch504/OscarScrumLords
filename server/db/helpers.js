@@ -75,9 +75,36 @@ const postLandmarks = ({ kind, details, fullName, lat, lng, date, time }) => {
   });
 };
 
+// const getEvents = () => {
+//   return new Promise((resolve, reject) => {
+//     db.query('SELECT * FROM events', (err, results) => {
+//       if (err) {
+//         return reject(err);
+//       }
+//       resolve(results);
+//     });
+//   });
+// };
+
+
 const getEvents = () => {
   return new Promise((resolve, reject) => {
-    db.query('SELECT * FROM events', (err, results) => {
+    db.query('SELECT \
+    events.id, \
+    events.eventsName, \
+    events.hostName, \
+    events.details, \
+    events.time_id, \
+    events.date_id, \
+    events.lat, \
+    events.lng, \
+    users.fullName attendee \
+    FROM \
+    events \
+    LEFT JOIN rsvps \
+      ON rsvps.eventId = events.id \
+    LEFT JOIN users \
+      ON users.googleId = rsvps.googleId;', (err, results) => {
       if (err) {
         return reject(err);
       }
@@ -85,6 +112,48 @@ const getEvents = () => {
     });
   });
 };
+
+//query needs to also look through rsvp table.
+//needs to lookup users using googleId who are attending each event
+
+/*
+// SELECT 
+//     e.id, 
+//     e.hostName host, 
+//     r.eventId, 
+//     r.name committee
+
+
+
+SELECT
+rsvps.googleId
+FROM
+    events
+LEFT JOIN rsvps
+	ON events.id = rsvps.eventId;
+
+SELECT
+events.id,
+events.eventsName,
+events.hostName,
+events.details,
+events.time_id,
+events.date_id,
+events.lat,
+events.lng,
+users.fullName attendee
+FROM
+events
+LEFT JOIN rsvps
+  ON rsvps.eventId = events.id
+LEFT JOIN users
+  ON users.googleId = rsvps.googleId;
+*/
+
+
+
+//EACH EVENT has to be looked up in rsvp based on its eventId in rsvpe
+//each corresponding userId has to be looked up in user. and select fullName
 
 
 // const postUser = ({ email, familyName, fullName, givenName, googleId }) => {
@@ -101,6 +170,13 @@ const getEvents = () => {
 //       });
 //   });
 // };
+
+/*
+
+INSERT INTO users (email, familyName, givenName, fullName, googleId) VALUES ('fakeemail@gmail.com', 'User', 'Fake', 'Fake User', '12345678')
+*/
+
+
 
 
 const postUser = ({ email, familyName, fullName, givenName, googleId }) => {
@@ -130,16 +206,31 @@ const postUser = ({ email, familyName, fullName, givenName, googleId }) => {
 //ATTENDANCE TO BIKE EVENTS
 //call to store in USER TABLE
 //INSERT user_Id from USERS and events_id from the EVENTS table
-const rsvp = ({ userId, eventId }) => {
+const toggleRSVP = ({ googleId, eventId }) => {
   return new Promise((resolve, reject) => {
-    db.query('INSERT INTO rsvps (userId, eventId) VALUES (?, ?)', [userId, eventId], (err, results) => {
+    db.query('SELECT id FROM rsvps WHERE googleId = ? AND eventId = ?', [googleId, eventId], (err, results) => {
       if (err) {
         return reject(err);
       }
-      resolve(results);
+      if (results[0]) {
+        db.query('DELETE FROM rsvps WHERE id = ?', results[0].id, (err, results) => {
+          if (err) {
+            return reject (err);
+          }
+          return resolve(results);
+        });
+      } else {
+        db.query('INSERT INTO rsvps (googleId, eventId) VALUES (?, ?)', [googleId, eventId], (err, results) => {
+          if (err) {
+            return reject(err);
+          }
+          resolve(results);
+        });
+      }
     });
   });
 };
+
   
 module.exports = {
   getLandmarks,
@@ -147,7 +238,7 @@ module.exports = {
   postLandmarks,
   postRoutes,
   photoBank,
-  rsvp,
   postEvents,
-  getEvents
+  getEvents,
+  toggleRSVP
 };
