@@ -24,6 +24,16 @@ const App = () => {
   const [landmarks, setLandmarks] = useState([]);
 
 
+  const createUser = (newUser) => {
+    const {name: fullName, ...rest} = newUser;
+    const postObj = {
+      ...rest,
+      fullName,
+    };
+    axios.post('/users', postObj)
+      .then(setUserObj(newUser));
+  };
+
 
   const createEvent = (eventObj) => {
     const {name: hostName} = userObj;
@@ -35,16 +45,30 @@ const App = () => {
       .then(getEvents);
   };
 
+  const putEvent = (eventId) => {
+    const { googleId } = userObj;
+    axios.put('/events', {eventId, googleId})
+      .then(getEvents);
+  };
+
   const getEvents = () => {
     axios.get('/events')
       .then(({data}) => {
-        data.forEach(event => {
+        const uniqueEvents = data.filter((event, i)=> data.findIndex(e=>(e.id === event.id)) === i);
+        const eventsWithAttendees = uniqueEvents.map(uniqueEvent => {
+          const attendees = data.filter(event => event.id === uniqueEvent.id).map(event => event.attendee);
+          const {attendee, ...rest} = uniqueEvent;
+          attendee; //so eslint wont complain
+          return {attendees, ...rest};
+        });
+        eventsWithAttendees.forEach(event => {
           event.lat = Number(event.lat);
           event.lng = Number(event.lng);
           event.time = new Date();
           event.kind = 'event';
         });
-        setEvents(data);
+
+        setEvents(eventsWithAttendees);
       });
   };
 
@@ -96,7 +120,7 @@ const App = () => {
             <li>
               {loggedIn ?
                 <SignOutButton setLoggedIn={setLoggedIn} setUserObj={setUserObj}/> :
-                <SignInButton setLoggedIn={setLoggedIn} setUserObj={setUserObj}/>
+                <SignInButton setLoggedIn={setLoggedIn} createUser={createUser}/>
               }</li>
           </ul>
           <br/>
@@ -120,6 +144,7 @@ const App = () => {
                 events={events}
                 setEvents={setEvents}
                 createEvent={createEvent}
+                putEvent={putEvent}
                 landmarks={landmarks}
                 setLandmarks={setLandmarks}
                 createLandmark={createLandmark}

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import styled from 'styled-components';
-import RenderEventTile from './RenderEventTile.jsx'
+import RenderEventTile from './RenderEventTile.jsx';
 
 
 const Div = styled.div`
@@ -30,23 +31,22 @@ h2 {
 //
 
 const Events = ({events}) => {
-  console.log('events', events)
 
   const [selectedDate, setDate] = useState(new Date());
 
   const onChange = selectedDate => {
-    setDate(selectedDate)
-  }
+    setDate(selectedDate);
+  };
 
   const eventsOnDate = events.filter(event => {
 
-    const formatDate = `${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}-${selectedDate.getDate()}`
+    const formatDate = `${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}-${selectedDate.getDate()}`;
 
     // console.log(formatDate)
     // console.log(event.date_id.slice(0, 10).replaceAll('-0', '-'))
 
-    return event.date_id.slice(0, 10).replaceAll('-0', '-') === formatDate
-  })
+    return event.date_id.slice(0, 10).replaceAll('-0', '-') === formatDate;
+  });
 
   return (
     <Div>
@@ -61,6 +61,10 @@ const Events = ({events}) => {
     </Div>
 
   );
+};
+
+Events.propTypes = {
+  events: PropTypes.object,
 };
 
 export default Events;

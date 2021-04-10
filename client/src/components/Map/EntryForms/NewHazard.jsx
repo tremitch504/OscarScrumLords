@@ -57,6 +57,7 @@ NewHazard.propTypes = {
   lat: PropTypes.number,
   lng: PropTypes.number,
   form: PropTypes.object,
-  createHazard: PropTypes.func
+  createLandmark: PropTypes.func
 };
+
 export default NewHazard;
