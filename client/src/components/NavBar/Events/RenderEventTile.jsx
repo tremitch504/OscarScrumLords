@@ -1,18 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const RenderEventTile = ({events}) => {
+const RenderEventTile = ({events, date}) => {
   // console.log('events RET', events)
 
   return (
-    <div>
+    <div className="events-container">
         {events.map(event => (
-          <div key={event.id}>
+          <div className="events" key={event.id}>
             <h3>{event.eventsName}</h3>
             <p>created by: {event.hostName}</p>
             <p>details: {event.details}</p>
             <p>time: {event.timeId}</p>
-            <p>attendees: tbd</p>
           </div>
         ))
         }

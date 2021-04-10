@@ -5,7 +5,7 @@ const MarkerDropdown = ({dropdown, setDropdown, loggedIn}) => {
   const onChange = ({target: {value}}) => {
     console.log('value of loggedin', loggedIn);
     if (loggedIn) {
-      setDropdown(value); 
+      setDropdown(value);
     } else {
       // console.log('else condition hit');
       setDropdown(false);
@@ -14,7 +14,7 @@ const MarkerDropdown = ({dropdown, setDropdown, loggedIn}) => {
   };
 
   return (
-    <div className='txn-data'>
+    <div className='map-nav-dropdown'>
       <nav>
 
         <select value={dropdown} onChange={onChange} >

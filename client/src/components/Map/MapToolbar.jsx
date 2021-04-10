@@ -11,8 +11,8 @@ const MapToolbar = ({activeLayers, setActiveLayers}) => {
   };
 
   return (
-    <nav>
-      <label>
+    <nav className="map-nav-container">
+      <label className="map-nav">
       Show Bike Shops:
         <input
           name="Show Bike Shops"
@@ -22,7 +22,7 @@ const MapToolbar = ({activeLayers, setActiveLayers}) => {
           onChange={onChange}
         />
       </label>
-      <label>
+      <label className="map-nav">
       Show Points of Interest:
         <input
           name="Show Points of Interest"
@@ -32,7 +32,7 @@ const MapToolbar = ({activeLayers, setActiveLayers}) => {
           onChange={onChange}
         />
       </label>
-      <label>
+      <label className="map-nav">
         Show Hazards:
         <input
           name="Show Hazards"
@@ -42,7 +42,7 @@ const MapToolbar = ({activeLayers, setActiveLayers}) => {
           onChange={onChange}
         />
       </label>
-      <label>
+      <label className="map-nav">
       Show Events:
         <input
           name="Show Events"

@@ -1,10 +1,10 @@
 /* eslint-disable multiline-ternary */
-import React, { useEffect } from 'react'; 
-import { GoogleMap, useLoadScript, Marker, InfoWindow, BicyclingLayer } from '@react-google-maps/api'; 
+import React, { useEffect } from 'react';
+import { GoogleMap, useLoadScript, Marker, InfoWindow, BicyclingLayer } from '@react-google-maps/api';
 import styled from 'styled-components';
 import axios from 'axios';
-import Search from './Search.jsx'; 
-import mapStyles from '../styles/mapStyles.js'; 
+import Search from './Search.jsx';
+import mapStyles from '../styles/mapStyles.js';
 import MapToolbar from './MapToolbar.jsx';
 import MarkerDropdown from './MarkerDropdown.jsx';
 import NewEvent from './EntryForms/NewEvent.jsx';
@@ -13,15 +13,15 @@ import RenderInfo from './RenderInfo.jsx';
 import cone from '../../assets/stockcone.jpg';
 import shopImg from '../../assets/shop.jpg';
 import eventImg from '../../assets/Event.jpg';
- 
+
 const libraries = ['places']; //    library for places api
 const mapContainerStyle = {
-  // width: '100vw', 
+  // width: '100vw',
   height: '100vh',
 };
-// position of map when loaded  
+// position of map when loaded
 const center = {
-  lat: 29.951065,  
+  lat: 29.951065,
   lng: -90.071533
 };
 /**
@@ -29,20 +29,20 @@ const center = {
  * styles: imported from mapStyles.js
  * disableDefault: toggle to remove unwanted UI elements, manually add UI´s below
  */
-const options = { 
-  styles: mapStyles, 
-  disableDefaultUI: false, 
+const options = {
+  styles: mapStyles,
+  disableDefaultUI: false,
   zoomControl: true,
 };
 /**
  * styles for nola ❤️´s 🚲
  */
 const H1 = styled.h2`
-    position: absolute; 
+    position: static;
     top: 50rem;
     left: 1rem;
-    color: black; 
-    z-index: 10; 
+    color: black;
+    z-index: 10;
     margin: 0;
     padding: 0,
 `
@@ -51,13 +51,13 @@ const H1 = styled.h2`
 
 
 const Map = ({events, setEvents, loggedIn, createEvent}) => {
-  const { isLoaded, loadError } = useLoadScript({ 
-    googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY, 
+  const { isLoaded, loadError } = useLoadScript({
+    googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
     libraries, //                                   enable additional libraries for 'places' api
-  }); 
-  // state for markers 
-  // const [markers, setMarkers] = React.useState([]); 
-  const [selected, setSelected] = React.useState(null); 
+  });
+  // state for markers
+  // const [markers, setMarkers] = React.useState([]);
+  const [selected, setSelected] = React.useState(null);
   const [shops, setShops] = React.useState([]);
   const [dropdown, setDropdown] = React.useState(false);
   const [form, setForm] = React.useState(null);
@@ -90,10 +90,10 @@ const Map = ({events, setEvents, loggedIn, createEvent}) => {
   /**
    * useCallBack hook allows you to create a function that will always retain the same value
    * setMarkers gets called when the cone gets placed
-   * receive current state and return a new version of it 
+   * receive current state and return a new version of it
    * spread in the current marker with cords given and create and new version of state
    * every time you click on map it renders a new version of state
-   */  
+   */
   const onMapClick = (event) => {
     dropdown && setForm({
       lat: event.latLng.lat(),
@@ -101,78 +101,77 @@ const Map = ({events, setEvents, loggedIn, createEvent}) => {
       time: new Date(),
       type: dropdown
     });
-  }; 
+  };
 
 
 
   /**
    * mapRef: retain a reference of the actual map instance. used to pan and zoom on map when searching
-   * OnMapLoad: produces the value of the map and saves it to a variable 
+   * OnMapLoad: produces the value of the map and saves it to a variable
    */
-  const mapRef = React.useRef();  
+  const mapRef = React.useRef();
   const onMapLoad = React.useCallback((map) => {
-    mapRef.current = map; 
-  }, []); 
+    mapRef.current = map;
+  }, []);
   const panTo = React.useCallback(({lat, lng}) => { //                     lat and lng that user whats to pan to
     mapRef.current.panTo({lat, lng}); //                                   call panTo function with same params
     mapRef.current.setZoom(15); //                                         zooms into location that is is searched
-  }, []); 
-  if (loadError) { 
+  }, []);
+  if (loadError) {
     return 'error loading map';
   } else if (!isLoaded) {
     return 'Loading Maps';
-  }  
+  }
   return (
-    <div> 
+    <div>
       <MapToolbar activeLayers={activeLayers} setActiveLayers={setActiveLayers} />
       <MarkerDropdown dropdown={dropdown} setDropdown={setDropdown} loggedIn={loggedIn}/>
-      
-      <H1> nola ❤️´s 🚲 </H1>
-      <Search panTo={panTo} />   
-      <GoogleMap 
-        mapContainerStyle={mapContainerStyle} 
-        zoom={12} 
-        center={center} 
-        options={options} 
-        onClick={onMapClick} 
+
+      <Search panTo={panTo} />
+      <GoogleMap
+        mapContainerStyle={mapContainerStyle}
+        zoom={12}
+        center={center}
+        options={options}
+        onClick={onMapClick}
         onLoad={onMapLoad}
       >
         <BicyclingLayer autoUpdate />
         {activeLayers.shops && shops.map(shop => <Marker key={Math.random()}
-          position={{ lat: shop.lat, lng: shop.lng }} 
-          icon={{ //                                        options for centering and resizing pin 
+          position={{ lat: shop.lat, lng: shop.lng }}
+          icon={{ //                                        options for centering and resizing pin
             url: shopImg,
             scaledSize: new window.google.maps.Size(33, 33),
             origin: new window.google.maps.Point(0, 0),
-            anchor: new window.google.maps.Point(15, 15), 
+            anchor: new window.google.maps.Point(15, 15),
           }}
-          onClick={() => { 
+          onClick={() => {
             setSelected(shop); //                       onlick passes in the marker being clicked, rendered (stores marker in selected state)
           }}
         />
         )}
 
         {activeLayers.events && events.map(event => <Marker key={Math.random()}
-          position={{ lat: Number(event.lat), lng: Number(event.lng) }} 
-          icon={{ //                                        options for centering and resizing pin 
+          position={{ lat: Number(event.lat), lng: Number(event.lng) }}
+          icon={{ //                                        options for centering and resizing pin
             url: eventImg,
             scaledSize: new window.google.maps.Size(33, 33),
             origin: new window.google.maps.Point(0, 0),
-            anchor: new window.google.maps.Point(15, 15), 
+            anchor: new window.google.maps.Point(15, 15),
           }}
-          onClick={() => { 
+          onClick={() => {
             console.log(event);
             setSelected(event); //                       onlick passes in the marker being clicked, rendered (stores marker in selected state)
           }}
         />
         )}
-        
+
 
         {selected && (
-          <InfoWindow 
-            position={{ lat: selected.lat, lng: selected.lng }} 
+          <InfoWindow
+            position={{ lat: selected.lat, lng: selected.lng }}
             onCloseClick={() => {
-              setSelected(null); 
+              setSelected(null);
             }}
           >
             <RenderInfo selected={selected}/>
@@ -182,9 +181,9 @@ const Map = ({events, setEvents, loggedIn, createEvent}) => {
         {form && dropdown ? (
 
           <InfoWindow
-            position={{ lat: form.lat, lng: form.lng }}             
+            position={{ lat: form.lat, lng: form.lng }}
             onCloseClick={() => {
-              setForm(null); 
+              setForm(null);
             }}
           >
             <div>
@@ -198,7 +197,8 @@ const Map = ({events, setEvents, loggedIn, createEvent}) => {
         ) : null}
 
       </GoogleMap>
+      <H1> nola ❤️´s 🚲 </H1>
     </div>
   );
-}; 
+};
 export default Map;
