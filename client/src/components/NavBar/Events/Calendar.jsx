@@ -10,11 +10,18 @@ import RenderEventTile from './RenderEventTile.jsx';
 
 const Div = styled.div`
 
+h2 {
+  text-align: center;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: bold;
+  padding: 5px;
+}
+
 .react-calendar {
   width: 3000px;
   max-width: 100%;
   background: whitesmoke;
-  border: 1px solid #a0a096;
+  border: 1px solid#a0a096;
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.125em;
   color: gainsboro;
@@ -44,6 +51,7 @@ const Events = ({events}) => {
   return (
     <Div>
       <Container>
+        <h2>Check out bike events happening in New Orleans!</h2>
         <Calendar
           onChange={onChange}
           value={selectedDate}
