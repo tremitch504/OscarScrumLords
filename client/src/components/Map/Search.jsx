@@ -15,24 +15,24 @@ import {
 
 // styles for combobox
 const Searched = styled.div`
-  position: absolute;
+  position: fixed;
   top: 16rem;
   left: 33rem;
   transform: translateX(-100%);
   color: black;
   width: 100%;
   max-width: 215px;
-  background: white;  
+  background: white;
   z-index: 10;
-  
+
   div {
-  
+
   font-size: 1rem;
-  font-weight: bold; 
-  color: #ffd1dc; 
+  font-weight: bold;
+  color: #ffd1dc;
   font-family: 'Ubuntu', sans-serif;
-  width: 100%; 
- 
+  width: 100%;
+
   }
 
 `;
