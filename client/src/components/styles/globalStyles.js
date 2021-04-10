@@ -18,55 +18,82 @@ a{
 header{
   font-family: 'Permanent Marker', cursive;
   color: black;
-  border-radius: 25px;
+  /* border-radius: 25px; */
   background-color: #ffd1dc;
-  width: 90%;
+  width: 100%;
   text-align: center;
   padding: 10px;
-  border: 1px;
+  /* border: 1px;
   border-color: black;
-  border-style: solid;
-}
-.map-nav-container {
-  display: block inline;
-  width: 90%;
-  block-size: auto;
-  object-fit: cover;
-  /* background-color: fuchsia; */
-}
-.map-nav-dropdown {
-  select {
-    margin: 10px
-
-  }
+  border-style: solid; */
 }
 
-nav{
+nav {
   font-family: 'Ubuntu', sans-serif;
   color: black;
-  width: 90%;
-  border-radius: 15px;
+  width: 100%;
+  /* border-radius: 15px; */
   border: 1px;
-  background-color: #ffffff;
+  background-color: whitesmoke;
   border-color: black;
   border-style: solid;
   height: 65px;
   padding: 0px;
   font-weight: bold;
-  /* object-fit: cover; */
-  label {
-    padding: 10px;
-  }
 }
 
 main{
   width: 90%;
 }
 
+
+
+.map-nav-container {
+  border-radius: 15px;
+  /* display: block inline;
+  block-size: auto;
+  object-fit: cover;
+  border-radius: 15px;
+  border: 1px;
+  font-family: 'Ubuntu', sans-serif;
+  background-color: whitesmoke;
+  border-color: black;
+  border-style: solid; */
+  background-color: #ffd1dc; */
+  input {
+    margin-left: 5px;
+  }
+}
+.map-nav {
+  position: relative;
+  float: left;
+  display: block;
+  padding: 15px 75px;
+  }
+
+.map-nav-dropdown {
+  border-radius: 15px;
+  border: 1px;
+  background-color: whitesmoke;
+  border-color: black;
+  border-style: solid;
+  height: 65px;
+  padding: 0px;
+  select {
+    height: 30px;
+    margin: 20px 10px;
+  }
+
+  h3 {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 16px;
+    margin: 20px 10px
+  }
+}
+
 li {
   float: left;
   display: block;
-  /* background-color: blue; */
 }
 
 .events-container {

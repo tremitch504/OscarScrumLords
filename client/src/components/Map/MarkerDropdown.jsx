@@ -14,9 +14,7 @@ const MarkerDropdown = ({dropdown, setDropdown, loggedIn}) => {
   };
 
   return (
-    <div className='map-nav-dropdown'>
-      <nav>
-
+    <div className="map-nav-dropdown">
         <select value={dropdown} onChange={onChange} >
           <option value={null}>Add to the Map!</option>
           <option value='poi'>Cool Thing</option>
@@ -24,7 +22,6 @@ const MarkerDropdown = ({dropdown, setDropdown, loggedIn}) => {
           <option value='event'>Event</option>
         </select>
         {dropdown && <h3>click the map to add feature</h3>}
-      </nav>
     </div>
   );
 };
