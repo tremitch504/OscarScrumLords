@@ -7,9 +7,6 @@ const SignInButton = ({ setLoggedIn, createUser }) => {
   const onSuccess = ({profileObj}) => {
     setLoggedIn(true);
     createUser(profileObj);
-    // setUserObj(response.profileObj);
-    console.info('heres console info', profileObj);
-
   };
 
   const onFailure = (response) => {
@@ -25,7 +22,7 @@ const SignInButton = ({ setLoggedIn, createUser }) => {
         onSuccess={onSuccess}
         onFailure={onFailure}
         cookiePolicy={'single_host_origin'}
-        isSignedIn={true}
+        isSignedIn={false}
         style={{color: 'pink'}}
       />
     </div>

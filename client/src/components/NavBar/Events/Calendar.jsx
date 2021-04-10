@@ -64,7 +64,7 @@ const Events = ({events}) => {
 };
 
 Events.propTypes = {
-  events: PropTypes.object,
+  events: PropTypes.array,
 };
 
 export default Events;

@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const RenderInfo = ({selected, putEvent}) => {
-
+const RenderInfo = ({selected, putEvent, attending, events, loggedIn}) => {
   const onClick = () => {
-    putEvent(selected.id);
+    loggedIn
+      ? putEvent(selected.id)
+      : alert('please login!');
   };
 
   const formSwitch = () => {
@@ -26,7 +27,7 @@ const RenderInfo = ({selected, putEvent}) => {
     }
     case ('event') : {
 
-      const {eventsName, hostName, details, date_id: dateId, time_id: timeId, attendees} = selected;
+      const {eventsName, hostName, details, date_id: dateId, time_id: timeId} = selected;
       return (
         <div>
           <h3>{eventsName}</h3>
@@ -34,8 +35,12 @@ const RenderInfo = ({selected, putEvent}) => {
           <p>details: {details}</p>
           <p>date: {dateId.slice(0, 10)}</p>
           <p>time: {timeId}</p>
-          <p>attendees: {attendees.join(', ')}</p>
-          <button type='button' onClick={onClick}>RSVP this event!</button>
+          <p>attendees: {events.filter(event => event.id === selected.id)[0].attendees.join(', ')}</p>
+          <button type='button' onClick={onClick}>{
+            attending && attending.includes(selected.id)
+              ? 'unattend event'
+              : 'attend event' 
+          }</button>
         </div>
       );
     }

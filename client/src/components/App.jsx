@@ -22,6 +22,7 @@ const App = () => {
   const [userObj, setUserObj] = useState({});
   const [events, setEvents] = useState([]);
   const [landmarks, setLandmarks] = useState([]);
+  const [attending, setAttending] = useState([]);
 
 
   const createUser = (newUser) => {
@@ -30,8 +31,11 @@ const App = () => {
       ...rest,
       fullName,
     };
+    setUserObj(newUser);
     axios.post('/users', postObj)
-      .then(setUserObj(newUser));
+      .then(() => {
+        getEvents(newUser);
+      });
   };
 
 
@@ -51,7 +55,7 @@ const App = () => {
       .then(getEvents);
   };
 
-  const getEvents = () => {
+  const getEvents = (newUser) => {
     axios.get('/events')
       .then(({data}) => {
         const uniqueEvents = data.filter((event, i)=> data.findIndex(e=>(e.id === event.id)) === i);
@@ -66,9 +70,13 @@ const App = () => {
           event.lng = Number(event.lng);
           event.time = new Date();
           event.kind = 'event';
-        });
-
+        });        
         setEvents(eventsWithAttendees);
+        setAttending(() => {
+          return events.filter(event => {
+            return event.attendees.includes(newUser.name);
+          }).map(event => event.id);
+        });
       });
   };
 
@@ -96,6 +104,7 @@ const App = () => {
 
 
   useEffect(() => {
+    // console.log('does userObj exist', userObj);
     getEvents();
     getLandmarks();
   }, []);
@@ -120,7 +129,7 @@ const App = () => {
             <li>
               {loggedIn ?
                 <SignOutButton setLoggedIn={setLoggedIn} setUserObj={setUserObj}/> :
-                <SignInButton setLoggedIn={setLoggedIn} createUser={createUser}/>
+                <SignInButton setLoggedIn={setLoggedIn} createUser={createUser} />
               }</li>
           </ul>
           <br/>
@@ -137,7 +146,12 @@ const App = () => {
                 setEvents={setEvents}
                 createEvent={createEvent}/>
             </Route>
-            <Route path='/userProfile'><UserProfile />
+            <Route path='/userProfile'>
+              <UserProfile
+                userObj={userObj}
+                events={events}
+                attending={attending}
+              />
             </Route>
             <Route path='/map'>
               <Map
@@ -148,6 +162,7 @@ const App = () => {
                 landmarks={landmarks}
                 setLandmarks={setLandmarks}
                 createLandmark={createLandmark}
+                attending={attending}
                 loggedIn={loggedIn}/>
             </Route>
           </Switch>
