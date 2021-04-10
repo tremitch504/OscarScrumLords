@@ -21,7 +21,7 @@ module.exports = {
     'camelcase': 2,
     // Language constructs
     'curly': 2,
-    // 'no-console': ['error', { allow: ['info', 'warn']}],
+    'no-console': ['error', { allow: ['info', 'warn']}],
     'eqeqeq': [2, 'smart'],
     'func-style': [2, 'expression'],
     'object-curly-newline': 'off',
