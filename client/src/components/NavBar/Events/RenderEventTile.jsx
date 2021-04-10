@@ -11,7 +11,7 @@ const RenderEventTile = ({events, date}) => {
             <h3>{event.eventsName}</h3>
             <p>created by: {event.hostName}</p>
             <p>details: {event.details}</p>
-            <p>time: {event.timeId}</p>
+            <p>when: {event.time_id}</p>
           </div>
         ))
         }
