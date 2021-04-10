@@ -21,7 +21,6 @@ const postRoutes = ({ routeName, start, end, rating }) => {
 
 
 const getLandmarks = () => {
-  console.log('gonna git landmarks');
   return new Promise((resolve, reject) => {
     db.query('SELECT * FROM landmarks', (err, results) => {
       if (err) {
