@@ -12,27 +12,24 @@ import {
   ComboboxOption,
 } from '@reach/combobox'; // displays search results
 
-
 // styles for combobox
 const Searched = styled.div`
   position: absolute;
-  top: 16rem;
-  left: 33rem;
+  top: 16.5rem;
+  left: 50rem;
   transform: translateX(-100%);
   color: black;
   width: 100%;
   max-width: 215px;
-  background: white;
+  background: whitesmoke;
   z-index: 10;
 
   div {
-
   font-size: 1rem;
   font-weight: bold;
-  color: #ffd1dc;
+  color: #6d6875;
   font-family: 'Ubuntu', sans-serif;
   width: 100%;
-
   }
 
 `;
@@ -101,3 +98,4 @@ const Search = ({ panTo }) => {
 // deconstruct an id and descripton. render an option and give it a key and value
 // adding this so i can push
 export default Search;
+
