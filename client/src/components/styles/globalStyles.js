@@ -96,6 +96,19 @@ li {
   display: block;
 }
 
+.events-container {
+  margin: 20px 0px;
+} 
+
+ .events {
+  
+  border-color: black;
+  border-style: solid;
+ 
+ 
+  padding: 5px;
+  margin: 4px 0px;
+}
 `;
 
 
