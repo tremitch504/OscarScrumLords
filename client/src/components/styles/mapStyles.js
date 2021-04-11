@@ -1,3 +1,7 @@
+/**
+ * map styling from google maps
+ */
+
 export default [
   {
     'featureType': 'administrative',
@@ -116,6 +120,6 @@ export default [
       }
     ]
   }
-]; 
+];
 
 

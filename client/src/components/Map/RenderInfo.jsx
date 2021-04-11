@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * renders info of given category to the map
+ */
+
 const RenderInfo = ({selected, putEvent, events, loggedIn, userObj = {}}) => {
   const onClick = () => {
     loggedIn
       ? putEvent(selected.id)
       : alert('please login!');
   };
-
 
   const formSwitch = () => {
     switch (selected.kind) {
@@ -40,7 +43,7 @@ const RenderInfo = ({selected, putEvent, events, loggedIn, userObj = {}}) => {
           <button type='button' onClick={onClick}>{
             attendees.includes(userObj && userObj.name)
               ? 'unattend event'
-              : 'attend event' 
+              : 'attend event'
           }</button>
         </div>
       );

@@ -1,26 +1,29 @@
 import React from 'react';
 import { Carousel } from 'react-bootstrap/';
 import styled from 'styled-components';
-import carousel1 from './assets/carousel1.jpeg';
-import carousel2 from './assets/carousel2.jpg';
-import carousel3 from './assets/carousel3.jpg';
-import carousel4 from './assets/carousel4.jpg'; 
-import carousel5 from './assets/carousel5.jpg'; 
+import carousel1 from './assets/carouselPhotos/carousel1.jpg';
+import carousel2 from './assets/carouselPhotos/carousel2.jpg';
+import carousel3 from './assets/carouselPhotos/carousel3.jpg';
+import carousel4 from './assets/carouselPhotos/carousel4.jpg';
+import carousel5 from './assets/carouselPhotos/carousel5.jpg';
 
+/**
+ * DOCS: https://react-bootstrap.github.io/components/carousel/
+ */
 
 const Img = styled.div`
     display: flex;
-    width: 100%; 
+    width: 100%;
     height: 70vh;
-    min-height: 250px; 
-    padding: 1rem 1.5rem;  
+    min-height: 250px;
+    padding: 1rem 1.5rem;
     img {
-      object-fit: cover; 
+      object-fit: cover;
       width: 100%;
-      height: 100%; 
-      display: block; 
+      height: 100%;
+      display: block;
     }
-`; 
+`;
 
 const RotatingCarousel = () => {
   const images = [carousel1, carousel2, carousel3, carousel4, carousel5];
@@ -42,4 +45,4 @@ const RotatingCarousel = () => {
   );
 };
 
-export default RotatingCarousel; 
+export default RotatingCarousel;
