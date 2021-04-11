@@ -28,7 +28,7 @@ h2 {
   padding: 30px 20px 0;
 }
 `;
-//
+
 
 const Events = ({events}) => {
 
