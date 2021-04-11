@@ -12,6 +12,9 @@ import {
   ComboboxList,
   ComboboxOption,
 } from '@reach/combobox'; // displays search results
+/**
+ * Combobox DOCS: https://reach.tech/combobox/
+ */
 
 // styles for combobox
 const Searched = styled.div`

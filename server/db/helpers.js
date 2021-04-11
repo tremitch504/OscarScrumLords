@@ -2,8 +2,6 @@ const { db } = require('../db');
 
 
 //call to API search key, store in LANDMARKS DB: address_id, phone, services, bus_hours
-
-
 const getLandmarks = () => {
   return new Promise((resolve, reject) => {
     db.query('SELECT * FROM landmarks', (err, results) => {
@@ -14,12 +12,12 @@ const getLandmarks = () => {
     });
   });
 };
-  
+
 //CREATE, FIND, AND CATEGORIZE BIKING EVENTS
 //will need API to pin location of event, EVENTS DB: id, date_id, time_id, location_id
 const postEvents = ({ name, hostName, details, date, time, lat, lng}) => {
   return new Promise((resolve, reject) => {
-    db.query('INSERT INTO events (eventsName, hostName, details, date_id, time_id, lat, lng) VALUES (?, ?, ?, ?, ?, ?, ?)', 
+    db.query('INSERT INTO events (eventsName, hostName, details, date_id, time_id, lat, lng) VALUES (?, ?, ?, ?, ?, ?, ?)',
       [name, hostName, details, date, time, lat, lng], (err, results) => {
         if (err) {
           return reject(err);
@@ -83,11 +81,9 @@ const postUser = ({ email, familyName, fullName, givenName, googleId }) => {
     });
   });
 };
-  
-  
+
+
 //ATTENDANCE TO BIKE EVENTS
-//call to store in USER TABLE
-//INSERT user_Id from USERS and events_id from the EVENTS table
 const toggleRSVP = ({ googleId, eventId, fullName }) => {
   return new Promise((resolve, reject) => {
     db.query('SELECT id FROM rsvps WHERE googleId = ? AND eventId = ?', [googleId, eventId], (err, results) => {
@@ -113,7 +109,7 @@ const toggleRSVP = ({ googleId, eventId, fullName }) => {
   });
 };
 
-  
+
 module.exports = {
   getLandmarks,
   postUser,

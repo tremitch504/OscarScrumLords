@@ -1,6 +1,6 @@
 const path = require('path');
 const express = require('express');
-const { 
+const {
   getLandmarks,
   postLandmarks,
   postEvents,
@@ -24,14 +24,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static(CLIENT_PATH));
 app.use('/favicon.ico', express.static(path.resolve(__dirname, 'assets', 'stockcone.jpg')));
 
-
-
-//middleware
-//set API FOLDER to api/ googleMaps (or change if named something else)
-// app.use('/api/googleMaps', Maps); 
-
 //call to API search key, store in LANDMARKS DB: address_id, phone, services, bus_hours
-
 app.get('/landmarks', (req, res) => {
   return getLandmarks()
     .then(data => res.status(201).send(data))
@@ -81,7 +74,6 @@ app.put('/events', (req, res) => {
     });
 });
 
-
 app.post('/users', (req, res) => {
   return postUser(req.body)
     .then(() => res.sendStatus(201))
@@ -90,7 +82,6 @@ app.post('/users', (req, res) => {
       res.sendStatus(500);
     });
 });
-
 
 
 module.exports = {
