@@ -12,6 +12,7 @@ import {
   ComboboxList,
   ComboboxOption,
 } from '@reach/combobox'; // displays search results
+import '../styles/comboboxStyles.css';
 
 // styles for combobox
 const Searched = styled.div`
