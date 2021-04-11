@@ -96,20 +96,6 @@ li {
   display: block;
 }
 
-.events-container {
-  margin: 20px 0px;
-}
-
-.events {
-  border-radius: 15px;
-  border: 1px;
-  border-color: black;
-  border-style: solid;
-  background-color: #ffe1ff;
-  font-family: 'Ubuntu', sans-serif;
-  padding: 5px;
-  margin: 4px 0px;
-}
 `;
 
 
