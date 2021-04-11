@@ -20,7 +20,6 @@ CREATE TABLE landmarks (
     fullName varchar(40),
     lat varchar(40),
     lng varchar(40),
-    time_id TIME,
     date_id DATE
 );
 
@@ -35,17 +34,11 @@ CREATE TABLE events (
   lng varchar(40)
 );
 
-CREATE TABLE routes (
-  route_name varchar(40) NOT NULL PRIMARY KEY,
-  st_location VARCHAR(40),
-  end_location VARCHAR(40),
-  rating INT
-);
-
 CREATE TABLE rsvps (
   id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
   googleId varchar(40),
   FOREIGN KEY (googleId) REFERENCES users(googleId),
   eventId int,
-  FOREIGN KEY (eventId) REFERENCES events(id)
+  FOREIGN KEY (eventId) REFERENCES events(id),
+  fullName varchar(40)
 );

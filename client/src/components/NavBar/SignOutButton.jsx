@@ -6,7 +6,6 @@ import { GoogleLogout } from 'react-google-login';
 const SignOutButton = ({ setLoggedIn, setUserObj }) => {
 
   const onSuccess = () => {
-    console.log('log out successful');
     setLoggedIn(false);
     setUserObj({});
 

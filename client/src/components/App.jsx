@@ -22,7 +22,6 @@ const App = () => {
   const [userObj, setUserObj] = useState({});
   const [events, setEvents] = useState([]);
   const [landmarks, setLandmarks] = useState([]);
-  const [attending, setAttending] = useState([]);
 
 
   const createUser = (newUser) => {
@@ -50,33 +49,21 @@ const App = () => {
   };
 
   const putEvent = (eventId) => {
-    const { googleId } = userObj;
-    axios.put('/events', {eventId, googleId})
-      .then(getEvents);
+    const { googleId, name: fullName } = userObj;
+    axios.put('/events', {eventId, googleId, fullName})
+      .then(getEvents(userObj));
   };
 
-  const getEvents = (newUser) => {
+  const getEvents = () => {
     axios.get('/events')
       .then(({data}) => {
-        const uniqueEvents = data.filter((event, i)=> data.findIndex(e=>(e.id === event.id)) === i);
-        const eventsWithAttendees = uniqueEvents.map(uniqueEvent => {
-          const attendees = data.filter(event => event.id === uniqueEvent.id).map(event => event.attendee);
-          const {attendee, ...rest} = uniqueEvent;
-          attendee; //so eslint wont complain
-          return {attendees, ...rest};
-        });
-        eventsWithAttendees.forEach(event => {
+        data.forEach(event => {
           event.lat = Number(event.lat);
           event.lng = Number(event.lng);
           event.time = new Date();
           event.kind = 'event';
         });        
-        setEvents(eventsWithAttendees);
-        setAttending(() => {
-          return events.filter(event => {
-            return event.attendees.includes(newUser.name);
-          }).map(event => event.id);
-        });
+        setEvents(data);
       });
   };
 
@@ -104,7 +91,6 @@ const App = () => {
 
 
   useEffect(() => {
-    // console.log('does userObj exist', userObj);
     getEvents();
     getLandmarks();
   }, []);
@@ -150,7 +136,7 @@ const App = () => {
               <UserProfile
                 userObj={userObj}
                 events={events}
-                attending={attending}
+                // attending={attending}
               />
             </Route>
             <Route path='/map'>
@@ -162,7 +148,7 @@ const App = () => {
                 landmarks={landmarks}
                 setLandmarks={setLandmarks}
                 createLandmark={createLandmark}
-                attending={attending}
+                userObj={userObj}
                 loggedIn={loggedIn}/>
             </Route>
           </Switch>
@@ -171,4 +157,5 @@ const App = () => {
     </ div>
   );
 };
+
 export default App;

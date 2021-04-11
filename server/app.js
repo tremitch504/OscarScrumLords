@@ -3,7 +3,6 @@ const express = require('express');
 const { 
   getLandmarks,
   postLandmarks,
-  postRoutes,
   postEvents,
   getEvents,
   postUser,
@@ -42,8 +41,6 @@ app.get('/landmarks', (req, res) => {
     });
 });
 
-//PHOTO BANK TO DOCUMENT ROADS
-//store image to LOCATIONS DB and pin location on map: coordinates, time_id, date_id, media
 //DATE FORMAT: yyyy-mm-dd
 app.post('/landmarks', (req, res) => {
   return postLandmarks(req.body)
@@ -53,19 +50,6 @@ app.post('/landmarks', (req, res) => {
       res.sendStatus(500);
     });
 });
-
-//USER CAN CREATE AND SAVE BIKE ROUTES
-//post to ROUTES DB: route_name, st_location, end_locaiton, rating
-app.post('/routes', (req, res) => {
-  const { routeName, start, end, rating } = req.body;
-  return postRoutes({ routeName, start, end, rating })
-    .then(() => res.sendStatus(201))
-    .catch(err => {
-      console.warn('ERROR', err);
-      res.sendStatus(500);
-    });
-});
-
 
 
 //CREATE, FIND, AND CATEGORIZE BIKING EVENTS
@@ -92,7 +76,7 @@ app.put('/events', (req, res) => {
   return toggleRSVP(req.body)
     .then(() => res.sendStatus(201))
     .catch(err => {
-      console.log('ERROR', err);
+      console.warn('ERROR', err);
       res.sendStatus(500);
     });
 });
@@ -107,18 +91,6 @@ app.post('/users', (req, res) => {
     });
 });
 
-
-//ATTENDANCE TO BIKE EVENTS
-//call to store in USER TABLE
-// app.post('/rsvps', (req, res) => {
-//   const { userId, eventId } = req.body;
-//   return rsvp({ userId, eventId })
-//     .then(() => res.sendStatus(201))
-//     .catch(err => {
-//       console.warn('ERROR', err);
-//       res.sendStatus(500);
-//     });
-// });
 
 
 module.exports = {

@@ -59,4 +59,5 @@ NewPoi.propTypes = {
   form: PropTypes.object,
   createLandmark: PropTypes.func
 };
+
 export default NewPoi;
