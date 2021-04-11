@@ -15,23 +15,6 @@ const getLandmarks = () => {
   });
 };
   
-//PHOTO BANK TO DOCUMENT ROADS
-//store image to LOCATIONS DB and pin location on map: coordinates, time_id, date_id, media
-const photoBank = ({ userId, lat, lng, media }) => {
-  return new Promise((resolve, reject) => {
-    db.query('INSERT INTO landmarks(userId, lat, lng, media) \
-    VALUES (?, ?, ?, ?)',
-    [userId, lat, lng, media],
-    (err, results) => {
-      if (err) {
-        return reject(err);
-      }
-      resolve(results);
-    });
-  });
-};
-  
-  
 //CREATE, FIND, AND CATEGORIZE BIKING EVENTS
 //will need API to pin location of event, EVENTS DB: id, date_id, time_id, location_id
 const postEvents = ({ name, hostName, details, date, time, lat, lng}) => {
@@ -46,10 +29,10 @@ const postEvents = ({ name, hostName, details, date, time, lat, lng}) => {
   });
 };
 
-const postLandmarks = ({ kind, details, fullName, lat, lng, date, time }) => {
+const postLandmarks = ({ kind, details, fullName, lat, lng, date}) => {
   return new Promise((resolve, reject) => {
-    db.query('INSERT INTO landmarks (kind, details, fullName, lat, lng, time_id, date_id) VALUES (?, ?, ?, ?, ?, ?, ?)',
-      [kind, details, fullName, lat, lng, time, date],
+    db.query('INSERT INTO landmarks (kind, details, fullName, lat, lng, date_id) VALUES (?, ?, ?, ?, ?, ?)',
+      [kind, details, fullName, lat, lng, date],
       (err, results) => {
         if (err) {
           return reject(err);
@@ -135,7 +118,6 @@ module.exports = {
   getLandmarks,
   postUser,
   postLandmarks,
-  photoBank,
   postEvents,
   getEvents,
   toggleRSVP
