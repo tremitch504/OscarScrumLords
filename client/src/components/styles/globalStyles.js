@@ -68,7 +68,7 @@ main{
   position: relative;
   float: left;
   display: block;
-  padding: 15px 75px;
+  margin-top: 11px;
   }
 
 .map-nav-dropdown {

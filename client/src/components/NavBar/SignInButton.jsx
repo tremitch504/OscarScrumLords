@@ -31,7 +31,7 @@ const SignInButton = ({ setLoggedIn, createUser }) => {
 
 SignInButton.propTypes = {
   setLoggedIn: PropTypes.func,
-  setUserObj: PropTypes.func,
+  createUser: PropTypes.func
 };
 
 export default SignInButton;

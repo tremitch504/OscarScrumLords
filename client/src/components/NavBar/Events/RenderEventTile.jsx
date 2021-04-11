@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const RenderEventTile = ({events}) => {
-  // console.log('events RET', events)
 
   return (
     <div className="events-container">
@@ -23,7 +22,7 @@ const RenderEventTile = ({events}) => {
 
 
 RenderEventTile.propTypes = {
-  events: PropTypes.object,
+  events: PropTypes.array,
 };
 
 export default RenderEventTile;

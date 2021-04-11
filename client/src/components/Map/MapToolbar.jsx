@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Search from './Search.jsx';
-import MarkerDropdown from './MarkerDropdown.jsx';
 
 
 const MapToolbar = ({activeLayers, setActiveLayers}) => {
@@ -14,7 +12,7 @@ const MapToolbar = ({activeLayers, setActiveLayers}) => {
 
   return (
     <nav className="map-nav-container">
-      <ul>
+      <ul className ='navbar' >
         <li className="map-nav">
         Bike Shops
           <input
@@ -56,7 +54,7 @@ const MapToolbar = ({activeLayers, setActiveLayers}) => {
           />
         </li>
       </ul>
-    </nav>
+    </ nav>
   );
 };
 

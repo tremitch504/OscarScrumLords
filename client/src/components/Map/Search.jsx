@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import usePlacesAutocomplete, {
   getGeocode,
@@ -65,7 +66,7 @@ const Search = ({ panTo }) => {
             panTo({ lat, lng });
 
           } catch (error) {
-            console.log('error!');
+            console.warn('error!');
           }
         }}
       >
@@ -81,7 +82,7 @@ const Search = ({ panTo }) => {
           <ComboboxPopover portal={false}>
             <ComboboxList>
               {status === 'OK' &&
-          data.map(({id, description}) =>(
+          data.map(({description}) =>(
             <ComboboxOption key={Math.random()} value={description}
             />
           ))}
@@ -89,13 +90,17 @@ const Search = ({ panTo }) => {
           </ComboboxPopover>
         </div>
       </Combobox>
-    </Searched>
+    </ Searched>
   );
-
 };
 
 // popover gives us the suggestions if status is ok map over suggestions
 // deconstruct an id and descripton. render an option and give it a key and value
 // adding this so i can push
+
+Search.propTypes = {
+  panTo: PropTypes.func
+};
+
 export default Search;
 

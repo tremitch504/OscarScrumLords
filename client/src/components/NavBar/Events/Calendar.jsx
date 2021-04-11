@@ -42,9 +42,6 @@ const Events = ({events}) => {
 
     const formatDate = `${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}-${selectedDate.getDate()}`;
 
-    // console.log(formatDate)
-    // console.log(event.date_id.slice(0, 10).replaceAll('-0', '-'))
-
     return event.date_id.slice(0, 10).replaceAll('-0', '-') === formatDate;
   });
 

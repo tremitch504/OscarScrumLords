@@ -1,5 +1,5 @@
-/* eslint-disable multiline-ternary */
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { GoogleMap, useLoadScript, Marker, InfoWindow, BicyclingLayer } from '@react-google-maps/api';
 import styled from 'styled-components';
 import axios from 'axios';
@@ -55,7 +55,7 @@ const H1 = styled.h2`
 
 
 
-const Map = ({events, setEvents, createEvent, putEvent, landmarks, setLandmarks, createLandmark, loggedIn, attending}) => {
+const Map = ({events, createEvent, putEvent, landmarks, createLandmark, loggedIn, userObj}) => {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
     libraries, //                                   enable additional libraries for 'places' api
@@ -210,47 +210,60 @@ const Map = ({events, setEvents, createEvent, putEvent, landmarks, setLandmarks,
               setSelected(null);
             }}
           >
-            <RenderInfo selected={selected} putEvent={putEvent} attending={attending} events={events} loggedIn={loggedIn}/>
+            <RenderInfo
+              selected={selected}
+              putEvent={putEvent}
+              events={events}
+              userObj={userObj}
+              loggedIn={loggedIn}/>
           </InfoWindow>
         )}
 
-        {form && dropdown ? (
-
-          <InfoWindow
-            position={{ lat: form.lat, lng: form.lng }}
-            onCloseClick={() => {
-              setForm(null);
-            }}
-          >
-            <div>
-
-              {dropdown === 'event' &&
+        {form && dropdown
+          && (
+            <InfoWindow
+              position={{ lat: form.lat, lng: form.lng }}
+              onCloseClick={() => {
+                setForm(null);
+              }}
+            >
+              <div>
+                {dropdown === 'event' &&
             <div>
               <h2>add your event!!</h2>
               <NewEvent form={form} createEvent={createEvent} />
             </div>
-              }
-              {dropdown === 'hazard' &&
+                }
+                {dropdown === 'hazard' &&
             <div>
               <h2>add a traffic cone!!</h2>
               <NewHazard form={form} createLandmark={createLandmark} />
             </div>
-              }
-              {dropdown === 'poi' &&
+                }
+                {dropdown === 'poi' &&
             <div>
               <h2>add something cool!!</h2>
               <NewPoi form={form} createLandmark={createLandmark} />
             </div>
-              }
-            </div>
-
-
-          </InfoWindow>
-        ) : null}
-
+                }
+              </div>
+            </InfoWindow>
+          )
+        }
       </GoogleMap>
       <H1> nola ❤️´s 🚲 </H1>
     </div>
   );
 };
+
+Map.propTypes = {
+  events: PropTypes.array,
+  createEvent: PropTypes.func,
+  putEvent: PropTypes.func,
+  landmarks: PropTypes.array,
+  createLandmark: PropTypes.func,
+  loggedIn: PropTypes.bool,
+  userObj: PropTypes.object
+};
+
 export default Map;

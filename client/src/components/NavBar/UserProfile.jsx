@@ -1,17 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const UserProfile = ({userObj, events, attending}) => {
-  console.log('does userobj exist', userObj, attending, events);
-  // console.log('events RET', events)
-
+const UserProfile = ({ userObj, events }) => {
   return (
     <div className="events-container">
       <div className="events">
         <h3>Name: {userObj.name}</h3>
         <p>email: {userObj.email}</p>
       </div>
-      {events.filter(event => attending.includes(event.id))
+      {events.filter(event => event.attendees.includes(userObj.name))
         .map(event => (
           <div className="events" key={event.id}>
             <h3>{event.eventsName}</h3>
@@ -29,7 +26,8 @@ const UserProfile = ({userObj, events, attending}) => {
 
 
 UserProfile.propTypes = {
-  events: PropTypes.object,
+  events: PropTypes.array,
+  userObj: PropTypes.object
 };
 
 export default UserProfile;

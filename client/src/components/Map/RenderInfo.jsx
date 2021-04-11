@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const RenderInfo = ({selected, putEvent, attending, events, loggedIn}) => {
+const RenderInfo = ({selected, putEvent, events, loggedIn, userObj = {}}) => {
   const onClick = () => {
     loggedIn
       ? putEvent(selected.id)
       : alert('please login!');
   };
+
 
   const formSwitch = () => {
     switch (selected.kind) {
@@ -26,8 +27,8 @@ const RenderInfo = ({selected, putEvent, attending, events, loggedIn}) => {
       );
     }
     case ('event') : {
-
       const {eventsName, hostName, details, date_id: dateId, time_id: timeId} = selected;
+      const attendees = events.filter(event => event.id === selected.id)[0].attendees;
       return (
         <div>
           <h3>{eventsName}</h3>
@@ -35,9 +36,9 @@ const RenderInfo = ({selected, putEvent, attending, events, loggedIn}) => {
           <p>details: {details}</p>
           <p>date: {dateId.slice(0, 10)}</p>
           <p>time: {timeId}</p>
-          <p>attendees: {events.filter(event => event.id === selected.id)[0].attendees.join(', ')}</p>
+          <p>attendees: {attendees.join(', ')}</p>
           <button type='button' onClick={onClick}>{
-            attending && attending.includes(selected.id)
+            attendees.includes(userObj && userObj.name)
               ? 'unattend event'
               : 'attend event' 
           }</button>
@@ -77,6 +78,9 @@ const RenderInfo = ({selected, putEvent, attending, events, loggedIn}) => {
 RenderInfo.propTypes = {
   selected: PropTypes.object,
   putEvent: PropTypes.func,
+  events: PropTypes.array,
+  loggedIn: PropTypes.bool,
+  userObj: PropTypes.object
 };
 
 export default RenderInfo;
