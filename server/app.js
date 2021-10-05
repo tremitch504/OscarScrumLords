@@ -12,7 +12,7 @@ const {
 } = require('./db/helpers.js');
 
 
-const {Users, Landmarks, Events, Rsvps} = require('./db/sequelize.js')
+const {Users, Landmarks, Events, Rsvps} = require('./db/sequelize.js');
 
 
 const dotenv = require('dotenv');
@@ -32,7 +32,6 @@ app.use('/favicon.ico', express.static(path.resolve(__dirname, 'assets', 'stockc
 
 //call to API search key, store in LANDMARKS DB: address_id, phone, services, bus_hours
 app.get('/landmarks', (req, res) => {
-  console.log('COOKIES', req.cookies);
   return getLandmarks()
     .then(data => res.status(201).send(data))
     .catch(err => {
@@ -43,7 +42,6 @@ app.get('/landmarks', (req, res) => {
 
 //DATE FORMAT: yyyy-mm-dd
 app.post('/landmarks', (req, res) => {
-  console.log('COOKIES', req.cookies);
   return postLandmarks(req.body)
     .then(() => res.sendStatus(201))
     .catch(err => {
@@ -97,7 +95,7 @@ app.post('/test', async (req, res) => {
   try {
     //console.log('reqcookies', req.cookies);
     //console.log('reqsssss', req.session);
-    await Rsvps.create({ userId: 1, eventId: 1, fullName: 'fullname'  })
+    await Rsvps.create({ userId: 1, eventId: 1, fullName: 'fullname' });
     res.sendStatus(201);
   } catch (err) {
 
