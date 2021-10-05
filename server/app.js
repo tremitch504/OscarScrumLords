@@ -10,6 +10,9 @@ const {
   toggleRSVP
 
 } = require('./db/helpers.js');
+const auth = require('./auth');
+const passport = require('passport');
+
 
 
 const {Users, Landmarks, Events, Rsvps} = require('./db/sequelize.js');
