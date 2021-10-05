@@ -9,7 +9,8 @@ module.exports = {
     'ecmaVersion': 2021,
     'ecmaFeatures': { 'jsx': true }
   },
-  extends: ['eslint:recommended', 'plugin:react/recommended'],
+  //'eslint:recommended', //--put this back in at end, just super annoying when developing
+  extends: [ 'plugin:react/recommended'],
   plugins: [ 'react-hooks' ],
   rules: {
     'eol-last': ['error', 'always'],
@@ -21,7 +22,7 @@ module.exports = {
     'camelcase': 2,
     // Language constructs
     'curly': 2,
-    'no-console': ['error', { allow: ['info', 'warn']}],
+    //'no-console': ['error', { allow: ['info', 'warn']}],
     'eqeqeq': [2, 'smart'],
     'func-style': [2, 'expression'],
     'object-curly-newline': 'off',

@@ -1,14 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+//parent is App.jsx
 import { GoogleLogout } from 'react-google-login';
-
+/******this all need to be redone */
 const SignOutButton = ({ setLoggedIn, setUserObj }) => {
 
   const onSuccess = () => {
+    console.log('sucess');
     setLoggedIn(false);
     setUserObj({});
 
+  };
+
+  const onFailure = () => {
+    console.log('fail');
+    setLoggedIn(true);
+    setUserObj({});
   };
 
   return (
@@ -17,6 +25,7 @@ const SignOutButton = ({ setLoggedIn, setUserObj }) => {
         clientId={'636707500167-jl0be6d4pi4e96ttgqkvt1v0758a3r9p.apps.googleusercontent.com'}
         buttonText= 'Sign out'
         onLogoutSuccess={onSuccess}
+        onFailure={onFailure}
       />
     </div>
   );
