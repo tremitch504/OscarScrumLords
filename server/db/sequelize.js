@@ -64,18 +64,30 @@ const Events = db.define('events', {
     autoIncrement: true,
     primaryKey: true
   },
-  googleId: {
+  eventsName: {
     type: Sequelize.STRING, //point back to u googleid
   },
-  eventId: {
-    type: Sequelize.INTEGER
-  },
-  fullName: {
+  hostName: {
     type: Sequelize.STRING
   },
-  userId: {   
-    type: Sequelize.INTEGER //point back to user id. new
+  details: {
+    type: Sequelize.STRING
+  },
+  date_id: {
+    type: Sequelize.DATE,
+    
+  },
+  time_id: {
+    type: Sequelize.TIME,
+    
+  },
+  lat: {
+    type: Sequelize.STRING
+  },
+  lng: {
+    type: Sequelize.STRING
   }
+ 
 });
 
 const Rsvps = db.define('rsvps', {
@@ -84,8 +96,8 @@ const Rsvps = db.define('rsvps', {
     primaryKey: true,
     autoIncrement: true
   },
-  googleId: {
-    type: Sequelize.STRING //point back to user google id
+  userId: {
+    type: Sequelize.INTEGER //point back to user google id
   },
   eventId: {
     type: Sequelize.INTEGER //foreign key references event id
@@ -93,9 +105,7 @@ const Rsvps = db.define('rsvps', {
   fullName: {
     type: Sequelize.STRING
   },
-  userId: {
-    type: Sequelize.INTEGER //point back to user id. new
-  }
+
 
 
 });
@@ -140,3 +150,11 @@ exports.Users = Users;
 exports.Landmarks = Landmarks;
 exports.Events = Events;
 exports.Rsvps = Rsvps;
+exports.db = db;
+
+/** right now these match the db schema, so sequelized can be used in the fture but the original functionscan use the helpers queries in raw mysql syntax.  However, if errors happen--- Sequelize.STRING type is varchar(255) -- the varchar(40) should be updated in the schema and i do not know yet if the dats will be compatible.
+ * 
+ * I had to add columns in the mysql schema for updatedAt and createdAt to be compatible with sequelize.
+ * 
+ * I also adjuusted the primary key because I think it is a better choice to have the primary key be what is generated in the db and not referencing the googleId.  
+ */

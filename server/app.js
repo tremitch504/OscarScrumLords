@@ -12,6 +12,9 @@ const {
 } = require('./db/helpers.js');
 
 
+const {Users, Landmarks, Events, Rsvps} = require('./db/sequelize.js')
+
+
 const dotenv = require('dotenv');
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
@@ -80,7 +83,7 @@ app.put('/events', (req, res) => {
 });
 
 app.post('/users', (req, res) => {
-  console.log('COOKIES', req.cookies);
+
   return postUser(req.body)
     .then(() => res.sendStatus(201))
     .catch(err => {
@@ -89,13 +92,15 @@ app.post('/users', (req, res) => {
     });
 });
 
-app.get('/test', async (req, res) => {
+//this is just an endpt for the  test button fo requests to more easy work out any bugs in the sequelize vs mysql or any other bugs.  Rm this after more progress made and definitely before final PR
+app.post('/test', async (req, res) => {
   try {
-    console.log('reqcookies', req.cookies);
-    console.log('reqsssss', req.session);
+    //console.log('reqcookies', req.cookies);
+    //console.log('reqsssss', req.session);
+    await Rsvps.create({ userId: 1, eventId: 1, fullName: 'fullname'  })
     res.sendStatus(201);
   } catch (err) {
-    console.log(err);
+
     res.sendStatus(500);
   }
 });
