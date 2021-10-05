@@ -63,7 +63,6 @@ const getEvents = () => {
 };
 
 const postUser = ({ email, familyName, fullName, givenName, googleId }) => {
-  console.log('post user');
   return new Promise((resolve, reject) => {
     db.query('SELECT EXISTS(SELECT * FROM users WHERE googleId = ?)', googleId, (err, results) => {
       if (err) {
