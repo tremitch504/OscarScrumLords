@@ -13,6 +13,8 @@ import Home from './NavBar/Home.jsx';
 import SignInButton from './NavBar/SignInButton.jsx';
 import SignOutButton from './NavBar/SignOutButton.jsx';
 import axios from 'axios';
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 // import styled from 'styled-components';
 // const AppStyles = styled.div``;
 
@@ -37,6 +39,19 @@ const App = () => {
       });
   };
 
+  /**this function returns data, next need to use it to update the state of the app */
+  const getUser = async () => {
+    try {
+      const {data} = await axios.get('/routes/profile');
+      setUserObj(data);
+      if (data.id) {
+        setLoggedIn(true);
+      }
+      console.log('DATA!', data);
+    } catch (err) {
+      console.log('getUSer err', err);
+    }
+  };
 
   const createEvent = (eventObj) => {
     const {name: hostName} = userObj;
@@ -93,6 +108,7 @@ const App = () => {
   useEffect(() => {
     getEvents();
     getLandmarks();
+    getUser();
   }, []);
 
   return (
@@ -136,6 +152,7 @@ const App = () => {
               <UserProfile
                 userObj={userObj}
                 events={events}
+                getUser={getUser}
                 // attending={attending}
               />
             </Route>

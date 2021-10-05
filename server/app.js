@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const auth = require('./auth');
 const {Router} = require('./routes/routes');
+const {Profile} = require('./routes/profile');
 
 
 const {
@@ -49,6 +50,7 @@ app.use(passport.session());
 
 //routes middleware goes here
 app.use('/routes/routes', Router);
+app.use('/routes/profile', Profile);
 
 app.get('/google', passport.authenticate('google', {scope: ['profile', 'email']}), (req, res) => {
 
@@ -57,7 +59,7 @@ app.get('/google', passport.authenticate('google', {scope: ['profile', 'email']}
 app.get('/google/callback', passport.authenticate('google', {failureRedirect: '/login'}),
   (req, res) => {
     console.log(req);
-    res.sendStatus(201);
+    res.redirect('/');
   });
 
 

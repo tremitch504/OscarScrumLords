@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 //parent is App.jsx
 import { GoogleLogout } from 'react-google-login';
-
+/******this all need to be redone */
 const SignOutButton = ({ setLoggedIn, setUserObj }) => {
 
   const onSuccess = () => {

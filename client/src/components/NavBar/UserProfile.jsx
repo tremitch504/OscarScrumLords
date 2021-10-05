@@ -51,12 +51,12 @@ const EventInfo = styled.div`
 `;
 
 
-const UserProfile = ({ userObj, events }) => {
+const UserProfile = ({ userObj, events, getUser }) => {
 
   const test = async() => {
-    console.log('clkck');
-    const {data} = await axios.get('/test');
-    console.log('data', data);
+    // console.log('clkck');
+    // const {data} = await axios.get('/test');
+    // console.log('data', data);
 
   };
   return (
@@ -64,7 +64,7 @@ const UserProfile = ({ userObj, events }) => {
       <UserInfo>
         <h3>Name: {userObj.name}</h3>
         <p>email: {userObj.email}</p>
-        <button onClick={test} >test</button>
+        <button onClick={getUser} >test</button>
       </UserInfo>
       {events.filter(event => event.attendees.includes(userObj.name))
         .map(event => (
