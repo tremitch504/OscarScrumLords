@@ -20,7 +20,7 @@ const getLandmarks = () => {
 //will need API to pin location of event, EVENTS DB: id, date_id, time_id, location_id
 const postEvents = ({ name, hostName, details, date, time, lat, lng}) => {
   return new Promise((resolve, reject) => {
-    db.query('INSERT INTO events (eventsName, hostName, details, date_id, time_id, lat, lng) VALUES (?, ?, ?, ?, ?, ?, ?)',
+    db.query('INSERT INTO events (eventsName, hostName, details, date_id,  lat, lng) VALUES (?, ?, ?, ?, ?, ?, ?)',
       [name, hostName, details, date, time, lat, lng], (err, results) => {
         if (err) {
           return reject(err);
@@ -30,10 +30,10 @@ const postEvents = ({ name, hostName, details, date, time, lat, lng}) => {
   });
 };
 
-const postLandmarks = ({ kind, details, fullName, lat, lng, date}) => {
+const postLandmarks = ({ kind, userId, details, fullName, lat, lng, date}) => {
   return new Promise((resolve, reject) => {
-    db.query('INSERT INTO landmarks (kind, details, fullName, lat, lng, date_id) VALUES (?, ?, ?, ?, ?, ?)',
-      [kind, details, fullName, lat, lng, date],
+    db.query('INSERT INTO landmarks (kind, userId, details, fullName, lat, lng, date_id) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      [kind, userId, details, fullName, lat, lng, date],
       (err, results) => {
         if (err) {
           return reject(err);

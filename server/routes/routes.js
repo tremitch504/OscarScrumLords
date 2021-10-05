@@ -18,6 +18,7 @@ const Router = express.Router();
 
 //call to API search key, store in LANDMARKS DB: address_id, phone, services, bus_hours
 Router.get('/landmarks', (req, res) => {
+
   return getLandmarks()
     .then(data => res.status(201).send(data))
     .catch(err => {
@@ -28,7 +29,13 @@ Router.get('/landmarks', (req, res) => {
 
 //DATE FORMAT: yyyy-mm-dd
 Router.post('/landmarks', (req, res) => {
-  return postLandmarks(req.body)
+
+  const userId = {userId: req.user.id}
+
+  const merged = {...req.body, ...userId}
+
+
+  return postLandmarks(merged)
     .then(() => res.sendStatus(201))
     .catch(err => {
       console.warn('ERROR', err);
