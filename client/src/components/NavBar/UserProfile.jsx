@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components'; 
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
+import axios from 'axios';
 
 const EventsContainer = styled.div`
 margin: 20px 0px;
@@ -49,11 +52,19 @@ const EventInfo = styled.div`
 
 
 const UserProfile = ({ userObj, events }) => {
+
+  const test = async() => {
+    console.log('clkck');
+    const {data} = await axios.get('/test');
+    console.log('data', data);
+
+  };
   return (
     <EventsContainer>
       <UserInfo>
         <h3>Name: {userObj.name}</h3>
         <p>email: {userObj.email}</p>
+        <button onClick={test} >test</button>
       </UserInfo>
       {events.filter(event => event.attendees.includes(userObj.name))
         .map(event => (

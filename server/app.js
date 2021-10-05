@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+const cookieParser = require('cookie-parser');
 const {
   getLandmarks,
   postLandmarks,
@@ -10,6 +11,7 @@ const {
 
 } = require('./db/helpers.js');
 
+
 const dotenv = require('dotenv');
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
@@ -19,6 +21,7 @@ const CLIENT_PATH = path.resolve(__dirname, '../client/dist');
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(cookieParser());
 
 
 app.use(express.static(CLIENT_PATH));
@@ -26,6 +29,7 @@ app.use('/favicon.ico', express.static(path.resolve(__dirname, 'assets', 'stockc
 
 //call to API search key, store in LANDMARKS DB: address_id, phone, services, bus_hours
 app.get('/landmarks', (req, res) => {
+  console.log('COOKIES', req.cookies);
   return getLandmarks()
     .then(data => res.status(201).send(data))
     .catch(err => {
@@ -36,6 +40,7 @@ app.get('/landmarks', (req, res) => {
 
 //DATE FORMAT: yyyy-mm-dd
 app.post('/landmarks', (req, res) => {
+  console.log('COOKIES', req.cookies);
   return postLandmarks(req.body)
     .then(() => res.sendStatus(201))
     .catch(err => {
@@ -75,12 +80,24 @@ app.put('/events', (req, res) => {
 });
 
 app.post('/users', (req, res) => {
+  console.log('COOKIES', req.cookies);
   return postUser(req.body)
     .then(() => res.sendStatus(201))
     .catch(err => {
       console.warn('ERROR', err);
       res.sendStatus(500);
     });
+});
+
+app.get('/test', async (req, res) => {
+  try {
+    console.log('reqcookies', req.cookies);
+    console.log('reqsssss', req.session);
+    res.sendStatus(201);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(500);
+  }
 });
 
 

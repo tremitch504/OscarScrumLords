@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { GoogleLogin } from 'react-google-login';
 
+//parent is App.jsx
+
 const SignInButton = ({ setLoggedIn, createUser }) => {
 
   const onSuccess = ({profileObj}) => {
@@ -13,7 +15,7 @@ const SignInButton = ({ setLoggedIn, createUser }) => {
     console.warn('log in failure', response);
   };
 
-//'636707500167-jl0be6d4pi4e96ttgqkvt1v0758a3r9p.apps.googleusercontent.com'
+  //'636707500167-jl0be6d4pi4e96ttgqkvt1v0758a3r9p.apps.googleusercontent.com'
   return (
     <div>
       <GoogleLogin
