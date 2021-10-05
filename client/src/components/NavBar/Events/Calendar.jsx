@@ -42,7 +42,7 @@ const Events = ({events}) => {
 
     const formatDate = `${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}-${selectedDate.getDate()}`;
 
-    //return event.date_id.slice(0, 10).replaceAll('-0', '-') === formatDate;
+    // return event.date_id.slice(0, 10).replaceAll('-0', '-') === formatDate;
     /**
      * ^^the commmented out function is original.  throws an error after refactors.  right now just have a blank return to not throw an err
      * 

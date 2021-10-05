@@ -2,7 +2,17 @@
 
 const express = require('express');
 const passport = require('passport');
-const {Users} = require('../db/sequelize');
+const {Users, Rsvps} = require('../db/sequelize');
+
+const {
+  getLandmarks,
+  postLandmarks,
+  postEvents,
+  getEvents,
+  postUser,
+  toggleRSVP
+
+} = require('../db/helpers.js');
 const Router = express.Router();
 
 
@@ -57,7 +67,6 @@ Router.put('/events', (req, res) => {
 });
 
 Router.post('/users', (req, res) => {
-
   return postUser(req.body)
     .then(() => res.sendStatus(201))
     .catch(err => {

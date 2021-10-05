@@ -27,16 +27,17 @@ const App = () => {
 
 
   const createUser = (newUser) => {
-    const {name: fullName, ...rest} = newUser;
-    const postObj = {
-      ...rest,
-      fullName,
-    };
-    setUserObj(newUser);
-    axios.post('/users', postObj)
-      .then(() => {
-        getEvents(newUser);
-      });
+    console.log('createUser fn in app.jsx.  this shouldnt b happening');
+    // const {name: fullName, ...rest} = newUser;
+    // const postObj = {
+    //   ...rest,
+    //   fullName,
+    // };
+    // setUserObj(newUser);
+    // axios.post('/users', postObj)
+    //   .then(() => {
+    //     getEvents(newUser);
+    //   });
   };
 
   /**this function returns data, next need to use it to update the state of the app */
@@ -59,18 +60,18 @@ const App = () => {
       ...eventObj,
       hostName,
     };
-    axios.post('/events', postObj)
+    axios.post('/routes/routes/events', postObj)
       .then(getEvents);
   };
 
   const putEvent = (eventId) => {
     const { googleId, name: fullName } = userObj;
-    axios.put('/events', {eventId, googleId, fullName})
+    axios.put('/routes/routes/events', {eventId, googleId, fullName})
       .then(getEvents(userObj));
   };
 
   const getEvents = () => {
-    axios.get('/events')
+    axios.get('/routes/routes/events')
       .then(({data}) => {
         data.forEach(event => {
           event.lat = Number(event.lat);
@@ -88,12 +89,12 @@ const App = () => {
       ...eventObj,
       fullName,
     };
-    axios.post('/landmarks', postObj)
+    axios.post('/routes/routes/landmarks', postObj)
       .then(getLandmarks);
   };
 
   const getLandmarks = () => {
-    axios.get('/landmarks')
+    axios.get('/routes/routes/landmarks')
       .then(({data}) => {
         data.forEach(event => {
           event.lat = Number(event.lat);
