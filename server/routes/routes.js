@@ -30,9 +30,9 @@ Router.get('/landmarks', (req, res) => {
 //DATE FORMAT: yyyy-mm-dd
 Router.post('/landmarks', (req, res) => {
 
-  const userId = {userId: req.user.id}
+  const userId = {userId: req.user.id};
 
-  const merged = {...req.body, ...userId}
+  const merged = {...req.body, ...userId};
 
 
   return postLandmarks(merged)

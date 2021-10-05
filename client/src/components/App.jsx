@@ -12,6 +12,8 @@ import UserProfile from './NavBar/UserProfile.jsx';
 import Home from './NavBar/Home.jsx';
 import SignInButton from './NavBar/SignInButton.jsx';
 import SignOutButton from './NavBar/SignOutButton.jsx';
+import UserList from './UserList/UserList.jsx';
+
 import axios from 'axios';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
@@ -125,6 +127,8 @@ const App = () => {
             <li><Link to='/map' >Map</Link></li>
             <li><Link to='/calendar' >Events</Link></li>
             <li><Link to='/userProfile'>My Profile</Link></li>
+            <li><Link to='/userList'>User List</Link></li>
+
             <li>{loggedIn ?
               `Hello ${userObj.givenName}` :
               'Please Sign in!'
@@ -168,6 +172,9 @@ const App = () => {
                 createLandmark={createLandmark}
                 userObj={userObj}
                 loggedIn={loggedIn}/>
+            </Route>
+            <Route path='/userList'>
+              <UserList />
             </Route>
           </Switch>
         </main>
