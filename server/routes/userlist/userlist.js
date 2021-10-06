@@ -33,5 +33,18 @@ UserList.post('/followUser/:targetId', async(req, res) => {
   }
 });
 
+UserList.get('/visitProfile/:id', async(req, res) => {
+  try {
+    const {id} = req.params;
+    const user = await Users.findByPk(id);
+    res.status(201).send(user);
+
+
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(500);
+  }
+});
+
 
 module.exports = {UserList};

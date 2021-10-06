@@ -13,6 +13,7 @@ import Home from './NavBar/Home.jsx';
 import SignInButton from './NavBar/SignInButton.jsx';
 import SignOutButton from './NavBar/SignOutButton.jsx';
 import UserList from './UserList/UserList.jsx';
+import VisitProfile from './UserList/VisitProfile.jsx';
 
 import axios from 'axios';
 import 'core-js/stable';
@@ -142,7 +143,8 @@ const App = () => {
         </nav>
         <main>
           <Switch>
-            <Route exact path='/'><Home />
+            <Route exact path='/'>
+              <Home />
             </Route>
             <Route path='/home'><Home />
             </Route>
@@ -175,6 +177,10 @@ const App = () => {
             <Route path='/userList'>
               <UserList />
             </Route>
+            <Route path='/visitProfile/:id'>
+              <VisitProfile />
+            </Route>
+         
           </Switch>
         </main>
       </Router>
@@ -183,3 +189,5 @@ const App = () => {
 };
 
 export default App;
+
+//{nextUser ? <Redirect to='/visitProfile' /> : <UserList />}
