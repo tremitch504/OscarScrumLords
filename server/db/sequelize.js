@@ -1,6 +1,5 @@
 
 const { Sequelize } = require('sequelize');
-const { User } = require('../../../../../poker-app/db');
 const db = new Sequelize('bike', 'root', '', {
   host: 'localhost',
   dialect: 'mysql',
@@ -133,7 +132,7 @@ const Following = db.define('following', {
 
 Users.hasMany(Rsvps);
 Events.hasMany(Rsvps); 
-Following.belongsTo(Users)
+Following.belongsTo(Users);
 //Users.belongsToMany(Users, {as: 'Children', through: 'Following'})
 
 
@@ -169,16 +168,16 @@ Rsvps.sync()
     console.error('Unable to connect to the database:', err);
   });
 
-  // Following.sync()
-  // .then(() => {
-  //   console.log('Connection has been established successfully.');
-  // })
-  // .catch((err) => {
-  //   console.error('Unable to connect to the database:', err);
-  // });
+// Following.sync()
+// .then(() => {
+//   console.log('Connection has been established successfully.');
+// })
+// .catch((err) => {
+//   console.error('Unable to connect to the database:', err);
+// });
 
 
-module.exports = {Users, Landmarks, Events, Rsvps, Following, db}
+module.exports = {Users, Landmarks, Events, Rsvps, Following, db};
 
 /** right now these match the db schema, so sequelized can be used in the fture but the original functionscan use the helpers queries in raw mysql syntax.  However, if errors happen--- Sequelize.STRING type is varchar(255) -- the varchar(40) should be updated in the schema and i do not know yet if the dats will be compatible.
  * 

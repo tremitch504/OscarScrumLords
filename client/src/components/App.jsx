@@ -177,8 +177,8 @@ const App = () => {
             <Route path='/userList'>
               <UserList />
             </Route>
-            <Route>
-              <VisitProfile path='/visitProfile/:id'/>
+            <Route path='/visitProfile/:id'>
+              <VisitProfile />
             </Route>
          
           </Switch>

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components'; 
 import axios from 'axios';
-import { Route, useParams } from 'react-router-dom';
+import { Route, useLocation, useParams } from 'react-router-dom';
 
 //component for visiting a profile
 //recycling styling from ../UserProfile, but going to be different because views when visiting your own vs a friends profile should b different 
@@ -29,20 +29,33 @@ const VisitProfileStyles = styled.div`
 
 const VisitProfile = () => {
 
-  const getParams = () => {
-    const params = useParams();
-    console.log(params)
-  }
+  const {id} = useParams(); 
 
-  return(
+  const [userObject, setUserObject] = useState({}); //state for the user object
+
+  //retrieve info on the user whose profile we visit and set the state to it, has the info needed to build this out
+  const getUserInfo = async () => {
+    const user = await axios.get(`/routes/userlist/userlist/visitProfile/${id}`);
+    setUserObject(user.data);
+  };
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+
+
+  return (
     <VisitProfileContainer>
       <VisitProfileStyles>
-        <h3>Name: visit</h3>
-        <p>email: </p>
-        <button onClick={getParams}></button>
+        <h3>Name: {userObject.fullName}</h3>
+        <p> {userObject.email} </p>
+        <span>
+          <button>send message</button>
+          <button>follow</button>
+        </span>
       </VisitProfileStyles>
     </VisitProfileContainer>
-  )
-}
+  );
+};
 
 export default VisitProfile;

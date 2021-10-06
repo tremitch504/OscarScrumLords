@@ -26,7 +26,7 @@ const UserList = (props) => {
     const {data: id} = await axios.get(`/routes/userlist/userlist/user/${userId}`);
     setNextUser(id);
 
-  }
+  };
 
 
 
