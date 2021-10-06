@@ -17,10 +17,8 @@ const UserList = (props) => {
     try {
       const {data} = await axios.get('/routes/userlist/userlist/allUsers');
       setUserList(data);
-
-
     } catch (err) {
-
+      console.log(err)
     }
   };
 
