@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components'; 
 import axios from 'axios';
+import { Route, useParams } from 'react-router-dom';
 
 //component for visiting a profile
 //recycling styling from ../UserProfile, but going to be different because views when visiting your own vs a friends profile should b different 
@@ -11,13 +12,12 @@ margin: 20px 0px;
 
 `;
 
-const VisitProfile = styled.div`
+const VisitProfileStyles = styled.div`
   border: 1px;
   border-color: lightgray;
   border-style: solid;
   border-radius: 15px;
   padding: 5px;
-  
   margin: auto;
     width: 100%;
     display: flex;
@@ -25,15 +25,23 @@ const VisitProfile = styled.div`
     align-items: center;
   background-color: white;
   font-family: 'Ubuntu', sans-serif; 
-
 `;
 
 const VisitProfile = () => {
 
+  const getParams = () => {
+    const params = useParams();
+    console.log(params)
+  }
+
   return(
-    <div>
-      profile here
-    </div>
+    <VisitProfileContainer>
+      <VisitProfileStyles>
+        <h3>Name: visit</h3>
+        <p>email: </p>
+        <button onClick={getParams}></button>
+      </VisitProfileStyles>
+    </VisitProfileContainer>
   )
 }
 

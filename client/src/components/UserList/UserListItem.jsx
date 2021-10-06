@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {Link} from 'react-router-dom';
 
 //component to display an individual user in the userlist.  
 //follow button follows a user
@@ -8,7 +9,10 @@ const UserListItem = ({user, visitUser}) => {
     <div>
       <span>{user.fullName}
         <button>follow</button>
-        <button onClick={() => visitUser(user.id)}>visit profile</button>
+        <Link to={`/visitProfile/${user.id}`}>
+          <button >visit profile</button>
+        </Link>
+        
       </span>
       
     </div>
@@ -16,3 +20,5 @@ const UserListItem = ({user, visitUser}) => {
 };
 
 export default UserListItem;
+
+//onClick={() => visitUser(user.id)}
