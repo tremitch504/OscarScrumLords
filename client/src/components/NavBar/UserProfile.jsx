@@ -53,12 +53,7 @@ const EventInfo = styled.div`
 
 const UserProfile = ({ userObj, events, getUser }) => {
 
-  const test = async() => {
-    // console.log('clkck');
-    // const {data} = await axios.get('/test');
-    // console.log('data', data);
 
-  };
   return (
     <EventsContainer>
       <UserInfo>

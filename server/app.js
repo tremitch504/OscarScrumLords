@@ -7,6 +7,7 @@ const passport = require('passport');
 const auth = require('./auth');
 const {Router} = require('./routes/routes');
 const {Profile} = require('./routes/profile');
+const {UserList} = require('./routes/userlist/userlist');
 
 
 const {
@@ -51,6 +52,7 @@ app.use(passport.session());
 //routes middleware goes here
 app.use('/routes/routes', Router);
 app.use('/routes/profile', Profile);
+app.use('/routes/userlist/userlist', UserList);
 
 app.get('/google', passport.authenticate('google', {scope: ['profile', 'email']}));
 
@@ -59,10 +61,18 @@ app.get('/google/callback', passport.authenticate('google', {failureRedirect: '/
     res.redirect('/');
   });
 
-
+app.get('/logout', (req, res) => {
+  console.log('logout');
+  req.logout();
+  res.sendStatus(201);
+});
 
 app.use('/favicon.ico', express.static(path.resolve(__dirname, 'assets', 'stockcone.jpg')));
 
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(CLIENT_PATH, 'index.html'));
+  
+});
 
 
 

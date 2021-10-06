@@ -50,7 +50,6 @@ const App = () => {
       if (data.id) {
         setLoggedIn(true);
       }
-      console.log('DATA!', data);
     } catch (err) {
       console.log('getUSer err', err);
     }

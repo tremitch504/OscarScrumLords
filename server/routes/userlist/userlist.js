@@ -1,9 +1,10 @@
 const express = require('express');
 //const passport = require('passport');
-const {Users} = require('../db/sequelize');
+const {Users} = require('../../db/sequelize');
 const UserList = express.Router();
 
-UserList.get('/allusers', async(req, res) => {
+UserList.get('/allUsers', async(req, res) => {
+  console.log('get req allUsers');
   try {
     //get all users from the db
     const users = await Users.findAll(); //unsorted all users.  
@@ -14,3 +15,6 @@ UserList.get('/allusers', async(req, res) => {
     res.sendStatus(500);
   }
 });
+
+
+module.exports = {UserList};
