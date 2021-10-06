@@ -12,7 +12,11 @@ import UserProfile from './NavBar/UserProfile.jsx';
 import Home from './NavBar/Home.jsx';
 import SignInButton from './NavBar/SignInButton.jsx';
 import SignOutButton from './NavBar/SignOutButton.jsx';
+import UserList from './UserList/UserList.jsx';
+
 import axios from 'axios';
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 // import styled from 'styled-components';
 // const AppStyles = styled.div``;
 
@@ -25,18 +29,31 @@ const App = () => {
 
 
   const createUser = (newUser) => {
-    const {name: fullName, ...rest} = newUser;
-    const postObj = {
-      ...rest,
-      fullName,
-    };
-    setUserObj(newUser);
-    axios.post('/users', postObj)
-      .then(() => {
-        getEvents(newUser);
-      });
+    console.log('createUser fn in app.jsx.  this shouldnt b happening');
+    // const {name: fullName, ...rest} = newUser;
+    // const postObj = {
+    //   ...rest,
+    //   fullName,
+    // };
+    // setUserObj(newUser);
+    // axios.post('/users', postObj)
+    //   .then(() => {
+    //     getEvents(newUser);
+    //   });
   };
 
+  /**this function returns data, next need to use it to update the state of the app */
+  const getUser = async () => {
+    try {
+      const {data} = await axios.get('/routes/profile');
+      setUserObj(data);
+      if (data.id) {
+        setLoggedIn(true);
+      }
+    } catch (err) {
+      console.log('getUSer err', err);
+    }
+  };
 
   const createEvent = (eventObj) => {
     const {name: hostName} = userObj;
@@ -44,18 +61,18 @@ const App = () => {
       ...eventObj,
       hostName,
     };
-    axios.post('/events', postObj)
+    axios.post('/routes/routes/events', postObj)
       .then(getEvents);
   };
 
   const putEvent = (eventId) => {
     const { googleId, name: fullName } = userObj;
-    axios.put('/events', {eventId, googleId, fullName})
+    axios.put('/routes/routes/events', {eventId, googleId, fullName})
       .then(getEvents(userObj));
   };
 
   const getEvents = () => {
-    axios.get('/events')
+    axios.get('/routes/routes/events')
       .then(({data}) => {
         data.forEach(event => {
           event.lat = Number(event.lat);
@@ -73,12 +90,12 @@ const App = () => {
       ...eventObj,
       fullName,
     };
-    axios.post('/landmarks', postObj)
+    axios.post('/routes/routes/landmarks', postObj)
       .then(getLandmarks);
   };
 
   const getLandmarks = () => {
-    axios.get('/landmarks')
+    axios.get('/routes/routes/landmarks')
       .then(({data}) => {
         data.forEach(event => {
           event.lat = Number(event.lat);
@@ -93,6 +110,7 @@ const App = () => {
   useEffect(() => {
     getEvents();
     getLandmarks();
+    getUser();
   }, []);
 
   return (
@@ -108,6 +126,8 @@ const App = () => {
             <li><Link to='/map' >Map</Link></li>
             <li><Link to='/calendar' >Events</Link></li>
             <li><Link to='/userProfile'>My Profile</Link></li>
+            <li><Link to='/userList'>User List</Link></li>
+
             <li>{loggedIn ?
               `Hello ${userObj.givenName}` :
               'Please Sign in!'
@@ -136,6 +156,7 @@ const App = () => {
               <UserProfile
                 userObj={userObj}
                 events={events}
+                getUser={getUser}
                 // attending={attending}
               />
             </Route>
@@ -150,6 +171,9 @@ const App = () => {
                 createLandmark={createLandmark}
                 userObj={userObj}
                 loggedIn={loggedIn}/>
+            </Route>
+            <Route path='/userList'>
+              <UserList />
             </Route>
           </Switch>
         </main>
