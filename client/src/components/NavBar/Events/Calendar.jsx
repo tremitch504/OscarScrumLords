@@ -29,6 +29,8 @@ h2 {
 }
 `;
 
+const style = {
+  border: "0",width:"800", height:"600", frameBorder:"0", scrolling:"no"};
 
 const Events = ({events}) => {
 
@@ -51,9 +53,11 @@ const Events = ({events}) => {
   });
 
   return (
+    
     <Div>
       <Container>
         <h2>Check out bike events happening in New Orleans!</h2>
+        <iframe src="https://calendar.google.com/calendar/embed?src=qh60f8hs6tp1u65c517ldutc98%40group.calendar.google.com&ctz=America%2FChicago" style={style}></iframe>
         <Calendar
           onChange={onChange}
           value={selectedDate}
