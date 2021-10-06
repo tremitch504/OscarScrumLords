@@ -4,7 +4,6 @@ const {Users} = require('../../db/sequelize');
 const UserList = express.Router();
 
 UserList.get('/allUsers', async(req, res) => {
-  console.log('get req allUsers');
   try {
     //get all users from the db
     const users = await Users.findAll(); //unsorted all users.  
