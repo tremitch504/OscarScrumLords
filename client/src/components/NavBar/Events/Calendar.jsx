@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Calendar from 'react-calendar';
+import { ReactEmbeddedGoogleCalendar } from 'react-embedded-google-calendar';
 import 'react-calendar/dist/Calendar.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container } from 'react-bootstrap';
@@ -30,7 +31,7 @@ h2 {
 `;
 
 const style = {
-  border: "0",width:"800", height:"600", frameBorder:"0", scrolling:"no"};
+  border: "solid 1px #777", width:"800", height:"600", frameborder:"0", scrolling:"no"};
 
 const Events = ({events}) => {
 
@@ -57,13 +58,15 @@ const Events = ({events}) => {
     <Div>
       <Container>
         <h2>Check out bike events happening in New Orleans!</h2>
-        <iframe src="https://calendar.google.com/calendar/embed?src=qh60f8hs6tp1u65c517ldutc98%40group.calendar.google.com&ctz=America%2FChicago" style={style}></iframe>
-        <Calendar
+       
+        {/* <Calendar
           onChange={onChange}
           value={selectedDate}
         />
-        {<RenderEventTile events={eventsOnDate} date={selectedDate}/>}
+        {<RenderEventTile events={eventsOnDate} date={selectedDate}/>} */}
       </Container>
+      <ReactEmbeddedGoogleCalendar publicUrl ="https://calendar.google.com/calendar/embed?height=800&wkst=1&bgcolor=%23ffffff&ctz=America%2FChicago&title=bikeAround&src=cWg2MGY4aHM2dHAxdTY1YzUxN2xkdXRjOThAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=Y2hlZmpvaG5iZXNoLmNvbV9oZjMwcW9jbmJsdGRqYm5tbjIzcnV1Z3U2OEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23A79B8E&color=%237986CB&color=%23616161" />
+     
     </Div>
 
   );
