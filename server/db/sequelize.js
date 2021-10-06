@@ -133,14 +133,8 @@ const Following = db.define('following', {
 
 Users.hasMany(Rsvps);
 Events.hasMany(Rsvps); 
- 
-
-
-
-
-
-
-
+Following.belongsTo(Users)
+//Users.belongsToMany(Users, {as: 'Children', through: 'Following'})
 
 
 Users.sync()
@@ -175,13 +169,13 @@ Rsvps.sync()
     console.error('Unable to connect to the database:', err);
   });
 
-  Following.sync()
-  .then(() => {
-    console.log('Connection has been established successfully.');
-  })
-  .catch((err) => {
-    console.error('Unable to connect to the database:', err);
-  });
+  // Following.sync()
+  // .then(() => {
+  //   console.log('Connection has been established successfully.');
+  // })
+  // .catch((err) => {
+  //   console.error('Unable to connect to the database:', err);
+  // });
 
 
 module.exports = {Users, Landmarks, Events, Rsvps, Following, db}

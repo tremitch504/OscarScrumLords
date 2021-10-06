@@ -9,6 +9,15 @@ const UserList = (props) => {
 
   //inital array is empty
   const [userList, setUserList] = useState([]);
+  const [nextUser, setNextUser] = userState(''); //when a user is clicked on to see their profile, a click handler will set this state so the next user is the user clickedo n.  this will trigger a redirect to their profile page
+
+  //this is the fn that will b triggered when selecting a prof page to visit
+  const visitUser = async (userId) => {
+    //get the userinfo from the db
+    const {data: id} = await axios.get(`/routes/userlist/userlist/user/${userId}`);
+    setNextUser(id);
+
+  }
 
 
 
@@ -27,7 +36,7 @@ const UserList = (props) => {
   }, []);
 
   const userListItemCreator = () => {
-    return userList.map((user, i) => <UserListItem key={i} user={user} />);
+    return userList.map((user, i) => <UserListItem key={i} user={user} visitUser={visitUser} />);
   };
 
 
