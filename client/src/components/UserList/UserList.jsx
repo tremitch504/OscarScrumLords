@@ -30,14 +30,17 @@ const UserList = (props) => {
 
   };
 
-  const getFollowers = async () => { //function to retrieve who is following
-    await axios.get()
+  const getFollowing = async () => { //function to retrieve who is following
+    const {data} = await axios.get('/routes/userlist/userlist/following');
+    console.log('following data', data);
     
-  }
+  };
 
-  const findFollowing = async () => {
-
-  }
+  const getFollowers = async () => { //function to retrieve who is following
+    const {data} = await axios.get('/routes/userlist/userlist/followers');
+    console.log('followers data', data);
+    
+  };
 
 
   const getUsers = async () => {
@@ -63,7 +66,8 @@ const UserList = (props) => {
     <div>user list
       {userListItemCreator()}
       
-      <button onClick={getUsers}>test</button>
+      <button onClick={getFollowing}>getFollowing</button>
+      <button onClick={getFollowers}>getFollowers</button>
     </div>
   );
 };

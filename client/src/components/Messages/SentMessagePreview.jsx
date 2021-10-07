@@ -5,9 +5,9 @@ import {useParams} from 'react-router-dom';
 
 const SentMessagePreview = ({messageObj, viewMessage}) => {
   const {sentTo, createdAt, subject} = messageObj;
-  const [messageDetails, setMessageDetails] = useState({sentMessage: {}, createdAt: '', subject: ''})
+  const [messageDetails, setMessageDetails] = useState({sentMessage: {}, createdAt: '', subject: ''});
 
-  useEffect(() => setMessageDetails(messageObj), [])
+  useEffect(() => setMessageDetails(messageObj), []);
   return (
     <div>
       <div onClick={() => viewMessage(messageObj) }>Subject: {messageDetails.subject} </div>
@@ -15,7 +15,7 @@ const SentMessagePreview = ({messageObj, viewMessage}) => {
       <div>When: {messageDetails.createdAt}</div>
       
     </div>
-  )
-}
+  );
+};
 
 export default SentMessagePreview;

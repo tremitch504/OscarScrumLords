@@ -139,8 +139,7 @@ const Message = db.define('messages', {
 });
 Message.belongsTo(Users, {foreignKey: 'userFromId', as: 'receivedFrom'});
 Message.belongsTo(Users, {foreignKey: 'userToId', as: 'sentTo'});
-// Users.hasMany(Message, {as: 'sentMessage'})
-// Users.hasMany(Message, {as: 'receivedMessage'})
+
 
 
 
@@ -151,13 +150,23 @@ const Following = db.define('following', {
     autoIncrement: true
   },
   userAdding: { //user who is making the add
-    type: Sequelize.INTEGER //foreign key for User.id
+    type: Sequelize.INTEGER, //foreign key for User.id
+    references: {
+      model: Users,
+      key: 'id'
+    }
   },
   userTarget: { //user who is being followed
-    type: Sequelize.INTEGER //foreign key for User.id
+    type: Sequelize.INTEGER, //foreign key for User.id
+    references: {
+      model: Users,
+      key: 'id'
+    }
   } 
 });
 
+Following.belongsTo(Users, {foreignKey: 'userAdding', as: 'followerAdder'});
+Following.belongsTo(Users, {foreignKey: 'userTarget', as: 'followingTarget'});
 
 
 /**
@@ -208,12 +217,12 @@ Message.sync()
   .catch((err) => console.log(err));
 
 Following.sync()
-.then(() => {
-  console.log('Connection has been established successfully.following');
-})
-.catch((err) => {
-  console.error('Unable to connect to the database:', err);
-});
+  .then(() => {
+    console.log('Connection has been established successfully.following');
+  })
+  .catch((err) => {
+    console.error('Unable to connect to the database:', err);
+  });
 
 
 module.exports = {Users, Landmarks, Message, Events, Rsvps, Following, db};

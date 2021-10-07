@@ -16,7 +16,7 @@ UserList.get('/allUsers', async(req, res) => {
 
 UserList.post('/followUser/:targetId', async(req, res) => {
   try {
-    console.log('post')
+    console.log('post');
     //the user who is adding is in req.user
     const {id} = req.user;
     //the user being followed comes from the parameters
@@ -47,21 +47,43 @@ UserList.get('/visitProfile/:id', async(req, res) => {
   }
 });
 
-UserList.get('/followers', async (req, res) => {
+//this is for getting the list of ppl the user is following
+UserList.get('/following', async (req, res) => {
   try {
-    const {id} = req.user //id of the user
-    await Following.findAll({
+    const {id} = req.user; //id of the user
+    const following = await Following.findAll({
       where: {userAdding: id},
       include: [{
         model: Users,
-        attributes: fullName
+        as: 'followingTarget',
+        attributes: ['fullName']
       }]
     });
+    res.status(201).send(following);
   } catch (err) {
     console.log(err);
     res.sendStatus(500);
   }
-})
+});
+
+//this is for getting the list of ppl who are following the user
+UserList.get('/followers', async (req, res) => {
+  try {
+    const {id} = req.user; //id of the user
+    const followers = await Following.findAll({
+      where: {userTarget: id},
+      include: [{
+        model: Users,
+        as: 'followerAdder',
+        attributes: ['fullName']
+      }]
+    });
+    res.status(201).send(followers);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(500);
+  }
+});
 
 
 module.exports = {UserList};

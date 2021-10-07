@@ -15,7 +15,7 @@ import SignOutButton from './NavBar/SignOutButton.jsx';
 import UserList from './UserList/UserList.jsx';
 import VisitProfile from './UserList/VisitProfile.jsx';
 import SendMessage from './Messages/SendMessage.jsx';
-import Inbox from './Messages/Inbox.jsx'
+import Inbox from './Messages/Inbox.jsx';
 
 import axios from 'axios';
 

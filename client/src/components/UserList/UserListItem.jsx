@@ -8,8 +8,8 @@ import axios from 'axios';
 const UserListItem = ({user, visitUser}) => {
 
   const follow = async () => {
-    await axios.post(`/routes/userlist/userlist/followUser/${user.id}`)
-  }
+    await axios.post(`/routes/userlist/userlist/followUser/${user.id}`);
+  };
 
   return (
     <div>

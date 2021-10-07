@@ -4,9 +4,24 @@ import axios from 'axios';
 import {useParams} from 'react-router-dom';
 import MessagePreview from './MessagePreview.jsx';
 import MessageView from './MessageView.jsx';
-import SentMessagePreview from './SentMessagePreview.jsx'
+import SentMessagePreview from './SentMessagePreview.jsx';
+
+const InboxStyles = styled.div`
+  .wrapper {
+    display: flex;
+    flex-direction: row;
+  }
+  .previewWrapper {
+    :hover {
+      cursor: pointer;
+      background-color: peachpuff;
+    }
+  }
+`;
 
 const Inbox = () => {
+
+  
 
   const [mail, setMail] = useState([]);
   const [currentMessage, setCurrentMessage] = useState({}); //a state to an email that someone wants to view.  when clicked the email will display
@@ -14,24 +29,23 @@ const Inbox = () => {
 
   const getInbox = async () => { //get request to get mail.  and then set it to the state
     const {data} = await axios.get('/routes/messages/getInbox');
-    console.log('data', data);
-    setMail(data)
+    setMail(data);
   };
 
   const getOutbox = async () => { //get request to get mail.  and then set it to the state
     const {data} = await axios.get('/routes/messages/getOutbox');
-    console.log('data', data);
-    setSentMail(data)
+    setSentMail(data);
   };
 
   
 
   const viewMessage = (message) => { //fn to fire off when clicked
-    console.log('click', message)
-    setCurrentMessage(message)
+    setCurrentMessage(message);
   };
 
   const messagePreviews = mail.map((messageObj, i) => <MessagePreview key={i} messageObj={messageObj} viewMessage={viewMessage} /> );
+
+  const sentMessagePreviews = mail.map((messageObj, i) => <SentMessagePreview key={i} messageObj={messageObj} viewMessage={viewMessage} /> );
 
   useEffect(()=> getInbox(), []);
 
@@ -41,15 +55,18 @@ const Inbox = () => {
 
 
   return (
-    <div>
-     
-      {messagePreviews}
-      
-     
-      
-    </div>
-  )
-}
+    <InboxStyles>
+      <div className='wrapper'>
+        <div className='previewWrapper'>
+          {messagePreviews}
+        </div>
+        <div className='messageViewWrapper'>
+          <MessageView currentMessage={currentMessage}/>
+        </div>
+      </div>
+    </InboxStyles>
+  );
+};
 
 export default Inbox; 
 //{currentMessage.id ? <MessageView /> : <div>no messages selected </div>}
