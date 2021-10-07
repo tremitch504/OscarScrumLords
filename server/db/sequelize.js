@@ -121,14 +121,26 @@ const Message = db.define('messages', {
     type: Sequelize.STRING
   },
   userFromId: {
-    type: Sequelize.INTEGER //foreign key pts to user sending it
+    type: Sequelize.INTEGER,
+    references: {
+      model: Users,
+      key: 'id'
+    }
   },
   userToId: {
-    type: Sequelize.INTEGER, //foreign key pts to user receiving message
+    type: Sequelize.INTEGER,
+    references: {
+      model: Users,
+      key: 'id'
+    }
   }
 
-});
 
+});
+Message.belongsTo(Users, {foreignKey: 'userFromId', as: 'receivedFrom'});
+Message.belongsTo(Users, {foreignKey: 'userToId', as: 'sentTo'});
+// Users.hasMany(Message, {as: 'sentMessage'})
+// Users.hasMany(Message, {as: 'receivedMessage'})
 
 
 
@@ -138,13 +150,13 @@ const Following = db.define('following', {
     primaryKey: true,
     autoIncrement: true
   },
-  userId: { //user who is making the add
+  userAdding: { //user who is making the add
     type: Sequelize.INTEGER //foreign key for User.id
   },
-  targetId: { //user who is being followed
+  userTarget: { //user who is being followed
     type: Sequelize.INTEGER //foreign key for User.id
   } 
-}, {timestamps: false});
+});
 
 
 
@@ -155,8 +167,7 @@ const Following = db.define('following', {
 Users.hasMany(Rsvps);
 Events.hasMany(Rsvps); 
 Following.belongsTo(Users);
-Message.belongsTo(Users, {foreignKey: 'userFromId'});
-Message.belongsTo(Users, {foreignKey: 'userToId'});
+
 //Users.belongsToMany(Users, {as: 'Children', through: 'Following'})
 
 
@@ -196,13 +207,13 @@ Message.sync()
   .then(() => console.log('messages synced'))
   .catch((err) => console.log(err));
 
-// Following.sync()
-// .then(() => {
-//   console.log('Connection has been established successfully.');
-// })
-// .catch((err) => {
-//   console.error('Unable to connect to the database:', err);
-// });
+Following.sync()
+.then(() => {
+  console.log('Connection has been established successfully.following');
+})
+.catch((err) => {
+  console.error('Unable to connect to the database:', err);
+});
 
 
 module.exports = {Users, Landmarks, Message, Events, Rsvps, Following, db};

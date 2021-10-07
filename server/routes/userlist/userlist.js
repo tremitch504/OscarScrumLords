@@ -16,18 +16,19 @@ UserList.get('/allUsers', async(req, res) => {
 
 UserList.post('/followUser/:targetId', async(req, res) => {
   try {
+    console.log('post')
     //the user who is adding is in req.user
     const {id} = req.user;
     //the user being followed comes from the parameters
     const {targetId} = req.params;
-    //create a new entry in the Following table
-    await Following.create({userId: id, targetId: targetId});
+    //create a new entry in theFollowing table
+    await Following.create({userAdding: id, userTarget: parseInt(targetId)});
 
     res.status(200);
 
 
 
-  } catch (err) {
+  } catch (err) { 
     console.log(err);
     res.sendStatus(500);
   }
@@ -45,6 +46,22 @@ UserList.get('/visitProfile/:id', async(req, res) => {
     res.sendStatus(500);
   }
 });
+
+UserList.get('/followers', async (req, res) => {
+  try {
+    const {id} = req.user //id of the user
+    await Following.findAll({
+      where: {userAdding: id},
+      include: [{
+        model: Users,
+        attributes: fullName
+      }]
+    });
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(500);
+  }
+})
 
 
 module.exports = {UserList};

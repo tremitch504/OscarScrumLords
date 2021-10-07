@@ -19,6 +19,8 @@ const UserList = (props) => {
   //inital array is empty
   const [userList, setUserList] = useState([]);
   const [nextUser, setNextUser] = useState(''); //when a user is clicked on to see their profile, a click handler will set this state so the next user is the user clickedo n.  this will trigger a redirect to their profile page
+  const [followers, setFollowers] = useState([]); //state of those following user
+  const [following, setFOllowiing] = useState([]); //state of those who user follows
 
   //this is the fn that will b triggered when selecting a prof page to visit
   const visitUser = async (userId) => {
@@ -28,6 +30,14 @@ const UserList = (props) => {
 
   };
 
+  const getFollowers = async () => { //function to retrieve who is following
+    await axios.get()
+    
+  }
+
+  const findFollowing = async () => {
+
+  }
 
 
   const getUsers = async () => {

@@ -23,5 +23,43 @@ Messages.post('/sendMessage/:recipientId', async (req, res) => {
   }
 });
 
+Messages.get('/getInbox', async (req, res) => {
+  try {
+    const {id} = req.user;
+    const messages = await Message.findAll({
+      where: {userToId: id}, //fix this
+      //need to have it grab the foreign key related to the prson sending it
+      include: [{model: Users, as: 'receivedFrom', attributes: ['fullName']}]
+
+    })
+    
+    res.status(201).send(messages)
+    
+  }
+  catch (err) {
+    console.log(err)
+    res.sendStatus(500)
+  }
+})
+
+Messages.get('/getOutbox', async (req, res) => {
+  try {
+    const {id} = req.user;
+    const messages = await Message.findAll({
+      where: {userToId: id}, //fix this
+      //need to have it grab the foreign key related to the prson sending it
+      include: [{model: Users, as: 'sentTo', attributes: ['fullName']}]
+
+    })
+    
+    res.status(201).send(messages)
+    
+  }
+  catch (err) {
+    console.log(err)
+    res.sendStatus(500)
+  }
+})
+
 
 module.exports = {Messages};

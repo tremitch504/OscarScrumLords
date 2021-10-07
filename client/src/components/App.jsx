@@ -15,6 +15,7 @@ import SignOutButton from './NavBar/SignOutButton.jsx';
 import UserList from './UserList/UserList.jsx';
 import VisitProfile from './UserList/VisitProfile.jsx';
 import SendMessage from './Messages/SendMessage.jsx';
+import Inbox from './Messages/Inbox.jsx'
 
 import axios from 'axios';
 
@@ -128,6 +129,8 @@ const App = () => {
             <li><Link to='/calendar' >Events</Link></li>
             <li><Link to='/userProfile'>My Profile</Link></li>
             <li><Link to='/userList'>User List</Link></li>
+            <li><Link to='/inbox'>Inbox</Link></li>
+
 
             <li>{loggedIn ?
               `Hello ${userObj.givenName}` :
@@ -182,6 +185,9 @@ const App = () => {
             </Route>
             <Route path='/sendMessage/:id'>
               <SendMessage />
+            </Route>
+            <Route path='/inbox'>
+              <Inbox />
             </Route>
          
           </Switch>
