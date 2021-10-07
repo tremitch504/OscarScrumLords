@@ -13,7 +13,7 @@ import Home from './NavBar/Home.jsx';
 import SignInButton from './NavBar/SignInButton.jsx';
 import SignOutButton from './NavBar/SignOutButton.jsx';
 import UserList from './UserList/UserList.jsx';
-
+import ImageUplaod from './ImageUpload/ImageUpload.jsx';
 import axios from 'axios';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
@@ -127,6 +127,7 @@ const App = () => {
             <li><Link to='/calendar' >Events</Link></li>
             <li><Link to='/userProfile'>My Profile</Link></li>
             <li><Link to='/userList'>User List</Link></li>
+            <li><Link to='/userImage'>Upload Image</Link></li>
 
             <li>{loggedIn ?
               `Hello ${userObj.givenName}` :
@@ -174,6 +175,9 @@ const App = () => {
             </Route>
             <Route path='/userList'>
               <UserList />
+            </Route>
+            <Route path='/userImage'>
+              <ImageUplaod userObj={userObj}/>
             </Route>
           </Switch>
         </main>

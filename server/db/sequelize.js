@@ -110,9 +110,31 @@ const Rsvps = db.define('rsvps', {
 
 });
 
+const Posts = db.define('posts', {
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  urlImage: {
+    type: Sequelize.STRING(255)
+  },
+  caption: {
+    type: Sequelize.STRING(255)
+  },
+  likes: {
+    type: Sequelize.INTEGER
+  },
+  public_id: {
+    type: Sequelize.STRING(255)
+  }
+});
+
 /**
  * the User.hasMany relationships here etc.  i dont think any functions are using the event/rsvp schema yet
  */
+Users.hasMany(Posts);
+Posts.belongsTo(Users);
 
 Users.sync()
   .then(() => {
@@ -146,10 +168,18 @@ Rsvps.sync()
     console.error('Unable to connect to the database:', err);
   });
 
+Posts.sync()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch((err) => {
+    console.error('Unable to connect to the database:', err);
+  });
 exports.Users = Users;
 exports.Landmarks = Landmarks;
 exports.Events = Events;
 exports.Rsvps = Rsvps;
+exports.Posts = Posts;
 exports.db = db;
 
 /** right now these match the db schema, so sequelized can be used in the fture but the original functionscan use the helpers queries in raw mysql syntax.  However, if errors happen--- Sequelize.STRING type is varchar(255) -- the varchar(40) should be updated in the schema and i do not know yet if the dats will be compatible.
