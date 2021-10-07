@@ -117,7 +117,7 @@ const Message = db.define('messages', {
     type: Sequelize.STRING,
     defaultValue: ''
   }, 
-  text : {
+  text: {
     type: Sequelize.STRING
   },
   userFromId: {
@@ -127,7 +127,7 @@ const Message = db.define('messages', {
     type: Sequelize.INTEGER, //foreign key pts to user receiving message
   }
 
-})
+});
 
 
 
@@ -156,7 +156,7 @@ Users.hasMany(Rsvps);
 Events.hasMany(Rsvps); 
 Following.belongsTo(Users);
 Message.belongsTo(Users, {foreignKey: 'userFromId'});
-Message.belongsTo(Users, {foreignKey: 'userToId'})
+Message.belongsTo(Users, {foreignKey: 'userToId'});
 //Users.belongsToMany(Users, {as: 'Children', through: 'Following'})
 
 

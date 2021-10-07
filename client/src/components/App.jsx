@@ -14,10 +14,10 @@ import SignInButton from './NavBar/SignInButton.jsx';
 import SignOutButton from './NavBar/SignOutButton.jsx';
 import UserList from './UserList/UserList.jsx';
 import VisitProfile from './UserList/VisitProfile.jsx';
+import SendMessage from './Messages/SendMessage.jsx';
 
 import axios from 'axios';
-import 'core-js/stable';
-import 'regenerator-runtime/runtime';
+
 // import styled from 'styled-components';
 // const AppStyles = styled.div``;
 
@@ -179,6 +179,9 @@ const App = () => {
             </Route>
             <Route path='/visitProfile/:id'>
               <VisitProfile />
+            </Route>
+            <Route path='/sendMessage/:id'>
+              <SendMessage />
             </Route>
          
           </Switch>

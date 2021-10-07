@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components'; 
 import axios from 'axios';
-import { Route, useLocation, useParams } from 'react-router-dom';
+import {useParams, useHistory } from 'react-router-dom';
 
 //component for visiting a profile
 //recycling styling from ../UserProfile, but going to be different because views when visiting your own vs a friends profile should b different 
@@ -30,6 +30,7 @@ const VisitProfileStyles = styled.div`
 const VisitProfile = () => {
 
   const {id} = useParams(); 
+  const history = useHistory();
 
   const [userObject, setUserObject] = useState({}); //state for the user object
 
@@ -50,7 +51,7 @@ const VisitProfile = () => {
         <h3>Name: {userObject.fullName}</h3>
         <p> {userObject.email} </p>
         <span>
-          <button>send message</button>
+          <button onClick={() => history.push(`/sendMessage/${userObject.id}`)}>send message</button>
           <button>follow</button>
         </span>
       </VisitProfileStyles>

@@ -4,21 +4,24 @@ const Messages = express.Router();
 
 Messages.post('/sendMessage/:recipientId', async (req, res) => {
   try {
-    const {subject, text} = req.body
-    const {recipientId} = req.params
-    const {id} = req.user //this is the user logged in 
+    console.log('send messages post');
+    console.log('reqbod', req.body);
+    const {subject, message} = req.body;
+    const {recipientId} = req.params;
+    const {id} = req.user || {id: 1}; //this is the user logged in  //HARD CODED FIX THIS AFTER TESTING MORE
+    console.log('id', id);
     await Message.create({
       subject: subject,
-      text: text,
+      text: message,
       userFromId: id,
       userToId: recipientId
-    })
-    res.sendStatus(200)
+    });
+    res.sendStatus(200);
   } catch (err) {
     console.log(err);
-    res.sendStatus(500)
+    res.sendStatus(500);
   }
-})
+});
 
 
-module.exports = Messages;
+module.exports = {Messages};
