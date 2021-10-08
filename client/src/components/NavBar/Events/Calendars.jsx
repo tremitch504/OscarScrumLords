@@ -1,4 +1,3 @@
-
 import React from 'react';
 import axios from 'axios';
 import Calendar from '@ericz1803/react-google-calendar';
@@ -25,7 +24,11 @@ const tool = {
 axios.get('/routes/calendar/calendarId')
   .then(data => {
     console.log(data.data);
-    const {CALENDAR_ID} = data.data.parsed;
+    const { CALENDAR_ID } = data.data.parsed;
+    const calendars = [
+      {calendarId: CALENDAR_ID, color: '#B241D1'},
+      
+    ];
   })
   .catch(err => {
     console.error(err);
