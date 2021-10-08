@@ -21,10 +21,16 @@ UserList.post('/followUser/:targetId', async(req, res) => {
     const {id} = req.user;
     //the user being followed comes from the parameters
     const {targetId} = req.params;
-    //create a new entry in theFollowing table
-    await Following.create({userAdding: id, userTarget: parseInt(targetId)});
+    //see if in the table
+    const exist = await Following.findOne({where: {
+      userAdding: id,
+      userTarget: parseInt(targetId)
+    }});
+    
+    //create a new entry in theFollowing table if it doesnt already exist
+    !exist && await Following.create({userAdding: id, userTarget: parseInt(targetId)});
 
-    res.status(200);
+    res.sendStatus(200);
 
 
 
@@ -79,6 +85,24 @@ UserList.get('/followers', async (req, res) => {
       }]
     });
     res.status(201).send(followers);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(500);
+  }
+});
+
+UserList.delete('/unfollow/:targetId', async (req, res) => {
+  try {
+    const {id} = req.user;
+    const {targetId} = req.params;
+    await Users.destroy({
+      where: {
+        userAdding: id,
+        userTarget: parseInt(targetId)
+      }
+    });
+    res.sendStatus(200);
+
   } catch (err) {
     console.log(err);
     res.sendStatus(500);

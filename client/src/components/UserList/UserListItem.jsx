@@ -5,10 +5,24 @@ import axios from 'axios';
 //component to display an individual user in the userlist.  
 //follow button follows a user
 //visit user has on click event handler to vist a user by id which triggers a resetting of state in parent component UserList
-const UserListItem = ({user, visitUser}) => {
+const UserListItem = ({user, visitUser, getFollowing}) => {
 
   const follow = async () => {
-    await axios.post(`/routes/userlist/userlist/followUser/${user.id}`);
+
+    try {
+      await axios.post(`/routes/userlist/userlist/followUser/${user.id}`, {req: 'body'});
+      getFollowing();
+
+    } catch (err) {
+      console.log('err', err);
+    }
+       
+
+        
+                
+     
+    
+
   };
 
   return (
