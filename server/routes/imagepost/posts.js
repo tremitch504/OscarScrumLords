@@ -3,7 +3,10 @@ const Post = express.Router();
 const { Posts, Users } = require('../../db/sequelize');
 
 Post.get('/imagePost', (req, res) => {
-  Posts.findAll().then(results => {
+  Posts.findAll({include: [{
+    model: Users,
+  
+  }]}).then(results => {
     console.log('POSTS:', results);
     res.status(201).send(results);
   })

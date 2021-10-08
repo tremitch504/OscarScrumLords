@@ -15,6 +15,8 @@ import SignOutButton from './NavBar/SignOutButton.jsx';
 import UserList from './UserList/UserList.jsx';
 import ImageUplaod from './ImageUpload/ImageUpload.jsx';
 import PostList from './ImageUpload/PostList.jsx';
+import VisitProfile from './UserList/VisitProfile.jsx';
+
 import axios from 'axios';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
@@ -145,7 +147,8 @@ const App = () => {
         </nav>
         <main>
           <Switch>
-            <Route exact path='/'><Home />
+            <Route exact path='/'>
+              <Home />
             </Route>
             <Route path='/home'><Home />
             </Route>
@@ -184,6 +187,10 @@ const App = () => {
             <Route path='/postList'>
               <PostList />
             </Route>
+            <Route path='/visitProfile/:id'>
+              <VisitProfile />
+            </Route>
+         
           </Switch>
         </main>
       </Router>
@@ -192,3 +199,5 @@ const App = () => {
 };
 
 export default App;
+
+//{nextUser ? <Redirect to='/visitProfile' /> : <UserList />}

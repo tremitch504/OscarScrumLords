@@ -5,6 +5,7 @@ import React, {useState, useEffect} from 'react';
 const ImageUplaod = ({ userObj }) => {
   //Create a state that will hold the files that is being uploaded
   const [imageSelected, setImageSelected] = useState('whatsgood');
+  const [imgCaption, setCaption] = useState('');
   // const [cloudImage, setCloudImage] = useState({});
   console.log('Current User:', userObj);
   // console.log('CLOUD:', cloudImage);
@@ -32,7 +33,7 @@ const ImageUplaod = ({ userObj }) => {
         // };
         axios.post( `/routes/imagepost/posts/imagePost/${userObj.id}`, { 
           urlImage: result.data.url,
-          caption: 'Welcome to Bug\'s Life',
+          caption: imgCaption,
           likes: 9,
           public_id: result.data.public_id,
         })
@@ -57,7 +58,8 @@ const ImageUplaod = ({ userObj }) => {
     uploudCloud();
   }, []);
 
-  //INPUT: onChange will update the state of the imageSelected to be the image that is coming from the input.
+  //INPUT file: onChange will update the state of the imageSelected to be the image that is coming from the input.
+  //INPUT text:
   //BUTTON: This button will invoke activate the uploadCloud function to send a post request to cloudinary with the formData, file information.
   return (
     <div className="upload-section">
@@ -66,6 +68,9 @@ const ImageUplaod = ({ userObj }) => {
         setImageSelected(e.target.files[0]);
       }}/>
       <button onClick={() => uploudCloud()}>Upload Image</button>
+      <div className='caption-section'>
+        <input type="text" placeholder='Enter a caption...' value={imgCaption} onChange={event => setCaption(event.target.value)} /> 
+      </div>
     </div>
   );
 };
