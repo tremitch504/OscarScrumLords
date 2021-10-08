@@ -57,7 +57,7 @@ const ImageUplaod = ({ userObj }) => {
   useEffect(() => {
     uploudCloud();
   }, []);
-
+ 
   //INPUT file: onChange will update the state of the imageSelected to be the image that is coming from the input.
   //INPUT text:
   //BUTTON: This button will invoke activate the uploadCloud function to send a post request to cloudinary with the formData, file information.
