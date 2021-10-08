@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Map from './Map/Map.jsx';
-import Calendar from './NavBar/Events/Calendar.jsx';
+import Calendars from './NavBar/Events/Calendars.jsx';
 import UserProfile from './NavBar/UserProfile.jsx';
 import Home from './NavBar/Home.jsx';
 import SignInButton from './NavBar/SignInButton.jsx';
@@ -147,10 +147,11 @@ const App = () => {
             <Route path='/home'><Home />
             </Route>
             <Route path='/calendar'>
-              <Calendar
-                events={events}
-                setEvents={setEvents}
-                createEvent={createEvent}/>
+              <Calendars
+                // events={events}
+                // setEvents={setEvents}
+                // createEvent={createEvent}
+              />
             </Route>
             <Route path='/userProfile'>
               <UserProfile
