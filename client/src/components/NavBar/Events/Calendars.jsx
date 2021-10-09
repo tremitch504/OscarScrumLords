@@ -9,14 +9,11 @@ const API_KEY = process.env.GOOGLE_CALENDAR_API_KEY;
 
 const calendars = [
   {calendarId: process.env.CALENDAR_ID, color: '#B241D1'},
-  
+
 ];
 
-
-
-
 const tool = {
- 
+
   position: 'relative',
   display: 'inline-block',
   borderBottom: '1px dotted black' /* If you want dots under the hoverable text */
@@ -139,3 +136,8 @@ export default Events;
 // };
 
 // export default Events;
+
+
+
+
+
