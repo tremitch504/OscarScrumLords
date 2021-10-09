@@ -16,7 +16,7 @@ const PostList = ({userObj}) => {
   };
   console.log(userObj);
 
-  const postComment = (e, id) => {
+  const postComment = (e, id) => { 
     e.preventDefault();
     axios.post(`/routes/imagepost/comments/comments/${id}`, {
       text: comment,
