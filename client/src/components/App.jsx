@@ -7,14 +7,14 @@ import {
 } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Map from './Map/Map.jsx';
-import Calendars from './NavBar/Events/Calendars.jsx';
+import Calendar from './NavBar/Events/Calendar.jsx';
 import UserProfile from './NavBar/UserProfile.jsx';
 import Home from './NavBar/Home.jsx';
 import SignInButton from './NavBar/SignInButton.jsx';
 import SignOutButton from './NavBar/SignOutButton.jsx';
 import UserList from './UserList/UserList.jsx';
-import BikeRegistry from './NavBar/BikeRegistry.jsx';
 import VisitProfile from './UserList/VisitProfile.jsx';
+
 import axios from 'axios';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
@@ -128,7 +128,7 @@ const App = () => {
             <li><Link to='/calendar' >Events</Link></li>
             <li><Link to='/userProfile'>My Profile</Link></li>
             <li><Link to='/userList'>User List</Link></li>
-            <li><Link to='/registry'>Bike Registry</Link></li>
+
             <li>{loggedIn ?
               `Hello ${userObj.givenName}` :
               'Please Sign in!'
@@ -149,11 +149,10 @@ const App = () => {
             <Route path='/home'><Home />
             </Route>
             <Route path='/calendar'>
-              <Calendars
-                // events={events}
-                // setEvents={setEvents}
-                // createEvent={createEvent}
-              />
+              <Calendar
+                events={events}
+                setEvents={setEvents}
+                createEvent={createEvent}/>
             </Route>
             <Route path='/userProfile'>
               <UserProfile
@@ -178,12 +177,10 @@ const App = () => {
             <Route path='/userList'>
               <UserList />
             </Route>
-            <Route path='/registry'>
-              <BikeRegistry />
-            </Route>
             <Route path='/visitProfile/:id'>
               <VisitProfile />
             </Route>
+         
           </Switch>
         </main>
       </Router>
