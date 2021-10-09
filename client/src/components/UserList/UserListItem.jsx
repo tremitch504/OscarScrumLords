@@ -23,10 +23,11 @@ const UserListItem = ({user, getFollowing}) => {
   return (
     <ListGroupItem className="listItem">
       <span>{user.fullName}
-        <Button className='fButton' onClick={follow}>follow</Button>
         <Link to={`/visitProfile/${user.id}`}>
           <Button className='fButton'>visit profile</Button>
         </Link> 
+        <Button className='fButton' onClick={follow}>follow</Button>
+        
         
       </span>
       
