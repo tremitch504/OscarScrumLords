@@ -10,6 +10,8 @@ const {Profile} = require('./routes/profile');
 const {UserList} = require('./routes/userlist/userlist');
 const {Post} = require('./routes/imagepost/posts');
 const { Comment } = require('./routes/imagepost/comments');
+const {CalendarId} = require('./routes/calendar/calendarId');
+
 const {
   getLandmarks,
   postLandmarks,
@@ -55,6 +57,8 @@ app.use('/routes/profile', Profile);
 app.use('/routes/userlist/userlist', UserList);
 app.use('/routes/imagepost/posts', Post);
 app.use('/routes/imagepost/comments', Comment);
+app.use('/routes/calendar/calendarId', CalendarId);
+
 app.get('/google', passport.authenticate('google', {scope: ['profile', 'email']}));
 
 app.get('/google/callback', passport.authenticate('google', {failureRedirect: '/login'}),
