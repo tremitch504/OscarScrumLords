@@ -43,6 +43,7 @@ passport.use(new GoogleStrategy({
         email: email,
         familyName: family_name,
         givenName: given_name,
+        picture: picture,
         googleId: sub
 
         
