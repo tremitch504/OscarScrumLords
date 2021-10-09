@@ -1,3 +1,48 @@
+
+import React from 'react';
+import axios from 'axios';
+import Calendar from '@ericz1803/react-google-calendar';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+const API_KEY = process.env.GOOGLE_CALENDAR_API_KEY;
+
+const calendars = [
+  {calendarId: process.env.CALENDAR_ID, color: '#B241D1'},
+
+];
+
+const tool = {
+
+  position: 'relative',
+  display: 'inline-block',
+  borderBottom: '1px dotted black' /* If you want dots under the hoverable text */
+};
+
+
+// --> in case persmissions are different for deployment
+axios.get('/routes/calendar/calendarId')
+  .then(data => {
+    console.log(data.data);
+    const {CALENDAR_ID} = data.data.parsed;
+  })
+  .catch(err => {
+    console.error(err);
+  });
+
+class Events extends React.Component {
+  render() {
+    return (
+      <div>
+        <Calendar apiKey={API_KEY} calendars={calendars} styles={tool}/>
+      </div>
+    );
+  }
+}
+
+export default Events;
+
 // import React, { useState } from 'react';
 // import PropTypes from 'prop-types';
 // import Calendar from 'react-calendar';
@@ -93,77 +138,7 @@
 
 // export default Events;
 
-import React from 'react';
-import Calendar from '@ericz1803/react-google-calendar';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-
-const API_KEY = 'AIzaSyCWcxhE-Iu2k8OEyo5oJpdCdjBjfjJ8SB0';
-const calendars = [
-  {calendarId: 'qh60f8hs6tp1u65c517ldutc98@group.calendar.google.com', color: '#B241D1'},
-  
-];
-
-
-const tool = {
- 
-  position: 'relative',
-  display: 'inline-block',
-  borderBottom: '1px dotted black' /* If you want dots under the hoverable text */
-  
-  
-  
-  // .tooltip .tooltiptext {
-  //   visibility: hidden;
-  //   width: 120px;
-  //   background-color: #555;
-  //   color: #fff;
-  //   text-align: center;
-  //   padding: 5px 0;
-  //   border-radius: 6px;
-  //   position: absolute;
-  //   z-index: 1;
-  //   bottom: 125%;
-  //   left: 50%;
-  //   margin-left: -60px;
-  
-  //   /* Fade in tooltip */
-  //   opacity: 0;
-  //   transition: opacity 0.3s;
-  // }
-  
-  // /* Tooltip arrow */
-  // .tooltip .tooltiptext::after {
-  //   content: "";
-  //   position: absolute;
-  //   top: 100%;
-  //   left: 50%;
-  //   margin-left: -5px;
-  //   border-width: 5px;
-  //   border-style: solid;
-  //   border-color: #555 transparent transparent transparent;
-  // }
-  
-  // /* Show the tooltip text when you mouse over the tooltip container */
-  // .tooltip:hover .tooltiptext {
-  //   visibility: visible;
-  //   opacity: 1;
-  // };
-
-};
 
 
 
-class Events extends React.Component {
-  render() {
-    return (
-      <div>
-        <Calendar apiKey={API_KEY} calendars={calendars} styles={tool}/>
-      </div>
-    );
-  }
-}
-
-export default Events;
 
