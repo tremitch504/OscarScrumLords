@@ -4,7 +4,10 @@ import axios from 'axios';
 import MessagePreview from './MessagePreview.jsx';
 import MessageView from './MessageView.jsx';
 import SentMessagePreview from './SentMessagePreview.jsx';
-import { ListGroup } from 'react-bootstrap';
+import { ListGroup, Card } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 
 
 
@@ -15,6 +18,8 @@ const InboxStyles = styled.div`
   .wrapper {
     display: flex;
     flex-direction: row;
+    justify-content: flex-start;
+    align-content: center;
   }
   .selected {
     background-color: #ffd1dc;
@@ -25,7 +30,18 @@ const InboxStyles = styled.div`
       background-color: lavender; 
     }
   }
-
+  .messagePreviewsContainer {
+    margin-right: 30px;
+    margin-left: 0px;
+  }
+  .messageView {
+    margin-left: 0px;
+    margin-top: 30px;
+  }
+  .messageViewWrapper :{
+    margin-top: 30px;
+    flex: 1;
+  }
 
 `;
 
@@ -82,11 +98,13 @@ const Inbox = () => {
   return (
     <InboxStyles>
       <div className='wrapper'>
-        <ListGroup>
+  
+        <ListGroup className='messagePreviewsContainer'>
           {messagePreviews}
         </ListGroup>
+    
         <div className='messageViewWrapper'>
-          <MessageView currentMessage={currentMessage}/>
+          <MessageView className='messageView' currentMessage={currentMessage}/>
         </div>
       </div>
     </InboxStyles>

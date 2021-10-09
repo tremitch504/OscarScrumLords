@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {Link, useHistory} from 'react-router-dom';
 import axios from 'axios';
+import { ListGroupItem } from 'react-bootstrap';
 
 //component to display an individual user in the userlist.  
 //follow button follows a user
 //visit user has on click event handler to vist a user by id which triggers a resetting of state in parent component UserList
-const UserListItem = ({user, visitUser, getFollowing}) => {
+const UserListItem = ({user, getFollowing}) => {
 
   const follow = async () => {
 
@@ -26,7 +27,7 @@ const UserListItem = ({user, visitUser, getFollowing}) => {
   };
 
   return (
-    <div>
+    <ListGroupItem>
       <span>{user.fullName}
         <button onClick={follow}>follow</button>
         <Link to={`/visitProfile/${user.id}`}>
@@ -35,7 +36,7 @@ const UserListItem = ({user, visitUser, getFollowing}) => {
         
       </span>
       
-    </div>
+    </ListGroupItem>
   );
 };
 

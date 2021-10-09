@@ -3,6 +3,7 @@ import axios from 'axios';
 import UserListItem from './UserListItem.jsx';
 import VisitProfile from './VisitProfile.jsx';
 import styled from 'styled-components';
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
 
 
 import {
@@ -58,6 +59,7 @@ const UserList = (props) => {
     try {
       const {data} = await axios.get('/routes/userlist/userlist/allUsers');
       setUserList(data);
+      
     } catch (err) {
       console.log(err);
     }
@@ -75,18 +77,18 @@ const UserList = (props) => {
   const followingList = () => {
     console.log('followinglist fn');
     return following.map((person, i) => (
-      <div 
+      <ListGroup.Item 
         key={i}>{person.followingTarget && person.followingTarget.fullName} 
         <button
           onClick={()=>{ /*in here do axios delete req to unfollow on b/e and pass down targe t id as param */ }}>unfollow</button>
-      </div>
+      </ListGroup.Item>
     ));
   };
 
   //create components for followers
   const followersList = () => {
     console.log('followers list fn', following.length);
-    return followers.map((person, i) => <div key={i}>{person.followerAdder && person.followerAdder.fullName}</div>);
+    return followers.map((person, i) => <ListGroup.Item key={i}>{person.followerAdder && person.followerAdder.fullName}</ListGroup.Item>);
   };
 
   const followPerson = (person) => { //this is a fn to add a person following to the state. to be used in conjunction with the post fn in the child component
@@ -102,12 +104,21 @@ const UserList = (props) => {
   return (
     <UserListStyles>
       <div>user list
-        {userListItemCreator()}
+        <ListGroup>
+          {userListItemCreator()}
+        </ListGroup>
+        
         <div><h3>Following</h3>
-          {followingList()}
+          <ListGroup >
+            {followingList()}
+          </ListGroup>
+         
         </div>
         <div><h3>followers</h3>
-          {followersList()}
+          <ListGroup>
+            {followersList()}
+          </ListGroup>
+          
         </div>
         <button onClick={getFollowing}>getFollowing</button>
     
