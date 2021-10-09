@@ -8,7 +8,11 @@ const auth = require('./auth');
 const {Router} = require('./routes/routes');
 const {Profile} = require('./routes/profile');
 const {UserList} = require('./routes/userlist/userlist');
+const {Messages} = require('./routes/messages');
+
+
 const {CalendarId} = require('./routes/calendar/calendarId');
+
 
 const {
   getLandmarks,
@@ -53,6 +57,7 @@ app.use(passport.session());
 app.use('/routes/routes', Router);
 app.use('/routes/profile', Profile);
 app.use('/routes/userlist/userlist', UserList);
+app.use('/routes/messages', Messages);
 app.use('/routes/calendar/calendarId', CalendarId);
 
 app.get('/google', passport.authenticate('google', {scope: ['profile', 'email']}));

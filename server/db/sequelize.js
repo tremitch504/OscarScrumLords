@@ -105,10 +105,43 @@ const Rsvps = db.define('rsvps', {
   fullName: {
     type: Sequelize.STRING
   },
+});
 
+const Message = db.define('messages', {
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  subject: {
+    type: Sequelize.STRING,
+    defaultValue: ''
+  }, 
+  text: {
+    type: Sequelize.STRING
+  },
+  userFromId: {
+    type: Sequelize.INTEGER,
+    references: {
+      model: Users,
+      key: 'id'
+    }
+  },
+  userToId: {
+    type: Sequelize.INTEGER,
+    references: {
+      model: Users,
+      key: 'id'
+    }
+  }
 
 
 });
+Message.belongsTo(Users, {foreignKey: 'userFromId', as: 'receivedFrom'});
+Message.belongsTo(Users, {foreignKey: 'userToId', as: 'sentTo'});
+
+
+
 
 const Following = db.define('following', {
   id: {
@@ -116,14 +149,24 @@ const Following = db.define('following', {
     primaryKey: true,
     autoIncrement: true
   },
-  userId: { //user who is making the add
-    type: Sequelize.INTEGER //foreign key for User.id
+  userAdding: { //user who is making the add
+    type: Sequelize.INTEGER, //foreign key for User.id
+    references: {
+      model: Users,
+      key: 'id'
+    }
   },
-  targetId: { //user who is being followed
-    type: Sequelize.INTEGER //foreign key for User.id
+  userTarget: { //user who is being followed
+    type: Sequelize.INTEGER, //foreign key for User.id
+    references: {
+      model: Users,
+      key: 'id'
+    }
   } 
-}, {timestamps: false});
+});
 
+Following.belongsTo(Users, {foreignKey: 'userAdding', as: 'followerAdder'});
+Following.belongsTo(Users, {foreignKey: 'userTarget', as: 'followingTarget'});
 
 
 /**
@@ -133,6 +176,7 @@ const Following = db.define('following', {
 Users.hasMany(Rsvps);
 Events.hasMany(Rsvps); 
 Following.belongsTo(Users);
+
 //Users.belongsToMany(Users, {as: 'Children', through: 'Following'})
 
 
@@ -168,16 +212,20 @@ Rsvps.sync()
     console.error('Unable to connect to the database:', err);
   });
 
-// Following.sync()
-// .then(() => {
-//   console.log('Connection has been established successfully.');
-// })
-// .catch((err) => {
-//   console.error('Unable to connect to the database:', err);
-// });
+Message.sync() 
+  .then(() => console.log('messages synced'))
+  .catch((err) => console.log(err));
+
+Following.sync()
+  .then(() => {
+    console.log('Connection has been established successfully.following');
+  })
+  .catch((err) => {
+    console.error('Unable to connect to the database:', err);
+  });
 
 
-module.exports = {Users, Landmarks, Events, Rsvps, Following, db};
+module.exports = {Users, Landmarks, Message, Events, Rsvps, Following, db};
 
 /** right now these match the db schema, so sequelized can be used in the fture but the original functionscan use the helpers queries in raw mysql syntax.  However, if errors happen--- Sequelize.STRING type is varchar(255) -- the varchar(40) should be updated in the schema and i do not know yet if the dats will be compatible.
  * 

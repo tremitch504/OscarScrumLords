@@ -11,3 +11,4 @@ client/dist
 apikey.js
 package-lock.json
 server/db/sql.js 
+notes.txt
