@@ -19,16 +19,15 @@ const tool = {
   borderBottom: '1px dotted black' /* If you want dots under the hoverable text */
 };
 
-
 // --> in case persmissions are different for deployment
-axios.get('/routes/calendar/calendarId')
-  .then(data => {
-    console.log(data.data);
-    const {CALENDAR_ID} = data.data.parsed;
-  })
-  .catch(err => {
-    console.error(err);
-  });
+// axios.get('/routes/calendar/calendarId')
+//   .then(data => {
+//     console.log(data.data);
+//     const {CALENDAR_ID} = data.data.parsed;
+//   })
+//   .catch(err => {
+//     console.error(err);
+//   });
 
 class Events extends React.Component {
   render() {
@@ -136,11 +135,8 @@ export default Events;
 // };
 
 // export default Events;
-<<<<<<< HEAD
 
 
 
 
 
-=======
->>>>>>> d661ee2 (fixing merge issue still)
