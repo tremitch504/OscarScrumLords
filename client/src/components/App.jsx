@@ -151,16 +151,10 @@ const App = () => {
             </Route>
             <Route path='/calendar'>
               <Calendars
-<<<<<<< HEAD
-                events={events}
-                setEvents={setEvents}
-                createEvent={createEvent}/>
-=======
                 // events={events}
                 // setEvents={setEvents}
                 // createEvent={createEvent}
               />
->>>>>>> 57b556a (calendar that displays events)
             </Route>
             <Route path='/userProfile'>
               <UserProfile
