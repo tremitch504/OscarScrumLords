@@ -20,6 +20,7 @@ const InboxStyles = styled.div`
 
   }
   .previewItem {
+    width: 250px;
     :hover {
       background-color: lavender; 
     }

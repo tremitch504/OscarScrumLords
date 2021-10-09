@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components'; 
 import axios from 'axios';
 import {useParams} from 'react-router-dom';
+import moment from 'moment';
 
 
 const StyledPreview = styled.div`
@@ -13,14 +14,13 @@ const MessagePreview = ({messageObj, viewMessage}) => {
 
   useEffect(() => {
     setMessageDetails(messageObj);
-    console.log('messobj', messageObj, messageObj.receivedFrom);
   }, []);
   return (
     <StyledPreview>
       <div className='previewWrapper'>
         <div >Subject: {messageDetails.subject} </div>
         <div>From: {messageDetails.receivedFrom && messageDetails.receivedFrom.fullName} </div>
-        <div>When: {messageDetails.createdAt}</div>
+        <div>When: {moment(messageDetails.createdAt).fromNow()}</div>
       
       </div>
     </StyledPreview>

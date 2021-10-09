@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components'; 
 import axios from 'axios';
 import {useParams} from 'react-router-dom';
-import { InputGroup, FormControl, Button } from 'react-bootstrap';
+import { InputGroup, FormControl, Button, Form } from 'react-bootstrap';
 
 const SendMessageStyled = styled.div`
 
@@ -11,13 +11,21 @@ border: 1px;
   border-style: solid;
   border-radius: 15px;
   padding: 5px;
-  margin: auto;
+  margin-top: 50px;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
   background-color: white;
   font-family: 'Ubuntu', sans-serif; 
+
+  .subject {
+    width: 400px;
+  }
+  .message {
+    height: 200px;
+    width: 400px;
+  }
 
 `;
 
@@ -53,22 +61,27 @@ const SendMessage = () => {
 
   return (
     <SendMessageStyled>
-      <InputGroup className="mb-3">
+      <h3>send message to {recipient}</h3>
+      <InputGroup className="mb-3 subject" >
         <InputGroup.Text>Subject</InputGroup.Text>
         <FormControl
           aria-label="subject"
           aria-describedby="inputGroup-sizing-default"
+          onChange={subjectChange}
+          value={subject}
         />
       </InputGroup>
-      <h3>send message to {recipient}</h3>
-      subject
-      <input type='text' onChange={subjectChange} value={subject}></input>
-      message
-      <input 
-        type='text' 
-        onChange={messageChange}
-        value={message}
-      ></input>
+      <Form>
+        <Form.Group>
+          <Form.Control 
+            type="text" 
+            placeholder="enter message!"
+            onChange={messageChange}
+            className='message'
+          />
+
+        </Form.Group>
+      </Form>
       <Button className='fButton' onClick={sendMessage}>send</Button>
 
     </SendMessageStyled>

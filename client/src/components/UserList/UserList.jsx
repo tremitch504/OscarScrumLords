@@ -65,14 +65,12 @@ const UserList = (props) => {
 
   const getFollowing = async () => { //function to retrieve who is following
     const {data} = await axios.get('/routes/userlist/userlist/following');
-    console.log('getFollowing data', data);
     setFollowing(data);
     
   };
 
   const getFollowers = async () => { //function to retrieve who is following
     const {data} = await axios.get('/routes/userlist/userlist/followers');
-    console.log('followers data', data);
     setFollowers(data);
     
   };
@@ -98,7 +96,6 @@ const UserList = (props) => {
 
   //create components for following
   const followingList = () => {
-    console.log('followinglist fn');
     return following.map((person, i) => (
       <ListGroup.Item className="listItem"
         key={i}>{person.followingTarget && person.followingTarget.fullName} 
@@ -114,12 +111,10 @@ const UserList = (props) => {
 
   //create components for followers
   const followersList = () => {
-    console.log('followers list fn', following.length);
     return followers.map((person, i) => <ListGroup.Item key={i}>{person.followerAdder && person.followerAdder.fullName}</ListGroup.Item>);
   };
 
   const followPerson = (person) => { //this is a fn to add a person following to the state. to be used in conjunction with the post fn in the child component
-    console.log('follow person fn', person);
     setFollowing(following.concat(person));
 
   };
@@ -152,15 +147,8 @@ const UserList = (props) => {
             <ListGroup>
               {followersList()}
             </ListGroup>
-          
           </Card>
-
         </div>
-
-       
-        
-       
-     
       </div>
     </UserListStyles>
   );

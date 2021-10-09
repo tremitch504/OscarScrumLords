@@ -32,17 +32,7 @@ const App = () => {
 
 
   const createUser = (newUser) => {
-    console.log('createUser fn in app.jsx.  this shouldnt b happening');
-    // const {name: fullName, ...rest} = newUser;
-    // const postObj = {
-    //   ...rest,
-    //   fullName,
-    // };
-    // setUserObj(newUser);
-    // axios.post('/users', postObj)
-    //   .then(() => {
-    //     getEvents(newUser);
-    //   });
+  
   };
 
   /**this function returns data, next need to use it to update the state of the app */
