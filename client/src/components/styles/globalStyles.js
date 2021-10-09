@@ -53,6 +53,16 @@ main{
   }
 }
 
+.fButton {
+    background-color: #ffd1dc;
+    border: 0px solid black;
+    margin-left: 5px;
+    margin-right: 5px;
+      :hover{
+        background-color: lavender;
+      }
+  }
+
 .map-nav {
   position: relative;
   float: left;

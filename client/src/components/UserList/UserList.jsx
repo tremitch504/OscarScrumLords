@@ -3,7 +3,7 @@ import axios from 'axios';
 import UserListItem from './UserListItem.jsx';
 import VisitProfile from './VisitProfile.jsx';
 import styled from 'styled-components';
-import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
+import { ListGroup, ListGroupItem, Button, Card } from 'react-bootstrap';
 
 
 import {
@@ -28,6 +28,15 @@ const UserListStyles = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+  }
+  .card {
+    width: 500px;
+    margin: 30px;
+    background-color: lavender;
+  }
+  .userListWrapper {
+    display: flex;
+    flex-direction: row;
   }
 `;
 
@@ -121,26 +130,36 @@ const UserList = (props) => {
 
   return (
     <UserListStyles>
-      <div>user list
-        <ListGroup>
-          {userListItemCreator()}
-        </ListGroup>
-        
-        <div><h3>Following</h3>
-          <ListGroup >
-            {followingList()}
-          </ListGroup>
-         
+      <div className='userListWrapper'>
+        <div className='allUsersWrapper'>
+          <Card className='card'>
+            <h3>Who is Biking?</h3>
+            <ListGroup>
+              {userListItemCreator()}
+            </ListGroup>
+          </Card>
+
         </div>
-        <div><h3>followers</h3>
-          <ListGroup>
-            {followersList()}
-          </ListGroup>
+        <div className='followWrapper'>
+          <Card className='card'>
+            <h3>Following</h3>
+            <ListGroup >
+              {followingList()}
+            </ListGroup>
+          </Card>
+
+          <Card className='card'><h3>followers</h3>
+            <ListGroup>
+              {followersList()}
+            </ListGroup>
           
+          </Card>
+
         </div>
-        <button onClick={getFollowing}>getFollowing</button>
-    
-        <button onClick={getFollowers}>getFollowers</button>
+
+       
+        
+       
      
       </div>
     </UserListStyles>

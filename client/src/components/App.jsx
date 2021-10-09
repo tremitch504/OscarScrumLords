@@ -17,10 +17,11 @@ import VisitProfile from './UserList/VisitProfile.jsx';
 import SendMessage from './Messages/SendMessage.jsx';
 import Inbox from './Messages/Inbox.jsx';
 
+
 import axios from 'axios';
 
-// import styled from 'styled-components';
-// const AppStyles = styled.div``;
+
+
 
 const App = () => {
 
@@ -193,7 +194,7 @@ const App = () => {
           </Switch>
         </main>
       </Router>
-    </ div>
+    </div>
   );
 };
 
