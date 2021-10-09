@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React, {useState, useEffect} from 'react';
+import {Link} from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
 //userObj: the current user that is logged in.
 const ImageUplaod = ({ userObj }) => {
@@ -57,21 +59,49 @@ const ImageUplaod = ({ userObj }) => {
   useEffect(() => {
     uploudCloud();
   }, []);
- 
+  //***STYLES***
+  const uploadStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '60%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: '150px',
+    marginBottom: '10px',
+  };
+  const header = {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '60%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: '30px',
+    marginBottom: '10px',
+    padding: '20px',
+    fontSize: '30px'
+  };
   //INPUT file: onChange will update the state of the imageSelected to be the image that is coming from the input.
   //INPUT text:
   //BUTTON: This button will invoke activate the uploadCloud function to send a post request to cloudinary with the formData, file information.
   return (
-    <div className="upload-section">
-      HELLO!
-      <input type="file" onChange={(e) => {
+      
+    <div className="upload-section" style={uploadStyle}>
+      <h6 className='header' style={header}><strong>Post a Picture!</strong></h6>
+      
+      <input type="text" placeholder='Enter a caption...' value={imgCaption} onChange={event => setCaption(event.target.value)} /> 
+     
+      <Button> <input type="file" style={{backgroundColor: 'transparent', color: 'white'}} onChange={(e) => {
         setImageSelected(e.target.files[0]);
       }}/>
-      <button onClick={() => uploudCloud()}>Upload Image</button>
-      <div className='caption-section'>
-        <input type="text" placeholder='Enter a caption...' value={imgCaption} onChange={event => setCaption(event.target.value)} /> 
-      </div>
+      </Button>
+      <Link to='/postList'> 
+        <Button type='submit' size='lg' style={{marginTop: '30px'}} onClick={() => uploudCloud()}> Upload Image </Button>
+        
+      </Link>
+
+      
     </div>
+  
   );
 };
 

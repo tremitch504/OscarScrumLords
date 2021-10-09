@@ -185,7 +185,7 @@ const App = () => {
               <ImageUplaod userObj={userObj}/>
             </Route>
             <Route path='/postList'>
-              <PostList />
+              <PostList userObj={userObj}/>
             </Route>
             <Route path='/visitProfile/:id'>
               <VisitProfile />
