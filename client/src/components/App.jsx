@@ -14,6 +14,7 @@ import SignInButton from './NavBar/SignInButton.jsx';
 import SignOutButton from './NavBar/SignOutButton.jsx';
 import UserList from './UserList/UserList.jsx';
 import BikeRegistry from './NavBar/BikeRegistry.jsx';
+import VisitProfile from './UserList/VisitProfile.jsx';
 import axios from 'axios';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
@@ -142,7 +143,8 @@ const App = () => {
         </nav>
         <main>
           <Switch>
-            <Route exact path='/'><Home />
+            <Route exact path='/'>
+              <Home />
             </Route>
             <Route path='/home'><Home />
             </Route>
@@ -179,6 +181,9 @@ const App = () => {
             <Route path='/registry'>
               <BikeRegistry />
             </Route>
+            <Route path='/visitProfile/:id'>
+              <VisitProfile />
+            </Route>
           </Switch>
         </main>
       </Router>
@@ -187,3 +192,5 @@ const App = () => {
 };
 
 export default App;
+
+//{nextUser ? <Redirect to='/visitProfile' /> : <UserList />}
