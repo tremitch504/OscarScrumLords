@@ -95,7 +95,7 @@ UserList.delete('/unfollow/:targetId', async (req, res) => {
   try {
     const {id} = req.user;
     const {targetId} = req.params;
-    await Users.destroy({
+    await Following.destroy({
       where: {
         userAdding: id,
         userTarget: parseInt(targetId)

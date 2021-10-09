@@ -3,7 +3,7 @@ import axios from 'axios';
 import UserListItem from './UserListItem.jsx';
 import VisitProfile from './VisitProfile.jsx';
 import styled from 'styled-components';
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 
 
 import {
@@ -14,7 +14,21 @@ import {
 } from 'react-router-dom';
 
 const UserListStyles = styled.div`
-
+  .fButton {
+    background-color: #ffd1dc;
+    border: 0px solid black;
+    margin-left: 5px;
+    margin-right: 5px;
+      :hover{
+        background-color: lavender;
+      }
+  }
+  .listItem {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
 `;
 
 
@@ -77,10 +91,14 @@ const UserList = (props) => {
   const followingList = () => {
     console.log('followinglist fn');
     return following.map((person, i) => (
-      <ListGroup.Item 
+      <ListGroup.Item className="listItem"
         key={i}>{person.followingTarget && person.followingTarget.fullName} 
-        <button
-          onClick={()=>{ /*in here do axios delete req to unfollow on b/e and pass down targe t id as param */ }}>unfollow</button>
+        <Button
+          className='fButton'
+          onClick={async()=>{ 
+            await axios.delete(`/routes/userList/userList/unfollow/${person.userTarget}`);
+            getFollowing();
+          }}>unfollow</Button>
       </ListGroup.Item>
     ));
   };

@@ -8,12 +8,6 @@ import { ListGroup, Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-
-
-
-
-
-
 const InboxStyles = styled.div`
   .wrapper {
     display: flex;
