@@ -11,18 +11,19 @@ const PostList = ({userObj}) => {
     axios.get('/routes/imagepost/posts/imagePost')
       .then((results) => {
         setPosts(results.data);
-        console.log('POSTS:', results.data);
+        // console.log('POSTS:', results.data);
       });
   };
-  // console.log(posts);
+  console.log(userObj);
 
-  const postComment = (id) => {
+  const postComment = (e, id) => {
+    e.preventDefault();
     axios.post(`/routes/imagepost/comments/comments/${id}`, {
       text: comment,
       username: userObj.givenName,
     })
       .then(() => {
-        console.log('Looks great!');
+        setComment('');
       })
       .catch(err => {
         console.log(err);
@@ -32,7 +33,7 @@ const PostList = ({userObj}) => {
   const getAllComments = () => {
     axios.get('/routes/imagepost/comments/comments')
       .then(results => {
-        console.log('POST COMMENTS', results);
+        // console.log('POST COMMENTS', results);
         setComments(results.data);
       });
   };
@@ -132,60 +133,76 @@ const PostList = ({userObj}) => {
     color: '#9C9496',
   };
 
-  return (
-    <div style={{backgroundColor: '#007bff', height: '100%', margin: '0'}}>
-      <div className="post-list-section" style={headerStyle}>
-        <div className='post-list'>
-          {getAllPost()}
-          {getAllComments()}
-          {
-            posts.map(post => {
-              return (
-                <div className='header-section' key={post.id}>
-                  <div>
+  const mustSignin = {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '60%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: '30px',
+    marginBottom: '10px',
+    padding: '20px',
+    fontSize: '30px'
+  };
+
+  if (userObj.id) {
+    return (
+      <div style={{backgroundColor: '#007bff', height: '100%', margin: '0'}}>
+        <div className="post-list-section" style={headerStyle}>
+          <div className='post-list'>
+            {/* {getAllComments()}
+          {getAllPost()} */}
+            {
+              posts.map(post => {
+                return (
+                  <div className='header-section' key={post.id}>
+                    <div>
                   
-                    <h3 style={profileStyle}><img className='avatar-sectio' src='https://lh3.google.com/u/0/ogw/ADea4I5y0hQjW97Eqo99APrXlIJAeoiF-LCITVsc5h2m=s83-c-mo' style={{marginRight: '10px', borderRadius: '40px'}}/> {post.user.givenName} </h3>
-                  </div>
-                  <div>
-                    <img src={post.urlImage} style={imgStyle} />
-                  </div>
-                  <h4 className='caption-section' style={textStyle}><strong>{post.user.givenName}</strong> {post.caption}</h4>
-                  <br style={lineBreak}/>
-                  {/* <button className='like-button' style={likeButton}>
+                      <h3 style={profileStyle}><img className='avatar-sectio' src='https://lh3.google.com/u/0/ogw/ADea4I5y0hQjW97Eqo99APrXlIJAeoiF-LCITVsc5h2m=s83-c-mo' style={{marginRight: '10px', borderRadius: '40px'}}/> {post.user.givenName} </h3>
+                    </div>
+                    <div>
+                      <img src={post.urlImage} style={imgStyle} />
+                    </div>
+                    <h4 className='caption-section' style={textStyle}><strong>{post.user.givenName}</strong> {post.caption}</h4>
+                    <br style={lineBreak}/>
+                    {/* <button className='like-button' style={likeButton}>
                   <span className='heart'> </span>
                   <span className="like" style={like}>Like </span>
                   <span className="number" style={number}>12 </span>
                 </button> */}
-                  <div className='comments' style={commentTextStyle}>
-                    {
-                      comments.map(comment => {
-                        if (comment.postId === post.id) {
-                          return (
-                            <p key={comment.id}>
-                              <strong>{comment.username}</strong> {comment.text}
-                            </p>
-                          );
-                        }
-                      })
-                    }
-                  </div>
+                    <div className='comments' style={commentTextStyle}>
+                      {
+                        comments.map(comment => {
+                          if (comment.postId === post.id) {
+                            return (
+                              <p key={comment.id}>
+                                <strong>{comment.username}</strong> {comment.text}
+                              </p>
+                            );
+                          }
+                        })
+                      }
+                    </div>
 
-                  <form className='comment-section' style={commentStyle}>
+                    <form className='comment-section' style={commentStyle}>
 
-                    <input className="comment-input" type="text" placeholder="Add a comment..." style={commentInput} value={comment} onChange={(event) => setComment(event.target.value)}/>
+                      <input className="comment-input" type="text" placeholder="Add a comment..." style={commentInput} value={comment} onChange={(event) => setComment(event.target.value)}/>
                   
-                    <button className="comment-button" disabled={!comment} type='submit' style={commentButton} onClick={ () => postComment(post.id)}> 
+                      <button className="comment-button" disabled={!comment} type='submit' style={commentButton} onClick={ (e) => postComment(e, post.id)}> 
                     Post
-                    </button>
-                  </form>
-                </div>
-              );
-            })
-          }
+                      </button>
+                    </form>
+                  </div>
+                );
+              })
+            }
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (<h6 className='header' style={mustSignin}><strong>Welcome, Please Sign In!</strong></h6>);
+  }
 
 };
 

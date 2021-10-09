@@ -80,29 +80,45 @@ const ImageUplaod = ({ userObj }) => {
     padding: '20px',
     fontSize: '30px'
   };
+  const mustSignin = {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '60%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: '30px',
+    marginBottom: '10px',
+    padding: '20px',
+    fontSize: '30px'
+  };
   //INPUT file: onChange will update the state of the imageSelected to be the image that is coming from the input.
   //INPUT text:
   //BUTTON: This button will invoke activate the uploadCloud function to send a post request to cloudinary with the formData, file information.
-  return (
+
+  if (userObj.id) {
+    return (
       
-    <div className="upload-section" style={uploadStyle}>
-      <h6 className='header' style={header}><strong>Post a Picture!</strong></h6>
+      <div className="upload-section" style={uploadStyle}>
+        <h6 className='header' style={header}><strong>Post a Picture!</strong></h6>
       
-      <input type="text" placeholder='Enter a caption...' value={imgCaption} onChange={event => setCaption(event.target.value)} /> 
+        <input type="text" placeholder='Enter a caption...' value={imgCaption} onChange={event => setCaption(event.target.value)} /> 
      
-      <Button> <input type="file" style={{backgroundColor: 'transparent', color: 'white'}} onChange={(e) => {
-        setImageSelected(e.target.files[0]);
-      }}/>
-      </Button>
-      <Link to='/postList'> 
-        <Button type='submit' size='lg' style={{marginTop: '30px'}} onClick={() => uploudCloud()}> Upload Image </Button>
+        <Button> <input type="file" style={{backgroundColor: 'transparent', color: 'white'}} onChange={(e) => {
+          setImageSelected(e.target.files[0]);
+        }}/>
+        </Button>
+        <Link to='/postList'> 
+          <Button type='submit' size='lg' style={{marginTop: '30px'}} onClick={() => uploudCloud()}> Upload Image </Button>
         
-      </Link>
+        </Link>
 
       
-    </div>
+      </div>
   
-  );
+    );
+  } else {
+    return (<h6 className='header' style={mustSignin}><strong>Before You Can Upload A Post, Please Sign In!</strong></h6>);
+  }
 };
 
 export default ImageUplaod;
