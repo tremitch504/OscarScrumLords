@@ -91,7 +91,7 @@ const PostList = ({userObj}) => {
   };
   const commentButton = {
     flex: '0',
-    border: 'none',
+    border: 'none', 
     borderTop: '1px solid lightgray',
     color: '#007bff',
     // backgroundColor: 'transparent'
