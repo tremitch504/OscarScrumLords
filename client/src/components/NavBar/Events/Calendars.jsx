@@ -7,7 +7,10 @@ import styled from 'styled-components';
 
 const API_KEY = process.env.GOOGLE_CALENDAR_API_KEY;
 
-
+const calendars = [
+  {calendarId: process.env.CALENDAR_ID, color: '#B241D1'},
+  
+];
 
 
 
@@ -24,11 +27,7 @@ const tool = {
 axios.get('/routes/calendar/calendarId')
   .then(data => {
     console.log(data.data);
-    const { CALENDAR_ID } = data.data.parsed;
-    const calendars = [
-      {calendarId: CALENDAR_ID, color: '#B241D1'},
-      
-    ];
+    const {CALENDAR_ID} = data.data.parsed;
   })
   .catch(err => {
     console.error(err);
