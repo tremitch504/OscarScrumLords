@@ -13,16 +13,15 @@ import Home from './NavBar/Home.jsx';
 import SignInButton from './NavBar/SignInButton.jsx';
 import SignOutButton from './NavBar/SignOutButton.jsx';
 import UserList from './UserList/UserList.jsx';
+import ImageUplaod from './ImageUpload/ImageUpload.jsx';
+import PostList from './ImageUpload/PostList.jsx';
 import VisitProfile from './UserList/VisitProfile.jsx';
-import SendMessage from './Messages/SendMessage.jsx';
-import Inbox from './Messages/Inbox.jsx';
-
-
 import BikeRegistry from './NavBar/BikeRegistry.jsx';
 import axios from 'axios';
-
-
-
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
+// import styled from 'styled-components';
+// const AppStyles = styled.div``;
 
 const App = () => {
 
@@ -33,7 +32,17 @@ const App = () => {
 
 
   const createUser = (newUser) => {
-  
+    console.log('createUser fn in app.jsx.  this shouldnt b happening');
+    // const {name: fullName, ...rest} = newUser;
+    // const postObj = {
+    //   ...rest,
+    //   fullName,
+    // };
+    // setUserObj(newUser);
+    // axios.post('/users', postObj)
+    //   .then(() => {
+    //     getEvents(newUser);
+    //   });
   };
 
   /**this function returns data, next need to use it to update the state of the app */
@@ -121,7 +130,9 @@ const App = () => {
             <li><Link to='/calendar' >Events</Link></li>
             <li><Link to='/userProfile'>My Profile</Link></li>
             <li><Link to='/userList'>User List</Link></li>
-            <li><Link to='/inbox'>Inbox</Link></li>
+            <li><Link to='/userImage'>Upload Image</Link></li>
+            <li><Link to='/postList'>Post List</Link></li>
+
             <li><Link to='/registry'>Bike Registry</Link></li>
             <li>{loggedIn ?
               `Hello ${userObj.givenName}` :
@@ -172,14 +183,14 @@ const App = () => {
             <Route path='/userList'>
               <UserList />
             </Route>
+            <Route path='/userImage'>
+              <ImageUplaod userObj={userObj}/>
+            </Route>
+            <Route path='/postList'>
+              <PostList userObj={userObj}/>
+            </Route>
             <Route path='/visitProfile/:id'>
               <VisitProfile />
-            </Route>
-            <Route path='/sendMessage/:id'>
-              <SendMessage />
-            </Route>
-            <Route path='/inbox'>
-              <Inbox />
             </Route>
          
             <Route path='/registry'>
@@ -188,7 +199,7 @@ const App = () => {
           </Switch>
         </main>
       </Router>
-    </div>
+    </ div>
   );
 };
 

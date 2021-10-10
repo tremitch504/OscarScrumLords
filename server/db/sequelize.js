@@ -137,14 +137,33 @@ const Message = db.define('messages', {
       key: 'id'
     }
   }
-
-
 });
+
 Message.belongsTo(Users, {foreignKey: 'userFromId', as: 'receivedFrom'});
 Message.belongsTo(Users, {foreignKey: 'userToId', as: 'sentTo'});
 
 
 
+
+const Posts = db.define('posts', {
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  urlImage: {
+    type: Sequelize.STRING(255)
+  },
+  caption: {
+    type: Sequelize.STRING(255)
+  },
+  likes: {
+    type: Sequelize.INTEGER
+  },
+  public_id: {
+    type: Sequelize.STRING(255)
+  }
+});
 
 const Following = db.define('following', {
   id: {
@@ -168,6 +187,22 @@ const Following = db.define('following', {
   } 
 });
 
+const Comments = db.define('comments', {
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  text: {
+    type: Sequelize.STRING(255)
+  },
+  username: {
+    type: Sequelize.STRING(255)
+  },
+  picture: {
+    type: Sequelize.STRING
+  },
+});
 Following.belongsTo(Users, {foreignKey: 'userAdding', as: 'followerAdder'});
 Following.belongsTo(Users, {foreignKey: 'userTarget', as: 'followingTarget'});
 
@@ -175,6 +210,8 @@ Following.belongsTo(Users, {foreignKey: 'userTarget', as: 'followingTarget'});
 /**
  * the User.hasMany relationships here etc.  i dont think any functions are using the event/rsvp schema yet
  */
+Users.hasMany(Posts);
+Posts.belongsTo(Users);
 
 Users.hasMany(Rsvps);
 Events.hasMany(Rsvps); 
@@ -182,6 +219,9 @@ Following.belongsTo(Users);
 
 //Users.belongsToMany(Users, {as: 'Children', through: 'Following'})
 
+//Post can have multiple comments
+Posts.hasMany(Comments);
+Comments.belongsTo(Posts);
 
 Users.sync()
   .then(() => {
@@ -215,6 +255,21 @@ Rsvps.sync()
     console.error('Unable to connect to the database:', err);
   });
 
+Posts.sync()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch((err) => {
+    console.error('Unable to connect to the database:', err);
+  });
+
+Comments.sync()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  }).catch((err) => {
+    console.error('Unable to connect to the database:', err);
+  });
+ 
 Message.sync() 
   .then(() => console.log('messages synced'))
   .catch((err) => console.log(err));
@@ -227,8 +282,24 @@ Following.sync()
     console.error('Unable to connect to the database:', err);
   });
 
+exports.Users = Users;
+exports.Landmarks = Landmarks;
+exports.Events = Events;
+exports.Rsvps = Rsvps;
+exports.Posts = Posts;
+exports.Comments = Comments;
+exports.db = db;
+// Following.sync()
+// .then(() => {
+//   console.log('Connection has been established successfully.');
+// })
+// .catch((err) => {
+//   console.error('Unable to connect to the database:', err);
+// });
 
-module.exports = {Users, Landmarks, Message, Events, Rsvps, Following, db};
+
+module.exports = {Users, Landmarks, Message, Events, Rsvps, Posts, Following, Comments, db};
+
 
 /** right now these match the db schema, so sequelized can be used in the fture but the original functionscan use the helpers queries in raw mysql syntax.  However, if errors happen--- Sequelize.STRING type is varchar(255) -- the varchar(40) should be updated in the schema and i do not know yet if the dats will be compatible.
  * 

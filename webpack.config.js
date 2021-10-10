@@ -10,7 +10,7 @@ module.exports = {
   watch: true,
   devtool: 'inline-source-map',
   stats: {
-    excludeModules: /node_modules/,
+    excludeModules: /node_modules/, 
   },
   entry: {
     app: path.resolve(srcDir, 'index.jsx'),
