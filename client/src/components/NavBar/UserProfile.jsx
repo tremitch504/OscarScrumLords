@@ -25,6 +25,11 @@ const UserInfo = styled.div`
   background-color: white;
   font-family: 'Ubuntu', sans-serif; 
 
+  img {
+    border: 1px grey solid;
+    border-radius: 50%;
+  }
+
 `;
 
 const EventInfo = styled.div`
@@ -59,7 +64,7 @@ const UserProfile = ({ userObj, events, getUser }) => {
       <UserInfo>
         <h3>Name: {userObj.name}</h3>
         <p>email: {userObj.email}</p>
-        <button onClick={getUser} >test</button>
+        <img src={userObj.picture} />
       </UserInfo>
       {events.filter(event => event.attendees.includes(userObj.name))
         .map(event => (
