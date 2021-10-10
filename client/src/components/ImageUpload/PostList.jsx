@@ -11,7 +11,7 @@ const PostList = ({userObj}) => {
     axios.get('/routes/imagepost/posts/imagePost')
       .then((results) => {
         setPosts(results.data);
-        // console.log('POSTS:', results.data);
+        console.log('POSTS:', results.data);
       });
   };
   console.log(userObj);
@@ -21,6 +21,7 @@ const PostList = ({userObj}) => {
     axios.post(`/routes/imagepost/comments/comments/${id}`, {
       text: comment,
       username: userObj.givenName,
+      picture: userObj.picture
     })
       .then(() => {
         setComment('');
@@ -39,8 +40,8 @@ const PostList = ({userObj}) => {
   };
   //useEffect: This runs a piece of code based on a specific condidtion
   useEffect(() => {
-    getAllPost();
-    getAllComments();
+    // getAllPost();
+    // getAllComments();
   }, []);
 
 
@@ -142,25 +143,26 @@ const PostList = ({userObj}) => {
     marginTop: '30px',
     marginBottom: '10px',
     padding: '20px',
-    fontSize: '30px'
-  };
-
+    fontSize: '30px',
+    fontFamily: 'Montserrat sans-serif'
+  }; 
+ 
   if (userObj.id) {
     return (
       <div style={{backgroundColor: '#007bff', height: '100%', margin: '0'}}>
         <div className="post-list-section" style={headerStyle}>
           <div className='post-list'>
-            {/* {getAllComments()}
-          {getAllPost()} */}
+           
+            {getAllPost()}
             {
               posts.map(post => {
                 return (
                   <div className='header-section' key={post.id}>
                     <div>
                   
-                      <h3 style={profileStyle}><img className='avatar-sectio' src='https://lh3.google.com/u/0/ogw/ADea4I5y0hQjW97Eqo99APrXlIJAeoiF-LCITVsc5h2m=s83-c-mo' style={{marginRight: '10px', borderRadius: '40px'}}/> {post.user.givenName} </h3>
+                      <h3 style={profileStyle}><img className='avatar-sectio' src={post.user.picture} style={{marginRight: '10px', borderRadius: '50px'}}/> {post.user.givenName} </h3>
                     </div>
-                    <div>
+                    <div> 
                       <img src={post.urlImage} style={imgStyle} />
                     </div>
                     <h4 className='caption-section' style={textStyle}><strong>{post.user.givenName}</strong> {post.caption}</h4>
@@ -171,12 +173,13 @@ const PostList = ({userObj}) => {
                   <span className="number" style={number}>12 </span>
                 </button> */}
                     <div className='comments' style={commentTextStyle}>
+                      {getAllComments()}
                       {
                         comments.map(comment => {
                           if (comment.postId === post.id) {
                             return (
                               <p key={comment.id}>
-                                <strong>{comment.username}</strong> {comment.text}
+                                <img src={comment.picture} style={{marginRight: '10px', borderRadius: '50px', height: '30px'}}/> <strong>{comment.username}</strong> {comment.text}
                               </p>
                             );
                           }
@@ -201,7 +204,14 @@ const PostList = ({userObj}) => {
       </div>
     );
   } else {
-    return (<h6 className='header' style={mustSignin}><strong>Welcome, Please Sign In!</strong></h6>);
+    return (
+      <div>
+        <h6 className='header' style={mustSignin}><strong>Welcome, Please Sign In!</strong></h6>
+        {/* <link rel="preconnect" href="https://fonts.googleapis.com"> </link>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin> </link>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,600&display=swap" rel="stylesheet"></link> */}
+      </div> );
+      
   }
 
 };

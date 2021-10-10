@@ -89,7 +89,8 @@ const ImageUplaod = ({ userObj }) => {
     marginTop: '30px',
     marginBottom: '10px',
     padding: '20px',
-    fontSize: '30px'
+    fontSize: '80px',
+    fontFamily: 'Montserrat sans-serif'
   };
   //INPUT file: onChange will update the state of the imageSelected to be the image that is coming from the input.
   //INPUT text:

@@ -8,7 +8,8 @@
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
     "lint:fix": "eslint --fix . --ext .jsx --ext.js",
-    "lint": "eslint . --fix --ext .js,.jsx"
+    "lint": "eslint . --fix --ext .js,.jsx",
+    "db:seed": "mysql -u root < bike.sql"
   },
   "husky": {
     "hooks": {
@@ -49,6 +50,7 @@
     "express-session": "^1.17.2",
     "hoist-non-react-statics": "^3.3.2",
     "html-webpack-plugin": "^5.3.1",
+    "moment": "^2.29.1",
     "mysql2": "^2.3.0",
     "nodemon": "^2.0.7",
     "passport": "^0.5.0",

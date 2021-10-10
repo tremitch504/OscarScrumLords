@@ -23,6 +23,9 @@ const Users = db.define('users', {
   fullName: {
     type: Sequelize.STRING
   },
+  picture: {
+    type: Sequelize.STRING
+  },
   googleId: {
     type: Sequelize.STRING
   },
@@ -105,10 +108,42 @@ const Rsvps = db.define('rsvps', {
   fullName: {
     type: Sequelize.STRING
   },
-
-
-
 });
+
+const Message = db.define('messages', {
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  subject: {
+    type: Sequelize.STRING,
+    defaultValue: ''
+  }, 
+  text: {
+    type: Sequelize.STRING
+  },
+  userFromId: {
+    type: Sequelize.INTEGER,
+    references: {
+      model: Users,
+      key: 'id'
+    }
+  },
+  userToId: {
+    type: Sequelize.INTEGER,
+    references: {
+      model: Users,
+      key: 'id'
+    }
+  }
+});
+
+Message.belongsTo(Users, {foreignKey: 'userFromId', as: 'receivedFrom'});
+Message.belongsTo(Users, {foreignKey: 'userToId', as: 'sentTo'});
+
+
+
 
 const Posts = db.define('posts', {
   id: {
@@ -129,19 +164,28 @@ const Posts = db.define('posts', {
     type: Sequelize.STRING(255)
   }
 });
+
 const Following = db.define('following', {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
-  userId: { //user who is making the add
-    type: Sequelize.INTEGER //foreign key for User.id
+  userAdding: { //user who is making the add
+    type: Sequelize.INTEGER, //foreign key for User.id
+    references: {
+      model: Users,
+      key: 'id'
+    }
   },
-  targetId: { //user who is being followed
-    type: Sequelize.INTEGER //foreign key for User.id
+  userTarget: { //user who is being followed
+    type: Sequelize.INTEGER, //foreign key for User.id
+    references: {
+      model: Users,
+      key: 'id'
+    }
   } 
-}, {timestamps: false});
+});
 
 const Comments = db.define('comments', {
   id: {
@@ -154,8 +198,14 @@ const Comments = db.define('comments', {
   },
   username: {
     type: Sequelize.STRING(255)
-  }
+  },
+  picture: {
+    type: Sequelize.STRING
+  },
 });
+Following.belongsTo(Users, {foreignKey: 'userAdding', as: 'followerAdder'});
+Following.belongsTo(Users, {foreignKey: 'userTarget', as: 'followingTarget'});
+
 
 /**
  * the User.hasMany relationships here etc.  i dont think any functions are using the event/rsvp schema yet
@@ -166,6 +216,7 @@ Posts.belongsTo(Users);
 Users.hasMany(Rsvps);
 Events.hasMany(Rsvps); 
 Following.belongsTo(Users);
+
 //Users.belongsToMany(Users, {as: 'Children', through: 'Following'})
 
 //Post can have multiple comments
@@ -215,6 +266,17 @@ Posts.sync()
 Comments.sync()
   .then(() => {
     console.log('Connection has been established successfully.');
+  }).catch((err) => {
+    console.error('Unable to connect to the database:', err);
+  });
+ 
+Message.sync() 
+  .then(() => console.log('messages synced'))
+  .catch((err) => console.log(err));
+
+Following.sync()
+  .then(() => {
+    console.log('Connection has been established successfully.following');
   })
   .catch((err) => {
     console.error('Unable to connect to the database:', err);
@@ -236,7 +298,8 @@ exports.db = db;
 // });
 
 
-module.exports = {Users, Landmarks, Events, Rsvps, Posts, Following, Comments, db};
+module.exports = {Users, Landmarks, Message, Events, Rsvps, Posts, Following, Comments, db};
+
 
 /** right now these match the db schema, so sequelized can be used in the fture but the original functionscan use the helpers queries in raw mysql syntax.  However, if errors happen--- Sequelize.STRING type is varchar(255) -- the varchar(40) should be updated in the schema and i do not know yet if the dats will be compatible.
  * 

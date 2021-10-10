@@ -10,7 +10,11 @@ const {Profile} = require('./routes/profile');
 const {UserList} = require('./routes/userlist/userlist');
 const {Post} = require('./routes/imagepost/posts');
 const { Comment } = require('./routes/imagepost/comments');
+const {Messages} = require('./routes/messages');
+
+
 const {CalendarId} = require('./routes/calendar/calendarId');
+
 
 const {
   getLandmarks,
@@ -57,6 +61,7 @@ app.use('/routes/profile', Profile);
 app.use('/routes/userlist/userlist', UserList);
 app.use('/routes/imagepost/posts', Post);
 app.use('/routes/imagepost/comments', Comment);
+app.use('/routes/messages', Messages);
 app.use('/routes/calendar/calendarId', CalendarId);
 
 app.get('/google', passport.authenticate('google', {scope: ['profile', 'email']}));
