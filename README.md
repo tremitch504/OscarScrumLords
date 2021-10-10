@@ -15,6 +15,10 @@ These specific commands also listed in  server/db/index.js:
   show databases
   use bike
   show tables
+
+  you also can just run npm run db:seed
+
+  in the front end, in ChatRoom.jsx, the socket.io defaults to local host.  for deployment, adjust the variable as needed.  
 # TECH WE USE
 **FRONTEND**
     axios - Promise based HTTP client for the browser and node.js
@@ -27,6 +31,7 @@ These specific commands also listed in  server/db/index.js:
     react-google-maps - react-google-maps provides a set of React components wrapping the underlying Google Maps JavaScript API v3 instances.
     styled-components - lets you write actual CSS in your JavaScript.
     use-places-autocomplete - This is a React hook for Google Maps Places Autocomplete, which helps you build a UI component with the feature of place autocomplete easily.
+    socket.io-client for real time communication from front end
 **BACKEND**
     express - Fast, unopinionated, minimalist web framework for node.
     mysql-server - MySQL is an open-source relational database management system
@@ -34,6 +39,7 @@ These specific commands also listed in  server/db/index.js:
     react-router-dom - React Router offers an incremental migration path, but @reach/router looks slightly more like the new API.
     webpack - webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser
     webpack-cli - webpack CLI provides a flexible set of commands for developers to increase speed when setting up a custom webpack project.
+    socket.io- an express library to handle real time communication
 # BUGS AND FIXES
 Not yet available as a mobile app.
 # FAQ
