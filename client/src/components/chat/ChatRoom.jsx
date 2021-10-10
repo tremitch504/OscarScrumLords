@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { Card, Button, DropdownButton, Dropdown} from 'react-bootstrap';
 
 const aws = false;
-const deployedDNS = '';
+const deployedDNS = 'ec2-18-117-135-53.us-east-2.compute.amazonaws.com';
 const host = aws === true
   ? deployedDNS
   : 'localhost';
