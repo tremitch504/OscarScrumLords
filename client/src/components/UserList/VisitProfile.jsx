@@ -20,6 +20,11 @@ const VisitProfileContainer = styled.div`
         background-color: lavender;
       }
   }
+  .profPic {
+    border: 2px grey solid;
+    border-radius: 50%;
+    margin: 20px; 
+  }
 
 `;
 
@@ -61,6 +66,7 @@ const VisitProfile = () => {
       <VisitProfileStyles>
         <h3>Name: {userObject.fullName}</h3>
         <p> {userObject.email} </p>
+        <img className='profPic' src={userObject.picture} />
         <span>
           <Button className='fButton' onClick={() => history.push(`/sendMessage/${userObject.id}`)}>send message</Button>
           <Button className='fButton'>follow</Button>
