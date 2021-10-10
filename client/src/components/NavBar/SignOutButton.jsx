@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+//parent is App.jsx
+
 import axios from 'axios';
 /******this all need to be redone */
 
