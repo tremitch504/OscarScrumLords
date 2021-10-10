@@ -3,6 +3,23 @@ import { Button, Card} from 'react-bootstrap';
 import styled from 'styled-components';
 
 const StyledChat = styled.div`
+
+  .currentTopic {
+    background-color: #ffd1dc;
+    border: 1px grey solid;
+    border-radius: 5px;
+    margin: 5px;
+    margin-bottom: 10px;
+    width: 300px;
+    padding: 5px;
+    
+  }
+
+  .messageInterface {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   .messages {
     background-color: white;
     border: 1px grey solid;
@@ -38,6 +55,13 @@ const StyledChat = styled.div`
     background-color: lavender;
     margin-right: 70px;
     align-self: flex-start;
+  }
+  .interaction {
+    margin: 15px;
+  }
+  .enterMsg {
+    width: 400px;
+    padding: 10px;
   }
 `;
 
@@ -79,23 +103,27 @@ const Chat = ({socket, username, room}) => {
     <StyledChat>
       <div>
         <div>
-          <p>CurrentTopic:{room} </p>
+          <Card className='currentTopic'>CurrentTopic: {room} </Card>
         </div>
-        <div className='messages'>
-          {allMessages.map((message, i) =>( <div 
-            key={i} 
-            className = 'msg'
-            id={message.username === username
-              ? 'user'
-              : 'others'}
-          >{message.message}
-          <p id='msgFootnote'>{message.username}</p>
-          </div>))}
+        <div className='messageInterface'>
+          <div className='messages'>
+            {allMessages.map((message, i) =>( <div 
+              key={i} 
+              className = 'msg'
+              id={message.username === username
+                ? 'user'
+                : 'others'}
+            >{message.message}
+              <p id='msgFootnote'>{message.username}</p>
+            </div>))}
+          </div>
+          <div className='interaction'>
+            <input type='text' className='enterMsg' placeholder='message text' onChange={e => setMessage(e.target.value)} value={message} />
+            <Button className='fButton' onClick={sendMessage} >send</Button>
+          </div>
+
         </div>
-        <div className='interaction'>
-          <input type='text' placeholder='message text' onChange={e => setMessage(e.target.value)} value={message} />
-          <Button className='fButton' onClick={sendMessage} >send</Button>
-        </div>
+        
       </div>
     </StyledChat>
   );

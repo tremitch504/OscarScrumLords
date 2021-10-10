@@ -5,7 +5,7 @@ const Profile = express.Router();
 
 Profile.get('/', async (req, res) => {
   try {
-    console.log('get profile', req.user);
+
     res.status(201).send(req.user);
     
   } catch (err) {
