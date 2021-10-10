@@ -15,13 +15,21 @@ import SignOutButton from './NavBar/SignOutButton.jsx';
 import UserList from './UserList/UserList.jsx';
 import ImageUplaod from './ImageUpload/ImageUpload.jsx';
 import PostList from './ImageUpload/PostList.jsx';
-import VisitProfile from './UserList/VisitProfile.jsx';
+
 import BikeRegistry from './NavBar/BikeRegistry.jsx';
+
+
+import VisitProfile from './UserList/VisitProfile.jsx';
+import SendMessage from './Messages/SendMessage.jsx';
+import Inbox from './Messages/Inbox.jsx';
+import ChatRoom from './chat/ChatRoom.jsx';
+
+
+
 import axios from 'axios';
-import 'core-js/stable';
-import 'regenerator-runtime/runtime';
-// import styled from 'styled-components';
-// const AppStyles = styled.div``;
+
+
+
 
 const App = () => {
 
@@ -32,17 +40,7 @@ const App = () => {
 
 
   const createUser = (newUser) => {
-    console.log('createUser fn in app.jsx.  this shouldnt b happening');
-    // const {name: fullName, ...rest} = newUser;
-    // const postObj = {
-    //   ...rest,
-    //   fullName,
-    // };
-    // setUserObj(newUser);
-    // axios.post('/users', postObj)
-    //   .then(() => {
-    //     getEvents(newUser);
-    //   });
+  
   };
 
   /**this function returns data, next need to use it to update the state of the app */
@@ -132,8 +130,11 @@ const App = () => {
             <li><Link to='/userList'>User List</Link></li>
             <li><Link to='/userImage'>Upload Image</Link></li>
             <li><Link to='/postList'>Post List</Link></li>
-
             <li><Link to='/registry'>Bike Registry</Link></li>
+            <li><Link to='/inbox'>Inbox</Link></li>
+            <li><Link to='/chatroom'>Chat</Link></li>
+
+
             <li>{loggedIn ?
               `Hello ${userObj.givenName}` :
               'Please Sign in!'
@@ -192,14 +193,26 @@ const App = () => {
             <Route path='/visitProfile/:id'>
               <VisitProfile />
             </Route>
+            <Route path='/sendMessage/:id'>
+              <SendMessage />
+            </Route>
+            <Route path='/inbox'>
+              <Inbox />
+            </Route>
          
             <Route path='/registry'>
               <BikeRegistry />
             </Route>
+
+            <Route path='/chatroom'>
+              <ChatRoom />
+            </Route>
+
+
           </Switch>
         </main>
       </Router>
-    </ div>
+    </div>
   );
 };
 
