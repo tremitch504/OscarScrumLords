@@ -10,11 +10,15 @@ const PostList = ({userObj}) => {
   const getAllPost = () => {
     axios.get('/routes/imagepost/posts/imagePost')
       .then((results) => {
-        setPosts(results.data);
+        const arr = [];
+        for (let i = results.data.length - 1; i >= 0; i--) {
+          arr.push(results.data[i]);
+        }
+        setPosts(arr);
         console.log('POSTS:', results.data);
       });
   };
-  console.log(userObj);
+  // console.log(userObj);
 
   const postComment = (e, id) => { 
     e.preventDefault();
