@@ -2,6 +2,8 @@
 Greenfield Project: Bike Around and Find Out
 # APP DESCRIPTION
 Bike Around and Find Out is a New Orleans based social media hub for biking enthusiasts. Through our app users are be able to interact with our dynamic map of New Orleans to log their favorite routes, post pictures from their travels, create and rsvp to events, and make note of any hazards of the road and/ or helpful bike stores within the 504.
+
+Users can also interact with eachother, send eachother messages, follow eachother, visit eachothers profiles, and live chat.  
 # PROJECT STATUS
 Project Status: In development. Our beta version is functional but is updated frequently while we account for new bugs and continue to hone and make minor adjustments to Bike Around and Find Out's aesthetic. Fully deployed through AWS.
 # REQUIREMENTS
