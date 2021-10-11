@@ -150,7 +150,7 @@ const PostList = ({userObj}) => {
     fontSize: '30px',
     fontFamily: 'Montserrat sans-serif'
   }; 
- 
+  
   if (userObj.id) {
     return (
       <div style={{backgroundColor: '#007bff', height: '100%', margin: '0'}}>
